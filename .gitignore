@@ -1,0 +1,58 @@
+# Python 虚拟环境
+.venv/
+venv/
+env/
+ENV/
+
+# Python 缓存与构建产物
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Python 打包与 ROS 2 / colcon 构建目录
+build/
+dist/
+install/
+log/
+
+# 本机配置、凭据与工具状态
+.env
+.env.*
+!.env.example
+!.env.sample
+/.aws/
+/.codex/
+/.agents/
+.idea/
+.vscode/
+
+# 日志和编辑器临时文件
+*.log
+MUJOCO_LOG.TXT
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# 运行时生成的实验输出（已跟踪的历史实验保留）
+/JiFang_world/camera_lab/runtime/
+/JiFang_world/camera_lab/experiments/
+/JiFang_world/camera_lab/robot_experiments/
+/JiFang_world/two_rows_20_racks/captures/
+
+# ROS 2 录包文件
+*.bag
+*.db3
+*.db3-shm
+*.db3-wal
+*.mcap
+
+# 场景 XML、纹理、二维码、vendor、基线实验和验证记录继续纳入版本管理。
