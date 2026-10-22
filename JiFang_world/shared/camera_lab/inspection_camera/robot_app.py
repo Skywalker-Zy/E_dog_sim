@@ -1,15 +1,15 @@
 from pathlib import Path
 from dataclasses import asdict
-import argparse,json,signal,sys,time
+import argparse,json,os,signal,sys,time
 import xml.etree.ElementTree as ET
-from .bootstrap import prepare
+from .bootstrap import prepare, default_scene_dir
 ROOT=prepare()
 from .robot_platform import RobotSettings,RobotCameraEngine,CAMERAS,platform_xml,SOURCES
 
 
 def main():
     parser=argparse.ArgumentParser(description='固定站姿 A2-W 尺寸模型与三相机平台')
-    parser.add_argument('--scene-dir',type=Path,default=ROOT.parent if (ROOT.parent/'scene.xml').exists() else Path.home()/'E_dog/JiFang_world')
+    parser.add_argument('--scene-dir',type=Path,default=default_scene_dir())
     parser.add_argument('--config',type=Path)
     parser.add_argument('--output',type=Path)
     parser.add_argument('--no-ros',action='store_true')
@@ -22,9 +22,14 @@ def main():
     settings=RobotSettings().updated(json.loads(args.config.read_text())) if args.config else RobotSettings().validate()
     if args.export_model:
         args.export_model.parent.mkdir(parents=True,exist_ok=True)
-        root=platform_xml(args.scene_dir,settings);ET.indent(root,space='  ');ET.ElementTree(root).write(args.export_model,encoding='utf-8',xml_declaration=True)
+        root=platform_xml(args.scene_dir,settings)
+        destination=args.export_model.parent.resolve()
+        root.find('compiler').set('texturedir',os.path.relpath(args.scene_dir.resolve()/'assets',destination))
+        for include in root.iter('include'):
+            include.set('file',os.path.relpath(include.get('file'),destination))
+        ET.indent(root,space='  ');ET.ElementTree(root).write(args.export_model,encoding='utf-8',xml_declaration=True)
         print('已导出站姿场景：',args.export_model);return
-    output=args.output or args.scene_dir/'camera_lab/robot_experiments'
+    output=args.output or args.scene_dir.parent/'03_robot_cameras/experiments'
     engine=RobotCameraEngine(args.scene_dir,settings);node=executor=None
     try:
         if not args.no_ros:

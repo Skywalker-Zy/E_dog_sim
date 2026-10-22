@@ -5,7 +5,7 @@ import json
 import signal
 import sys
 import time
-from .bootstrap import prepare
+from .bootstrap import prepare, default_scene_dir
 PACKAGE_ROOT = prepare()
 from .core import CameraEngine, Settings, load_settings
 from .experiments import save_snapshot, save_scan, save_sweep
@@ -13,7 +13,7 @@ from .experiments import save_snapshot, save_scan, save_sweep
 
 def main(argv=None):
     parser=argparse.ArgumentParser(description='机房相机视角、二维码与 ROS 2 实验平台')
-    default_scene=PACKAGE_ROOT.parent if (PACKAGE_ROOT.parent/'scene.xml').exists() else Path.home()/'E_dog/JiFang_world'
+    default_scene=default_scene_dir()
     parser.add_argument('--scene-dir',type=Path,default=default_scene)
     parser.add_argument('--config',type=Path)
     parser.add_argument('--output',type=Path)
@@ -28,7 +28,7 @@ def main(argv=None):
     if ros_args and '--ros-args' not in ros_args:parser.error('无法识别的参数: '+' '.join(ros_args))
     if args.frames<0:parser.error('--frames 不可为负数')
     settings=load_settings(args.config)
-    output=args.output or args.scene_dir/'camera_lab/experiments'
+    output=args.output or args.scene_dir.parent/'02_single_camera/experiments'
     engine=CameraEngine(args.scene_dir,settings)
     node=executor=None
     app=None

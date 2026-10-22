@@ -1,17 +1,17 @@
 # 机房巡检相机实验平台
 
-本平台复用 `/home/zy/E_dog_sim/JiFang_world/scene.xml` 中的单机柜和 35 个正面二维码，提供可移动相机、中文控制窗口、实际二维码解码、ROS 2 接口和参数对比实验。
+本平台复用 `/home/zy/E_dog_sim/JiFang_world/01_single_cabinet/scene.xml` 中的单机柜和 35 个正面二维码，提供可移动相机、中文控制窗口、实际二维码解码、ROS 2 接口和参数对比实验。
 
 已在本机 Ubuntu 22.04 / x86_64 / ROS 2 Humble / MuJoCo 3.16.0 验证。程序使用当前可用的 OpenGL 设备；宿主机实测使用 NVIDIA RTX 4060。受限测试环境会回退为 Mesa llvmpipe 软件渲染（CPU），状态栏会显示实际渲染设备。相机初始参数为 1920×1080、水平视场角 60°，目标帧率 5 Hz；实际速度取决于分辨率与识别耗时，CPU 忙时会降低更新频率。
 
 ## 1. 一键打开中文窗口
 
 ```bash
-cd /home/zy/E_dog_sim/JiFang_world
-./run_camera.sh
+cd /home/zy/E_dog_sim/JiFang_world/02_single_camera
+bash run.sh
 ```
 
-默认同时启动 ROS 2 节点 `jifang_inspection_camera`。不需要先运行原来的 `run.sh`；该程序自己加载 MuJoCo 场景。
+默认同时启动 ROS 2 节点 `jifang_inspection_camera`。不需要先打开单机柜窗口；该程序自己加载 MuJoCo 场景。
 
 窗口左侧可以拖动或输入：水平位置、高度、yaw、pitch、视场角、分辨率、帧率。也能切换到“传感器＋焦距”模式。
 
@@ -27,10 +27,10 @@ cd /home/zy/E_dog_sim/JiFang_world
 如只想使用相机窗口，不接 ROS：
 
 ```bash
-./run_camera.sh --no-ros
+bash run.sh --no-ros
 ```
 
-ROS 2 日志默认写入 `camera_lab/runtime/ros_logs`，实验结果写入 `camera_lab/experiments`。
+ROS 2 日志默认写入 本目录的 `runtime/ros_logs`，实验结果写入 本目录的 `experiments/`。
 
 ## 2. 轨道、坐标和角度
 
@@ -111,7 +111,7 @@ ros2 service call /inspection_camera/start_scan std_srvs/srv/Trigger '{}'
 相机启动时也支持标准 ROS 参数覆盖：
 
 ```bash
-./run_camera.sh --ros-args -p height_m:=0.8 -p pitch_deg:=-30.0
+bash run.sh --ros-args -p height_m:=0.8 -p pitch_deg:=-30.0
 ```
 
 所有参数名见 `config/default.json`。width/height 是整数，其他数值参数是浮点数。参数变更先整体验证，通过后才应用；越界参数会被拒绝，界面随 ROS 参数同步更新。
@@ -140,31 +140,31 @@ ros2 bag record -o camera_inspection_bag \
 只启动 ROS 发布，不打开控制窗口：
 
 ```bash
-./run_camera.sh --headless
+bash run.sh --headless
 ```
 
 发布并保存 3 帧中的最后一帧，然后退出：
 
 ```bash
-./run_camera.sh --headless --frames 3
+bash run.sh --headless --frames 3
 ```
 
 自动巡检：
 
 ```bash
-./run_camera.sh --scan --no-ros
+bash run.sh --scan --no-ros
 ```
 
 批量比较 1080p/4K 与 60°/90°/120°：
 
 ```bash
-./run_camera.sh --sweep --no-ros
+bash run.sh --sweep --no-ros
 ```
 
 自定义比较矩阵：
 
 ```bash
-./run_camera.sh --sweep --no-ros \
+bash run.sh --sweep --no-ros \
   --sweep-fovs 70,80,90 \
   --sweep-resolutions 1920x1080,1080x1920
 ```
@@ -172,7 +172,7 @@ ros2 bag record -o camera_inspection_bag \
 传入配置或输出目录：
 
 ```bash
-./run_camera.sh --config /完整路径/settings.json --output /完整路径/实验目录
+bash run.sh --config /完整路径/settings.json --output /完整路径/实验目录
 ```
 
 无窗口普通模式持续运行时支持 ROS 参数和 target_pose；`start_scan` 服务只在图形界面模式可用，无窗口扫描使用 `--scan`。
@@ -212,7 +212,7 @@ ros2 bag record -o camera_inspection_bag \
 ```bash
 source /opt/ros/humble/setup.bash
 mkdir -p ~/jifang_ros_ws/src
-ln -s /home/zy/E_dog_sim/JiFang_world/camera_lab ~/jifang_ros_ws/src/jifang_camera_lab
+ln -s /home/zy/E_dog_sim/JiFang_world/shared/camera_lab ~/jifang_ros_ws/src/jifang_camera_lab
 cd ~/jifang_ros_ws
 colcon build --symlink-install --packages-select jifang_camera_lab
 source install/setup.bash
@@ -225,7 +225,7 @@ ros2 launch jifang_camera_lab inspection_camera.launch.py
 ros2 launch jifang_camera_lab inspection_camera.launch.py headless:=true
 ```
 
-运行入口统一使用 venv，优先采用 `EDOG_VENV` 或已激活环境，否则向上查找 `.venv`。在项目根目录执行 `python3 -m venv .venv`，然后执行 `.venv/bin/python -m pip install -r requirements.txt`，即可安装完整 Python 依赖；本目录的 requirements 也转引根清单。ROS 需使用与 venv 匹配的系统 Python 版本，脚本支持 Ubuntu 24.04/Jazzy 和 22.04/Humble；`--no-ros` 跳过 ROS 加载。NumPy 约束为 `<2`。ZXing-C++ 优先使用 pip 安装的当前 Python 版本，`vendor/` 中的历史二进制仅作兼容保留。
+运行入口统一使用 venv，优先采用 `EDOG_VENV` 或已激活环境，否则向上查找 `.venv`。在项目根目录执行 `python3 -m venv .venv`，然后执行 `.venv/bin/python -m pip install -r requirements.txt`，即可安装完整 Python 依赖；本目录的 requirements 也转引根清单。ROS 需使用与 venv 匹配的系统 Python 版本，脚本支持 Ubuntu 24.04/Jazzy 和 22.04/Humble；`--no-ros` 跳过 ROS 加载。NumPy 约束为 `<2`。ZXing-C++ 优先使用 pip 安装的当前 Python 版本，`../shared/camera_lab/vendor/` 中的历史二进制仅作兼容保留。
 
 
 ## 8. 卡顿修复与性能诊断
@@ -250,3 +250,13 @@ ros2 launch jifang_camera_lab inspection_camera.launch.py headless:=true
 该表量化的是静止时的资源占用及界面响应，不是宣称相机能渲染 100 FPS。连续调整相机位置时，4K、5 Hz 的实测界面事件间隔 P95 为 10.40 ms，CPU 负载约 48.18%（同样以单核=100%计）。动态画面/自动扫描仍需真实计算；本机单次 4K 解码约 65 ms，硬件渲染约 12 ms。可以在 CPU 机器上保留较低目标帧率，或在调视角时关闭实时识别，确定位置后再开启。
 
 性能与功能检查记录在 `verification/performance/`。开启缓存后状态栏显示实际 GPU/CPU 渲染器，统计区显示“静态画面复用”或新图像的后台耗时。如显示 llvmpipe，说明正在使用 CPU 软件渲染，应先确认图形设备/驱动和运行权限，而不是仅提高 fps 参数。
+
+## 整理后的文件归属
+
+- `run.sh`、`config/default.json`：本方案入口和配置。
+- `baseline_experiments/`：已有分辨率、视场角与覆盖率基线结果。
+- `实验结果/`：安装高度与视角的论证及截图。
+- `verification/`、`gui_preview.png`：已有验证记录和界面预览。
+- `experiments/`、`runtime/`：新采集结果和运行日志，默认忽略提交。
+
+机柜模型复用 `../01_single_cabinet/`，Python/ROS 代码共用 `../shared/camera_lab/`。历史报告中的原始绝对路径保留，代表当时的采集环境。

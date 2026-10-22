@@ -43,9 +43,10 @@ MUJOCO_LOG.TXT
 Thumbs.db
 
 # 运行时生成的实验输出（已跟踪的历史实验保留）
-/JiFang_world/camera_lab/runtime/
-/JiFang_world/camera_lab/experiments/
-/JiFang_world/camera_lab/robot_experiments/
+/JiFang_world/02_single_camera/runtime/
+/JiFang_world/02_single_camera/experiments/
+/JiFang_world/03_robot_cameras/runtime/
+/JiFang_world/03_robot_cameras/experiments/
 /JiFang_world/two_rows_20_racks/captures/
 
 # ROS 2 录包文件

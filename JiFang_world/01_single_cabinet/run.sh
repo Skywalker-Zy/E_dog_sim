@@ -2,7 +2,7 @@
 # Activate the project venv, then open the standalone MuJoCo simulator.
 set -euo pipefail
 scene_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-source "$scene_dir/scripts/venv.sh"
+source "$scene_dir/../shared/scripts/venv.sh"
 edog_use_venv "$scene_dir"
 scene_file="${1:-$scene_dir/scene.xml}"
 if [[ ! -f "$scene_file" && -f "$scene_dir/$scene_file" ]]; then

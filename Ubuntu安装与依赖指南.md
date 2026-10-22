@@ -48,7 +48,7 @@ uname -m
 
 仓库已附带生成二维码所用的 `qrcode` 库，无须额外安装。当前代码不依赖 OpenCV、PyTorch、CUDA Toolkit、Gazebo、Blender 或机器狗厂商 SDK；使用 NVIDIA 显卡渲染时需要相应图形驱动。
 
-根目录 `requirements.txt` 覆盖所有 Python 功能。`JiFang_world/requirements.txt` 和 `camera_lab/requirements.txt` 转引根清单；双排机房保留独立清单，方便整目录复制。ROS 2、显卡驱动和系统图形库不通过 pip 安装。
+根目录 `requirements.txt` 覆盖所有 Python 功能。`JiFang_world/requirements.txt` 和 `JiFang_world/shared/camera_lab/requirements.txt` 转引根清单；双排机房保留独立清单，方便整目录复制。ROS 2、显卡驱动和系统图形库不通过 pip 安装。
 
 ## 3. 安装基础系统依赖
 
@@ -105,7 +105,7 @@ NVIDIA 用户可通过 Ubuntu“软件和更新 → 附加驱动”安装适合�
 ```bash
 export EDOG_PROJECT_ROOT="$HOME/E_dog_sim"
 cd "$EDOG_PROJECT_ROOT"
-test -f JiFang_world/scene.xml
+test -f JiFang_world/01_single_cabinet/scene.xml
 ```
 
 本机项目路径为 `/home/zy/E_dog_sim`。原有 README 中出现的 `/home/zy/E_dog/` 是历史路径，不要照搬。
@@ -373,7 +373,7 @@ ldd "$MUJOCO_HOME/bin/simulate"
 最后，在桌面终端打开项目场景：
 
 ```bash
-cd "$HOME/E_dog_sim/JiFang_world"
+cd "$HOME/E_dog_sim/JiFang_world/01_single_cabinet"
 simulate scene.xml
 ```
 
@@ -389,7 +389,7 @@ Python 相机程序仍需安装第 4 节的 Python 依赖。独立压缩包提�
 
 ```bash
 source "$HOME/.config/e_dog_sim/env.sh"
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
+cd "$EDOG_PROJECT_ROOT/JiFang_world/01_single_cabinet"
 python run.py --check
 ```
 
@@ -400,14 +400,14 @@ python run.py --check
 使用 Python viewer，不依赖独立 simulate：
 
 ```bash
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
+cd "$EDOG_PROJECT_ROOT/JiFang_world/01_single_cabinet"
 python run.py
 ```
 
 或者完成第 6 节后，通过同样加载 venv 的脚本启动独立 simulate：
 
 ```bash
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
+cd "$EDOG_PROJECT_ROOT/JiFang_world/01_single_cabinet"
 bash run.sh
 ```
 
@@ -416,23 +416,23 @@ bash run.sh
 单相机中文调参窗口：
 
 ```bash
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
-bash run_camera.sh --no-ros
+cd "$EDOG_PROJECT_ROOT/JiFang_world/02_single_camera"
+bash run.sh --no-ros
 ```
 
 机器狗三相机中文窗口：
 
 ```bash
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
-bash run_robot_cameras.sh --no-ros
+cd "$EDOG_PROJECT_ROOT/JiFang_world/03_robot_cameras"
+bash run.sh --no-ros
 ```
 
 无窗口采集：
 
 ```bash
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
-bash run_camera.sh --headless --frames 1 --no-ros --output /tmp/edog-camera-check
-bash run_robot_cameras.sh --headless --frames 1 --no-ros --output /tmp/edog-platform-check
+cd "$EDOG_PROJECT_ROOT/JiFang_world/02_single_camera"
+bash run.sh --headless --frames 1 --no-ros --output /tmp/edog-camera-check
+bash "$EDOG_PROJECT_ROOT/JiFang_world/03_robot_cameras/run.sh" --headless --frames 1 --no-ros --output /tmp/edog-platform-check
 ```
 
 预期生成带时间戳的结果目录。单相机保存 `image.png`、`result.json`、`settings.json`；三相机保存 `top.png`、`left.png`、`right.png`、各路结果和配置。输出目录由程序打印。
@@ -440,8 +440,8 @@ bash run_robot_cameras.sh --headless --frames 1 --no-ros --output /tmp/edog-plat
 需要完整覆盖实验时，再运行：
 
 ```bash
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
-bash run_camera.sh --scan --no-ros --output /tmp/edog-scan
+cd "$EDOG_PROJECT_ROOT/JiFang_world/02_single_camera"
+bash run.sh --scan --no-ros --output /tmp/edog-scan
 ```
 
 ### 7.4 双排 20 机柜中文窗口
@@ -460,8 +460,8 @@ bash run.sh
 ```bash
 source /opt/ros/jazzy/setup.bash
 source "$HOME/.config/e_dog_sim/env.sh"
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
-bash run_robot_cameras.sh
+cd "$EDOG_PROJECT_ROOT/JiFang_world/03_robot_cameras"
+bash run.sh
 ```
 
 22.04 将上面的 Jazzy 环境改为 `source /opt/ros/humble/setup.bash`。
@@ -496,15 +496,15 @@ ros2 run tf2_ros tf2_echo world left_camera_optical_frame
 有桌面显示时尝试 GLFW：
 
 ```bash
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
-MUJOCO_GL=glfw bash run_camera.sh --no-ros
+cd "$EDOG_PROJECT_ROOT/JiFang_world/02_single_camera"
+MUJOCO_GL=glfw bash run.sh --no-ros
 ```
 
 没有可用硬件 EGL 时，尝试 OSMesa 软件渲染：
 
 ```bash
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
-MUJOCO_GL=osmesa bash run_camera.sh --headless --frames 1 --no-ros --output /tmp/edog-osmesa-check
+cd "$EDOG_PROJECT_ROOT/JiFang_world/02_single_camera"
+MUJOCO_GL=osmesa bash run.sh --headless --frames 1 --no-ros --output /tmp/edog-osmesa-check
 ```
 
 OSMesa 依赖 `libosmesa6`，已包含在第 3 节。无窗口渲染仍需要 EGL 或 OSMesa 等图形后端。更换后端后重新启动进程；Python viewer 的交互窗口仍需要桌面显示。
@@ -520,8 +520,8 @@ printenv DISPLAY WAYLAND_DISPLAY
 Wayland 下遇到窗口问题时，可尝试在支持 XWayland 的桌面会话中运行：
 
 ```bash
-cd "$EDOG_PROJECT_ROOT/JiFang_world"
-QT_QPA_PLATFORM=xcb bash run_camera.sh --no-ros
+cd "$EDOG_PROJECT_ROOT/JiFang_world/02_single_camera"
+QT_QPA_PLATFORM=xcb bash run.sh --no-ros
 ```
 
 本教程统一使用 venv 中通过 requirements 安装的 PyQt5。若仍有插件缺库错误，用 `QT_DEBUG_PLUGINS=1` 启动查看具体缺失库。
@@ -536,14 +536,14 @@ fc-cache -f
 
 ### 8.6 场景文件找不到或脚本不可执行
 
-优先使用本教程的 `bash run_camera.sh` 等命令。顶层相机脚本还会直接执行子目录脚本；若复制项目时丢失执行权限，可恢复：
+优先在对应方案目录使用 `bash run.sh`，无需脚本具有执行权限。若希望用 `./run.sh`，可恢复三个实验入口的执行权限：
 
 ```bash
 cd "$EDOG_PROJECT_ROOT"
-chmod +x JiFang_world/*.sh JiFang_world/camera_lab/*.sh JiFang_world/two_rows_20_racks/*.sh
+chmod +x JiFang_world/01_single_cabinet/run.sh JiFang_world/02_single_camera/run.sh JiFang_world/03_robot_cameras/run.sh
 ```
 
-使用 ROS launch 时，当前默认场景路径仍是历史目录，需显式传入 `scene_dir`，见下一节。
+使用 ROS launch 时可通过 `scene_dir` 指定方案一的场景路径，见下一节。
 
 ## 9. 可选：纳入 ROS 2 工作区
 
@@ -557,12 +557,12 @@ sudo apt install -y python3-colcon-common-extensions
 
 ```bash
 mkdir -p "$HOME/jifang_ros_ws/src"
-ln -s "$EDOG_PROJECT_ROOT/JiFang_world/camera_lab" "$HOME/jifang_ros_ws/src/jifang_camera_lab"
+ln -s "$EDOG_PROJECT_ROOT/JiFang_world/shared/camera_lab" "$HOME/jifang_ros_ws/src/jifang_camera_lab"
 cd "$HOME/jifang_ros_ws"
 colcon build --symlink-install --packages-select jifang_camera_lab
 source install/setup.bash
 ros2 launch jifang_camera_lab robot_cameras.launch.py \
-  scene_dir:="$EDOG_PROJECT_ROOT/JiFang_world"
+  scene_dir:="$EDOG_PROJECT_ROOT/JiFang_world/01_single_cabinet"
 ```
 
 软链接只需创建一次。此包不会把外部机柜场景复制进 ROS 安装目录，因此应保留完整项目，并传入实际 `scene_dir`。

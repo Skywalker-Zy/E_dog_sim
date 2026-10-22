@@ -1,7 +1,7 @@
 from pathlib import Path
 from setuptools import setup
 root=Path(__file__).parent
-files=[('share/ament_index/resource_index/packages',['resource/jifang_camera_lab']),('share/jifang_camera_lab',['package.xml']),('share/jifang_camera_lab/config',['config/default.json']),('share/jifang_camera_lab/launch',['launch/inspection_camera.launch.py','launch/robot_cameras.launch.py']),('share/jifang_camera_lab/config',['config/robot_platform.json'])]
+files=[('share/ament_index/resource_index/packages',['resource/jifang_camera_lab']),('share/jifang_camera_lab',['package.xml']),('share/jifang_camera_lab/config',['../../02_single_camera/config/default.json']),('share/jifang_camera_lab/launch',['launch/inspection_camera.launch.py','launch/robot_cameras.launch.py']),('share/jifang_camera_lab/config',['../../03_robot_cameras/config/robot_platform.json'])]
 for directory in sorted((root/'vendor').rglob('*')):
     if directory.is_dir() and directory.name!='__pycache__':
         children=[str(p.relative_to(root)) for p in directory.iterdir() if p.is_file() and p.suffix!='.pyc']

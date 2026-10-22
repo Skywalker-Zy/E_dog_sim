@@ -26,3 +26,13 @@ def prepare():
             sys.path.append(str(candidate))
     os.environ.setdefault('MUJOCO_GL', 'egl')
     return package_root
+
+
+def default_scene_dir():
+    """Resolve the source scene or the standard checkout after ROS installation."""
+    source_world = Path(__file__).resolve().parents[3]
+    source_scene = source_world / '01_single_cabinet'
+    if (source_scene / 'scene.xml').exists():
+        return source_scene
+    checkout = Path(os.environ.get('EDOG_PROJECT_ROOT', Path.home() / 'E_dog_sim'))
+    return checkout / 'JiFang_world/01_single_cabinet'

@@ -3,23 +3,23 @@
 ## 启动
 
 ```bash
-cd /home/zy/E_dog/JiFang_world
-./run_robot_cameras.sh
+cd /home/zy/E_dog_sim/JiFang_world/03_robot_cameras
+bash run.sh
 ```
 
-默认打开中文控制窗口并发布 ROS 2。旧的单相机平台仍使用 `./run_camera.sh`。
+默认打开中文控制窗口并发布 ROS 2。单相机平台位于 `../02_single_camera/`。
 
 - 左侧控件调整整机 X/Y 平移、整机朝向及伸缩杆高度。
 - 顶部、左侧、右侧相机分别有独立 yaw、pitch 和水平视场角。右上三个页签查看对应的全分辨率相机画面。
 - 底部场景显示机柜、站姿机器狗、三台相机及视场锥，支持拖动旋转和滚轮缩放。
 - “左侧靠柜／右侧靠柜”切换整机朝向；“转向此码”只调整所选相机，“平移对齐此码并转向”会移动整机，顶部相机还会在实际伸缩杆范围内调整高度。
 - 表格单独显示三路的当前解码数量，以及最底部 1/2/3 号二维码是否读出。
-- “保存三路图像/配置”保存三张原始 PNG、逐相机识别结果、整机配置及总览；默认目录为 `camera_lab/robot_experiments/`。
+- “保存三路图像/配置”保存三张原始 PNG、逐相机识别结果、整机配置及总览；默认目录为 本目录的 `experiments/`。
 
 只打开界面、不接 ROS：
 
 ```bash
-./run_robot_cameras.sh --no-ros
+bash run.sh --no-ros
 ```
 
 ## 尺寸来源与模型范围
@@ -120,28 +120,28 @@ ros2 param set /jifang_robot_cameras right_yaw_deg 0.0
 
 ```bash
 # 使用 ROS 发布三路图像，保存一批后退出
-./run_robot_cameras.sh --headless --frames 1
+bash run.sh --headless --frames 1
 
 # 指定平台配置
-./run_robot_cameras.sh --config /完整路径/settings.json
+bash run.sh --config /完整路径/settings.json
 
 # 无 ROS，保存三路截图
-./run_robot_cameras.sh --headless --frames 1 --no-ros
+bash run.sh --headless --frames 1 --no-ros
 
 # 仅查看静态站姿模型
-~/mujoco_work/mujoco-3.16.0/bin/simulate /home/zy/E_dog/JiFang_world/robot_scene.xml
+simulate robot_scene.xml
 ```
 
 `robot_scene.xml` 提供静态独立入口；它不包含中文调参窗口或 ROS 节点。可通过以下方式重新导出当前配置：
 
 ```bash
-./run_robot_cameras.sh --config /完整路径/settings.json \
+bash run.sh --config /完整路径/settings.json \
   --export-model /完整路径/robot_scene.xml
 ```
 
 ## 已完成的验证
 
-记录见 `verification/robot_platform/`，预览见 `robot_previews/`。
+记录见 `verification/`，预览见 `previews/`。
 
 - 无活动关节；整机平移/转向后三台相机位姿一致跟随。
 - 伸缩杆两端对应顶部 1.325/1.925 m，侧相机恒为 0.700 m。
@@ -152,3 +152,13 @@ ros2 param set /jifang_robot_cameras right_yaw_deg 0.0
 - 三路 ROS 图像、内参、位姿、TF、参数控制及目标平移通过收发检查。
 
 这些结果只适用于当前尺寸代理和理想成像条件，用于方案比较，尚非真实安装和识别可靠性的最终验收。
+
+## 整理后的文件归属
+
+- `run.sh`、`config/robot_platform.json`：本方案入口和配置。
+- `robot_scene.xml`：机器狗与三相机的静态场景，使用相对路径引用方案一的机柜资产。
+- `recorded_experiments/`：整理前保存的历史三路图像、配置与识别结果。
+- `previews/`、`verification/`、`robot_sources.json`：预览、已有验证记录及尺寸来源。
+- `experiments/`、`runtime/`：新采集结果和运行日志，默认忽略提交。
+
+Python/ROS 代码共用 `../shared/camera_lab/`，机柜模型复用 `../01_single_cabinet/`。历史报告中的原始绝对路径保留，代表当时的采集环境。
