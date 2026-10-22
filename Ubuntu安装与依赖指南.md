@@ -32,13 +32,14 @@ uname -m
 | 依赖 | 是否必需 | 作用与安装方式 |
 | --- | --- | --- |
 | Python 3、venv、pip | Python 功能必需 | 运行代码、隔离第三方包；通过 apt 安装 |
-| MuJoCo 3.16.0 | 仿真必需 | 场景加载、物理推进、相机渲染；Python 功能用 pip 安装 |
-| NumPy | Python 功能必需 | 几何、矩阵和相机内参计算；优先使用 Ubuntu apt 版本 |
-| PyQt5 | 中文界面必需 | 相机和机房控制窗口；通过 apt 安装 |
-| Pillow | 图像保存、双排场景生成必需 | PNG 保存和纹理生成；apt 包名 `python3-pil` |
-| PyOpenGL | 相机渲染相关 | OpenGL 接口和界面渲染器信息；apt 包名 `python3-opengl` |
+| MuJoCo 3.16.0 | 仿真必需 | 场景加载、物理推进、相机渲染；Python 功能通过 requirements.txt 安装 |
+| NumPy | Python 功能必需 | 几何、矩阵和相机内参计算；通过 requirements.txt 安装到 venv |
+| PyQt5 | 中文界面必需 | 相机和机房控制窗口；通过 requirements.txt 安装 |
+| Pillow | 图像保存、双排场景生成必需 | PNG 保存和纹理生成；通过 requirements.txt 安装 |
+| PyOpenGL | 相机渲染相关 | OpenGL 接口和界面渲染器信息；通过 requirements.txt 安装 |
 | ZXing-C++ Python 绑定 | 相机程序必需 | 实际二维码解码；pip 包名 `zxing-cpp`，导入名 `zxingcpp` |
 | OpenGL、EGL、GLFW 库 | 图形功能必需 | 离屏渲染和查看窗口；通过 apt 安装 |
+| PyYAML | ROS Python 接口需要 | 通过根 requirements.txt 安装到 venv |
 | 中文字体 | 中文显示建议安装 | 避免按钮、标签出现方框 |
 | ROS 2、RViz2 | 可选 | 图像/内参/TF 发布、外部控制和可视化 |
 | colcon | ROS 包开发可选 | 构建 `jifang_camera_lab`；直接运行脚本不需要 |
@@ -47,7 +48,7 @@ uname -m
 
 仓库已附带生成二维码所用的 `qrcode` 库，无须额外安装。当前代码不依赖 OpenCV、PyTorch、CUDA Toolkit、Gazebo、Blender 或机器狗厂商 SDK；使用 NVIDIA 显卡渲染时需要相应图形驱动。
 
-> 注意：`JiFang_world/two_rows_20_racks/requirements.txt` 只覆盖独立双排机房，不是整个项目的完整依赖表。
+根目录 `requirements.txt` 覆盖所有 Python 功能。`JiFang_world/requirements.txt` 和 `camera_lab/requirements.txt` 转引根清单；双排机房保留独立清单，方便整目录复制。ROS 2、显卡驱动和系统图形库不通过 pip 安装。
 
 ## 3. 安装基础系统依赖
 
@@ -61,7 +62,6 @@ sudo apt update
 sudo apt install -y \
   git curl ca-certificates locales \
   python3 python3-venv python3-pip \
-  python3-numpy python3-pil python3-pyqt5 python3-opengl \
   libgl1 libegl1 libglfw3 libgl1-mesa-dri libegl-mesa0 \
   libosmesa6 mesa-utils \
   libxcb-xinerama0 libxkbcommon-x11-0 \
@@ -110,54 +110,71 @@ test -f JiFang_world/scene.xml
 
 本机项目路径为 `/home/zy/E_dog_sim`。原有 README 中出现的 `/home/zy/E_dog/` 是历史路径，不要照搬。
 
-### 4.2 建立与系统 Python 一致的虚拟环境
+### 4.2 在项目目录建立 venv 并安装依赖
 
-相机启动脚本固定调用 `/usr/bin/python3`。因此，只在一个任意虚拟环境中执行 `pip install`，并不能保证启动脚本能找到依赖。
-
-下面使用系统解释器建立支持系统软件包的环境，再在下一步显式配置搜索路径：
+所有启动脚本统一使用虚拟环境，不再固定调用系统 Python。第一次安装：
 
 ```bash
-/usr/bin/python3 -m venv --system-site-packages "$HOME/mujoco_work/.venv"
-"$HOME/mujoco_work/.venv/bin/python" -m pip install --upgrade pip
-"$HOME/mujoco_work/.venv/bin/python" -m pip install \
-  'numpy<2' 'mujoco==3.16.0' 'zxing-cpp==3.1.1'
+cd "$EDOG_PROJECT_ROOT"
+/usr/bin/python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
-`--system-site-packages` 让环境能够使用 apt 安装的 Qt、Pillow 和 NumPy。`numpy<2` 是本教程为兼容现有 ROS 环境采用的约束；系统 NumPy 满足条件时，pip 通常直接复用它。若指定目录已有其他 Python 版本创建的环境，改用新的目录，并同步修改后续环境配置，不要混用两个版本的 site-packages。
+已有 `.venv` 时，无需重新创建，直接激活并安装清单即可。这些操作不需要 sudo，前提是系统已有可用的 Python、venv 和图形运行库。
 
-MuJoCo 官方 Python 包包含引擎库，无须先编译 C++ 源码；这里固定到项目已有验证记录使用的 3.16.0，见资料 [3][4]。扫码库的安装名与导入名不同，见资料 [5]。
+清单包含 MuJoCo、NumPy、Pillow、PyQt5、PyOpenGL、ZXing-C++，以及 ROS Python 接口需要的 PyYAML。NumPy 限制为 `<2`，兼顾当前 ROS 二进制包；无需额外用 apt 安装 Qt/Pillow 的 Python 包。
 
-### 4.3 配置启动脚本能读取的环境
+如果 `python3 -m venv` 提示缺少 `ensurepip` / `python3-venv`，需要管理员安装对应的系统包，或使用机器上已有的可用虚拟环境。将它的目录通过 `EDOG_VENV` 指定即可。
 
-**此步对 Ubuntu 24.04 尤其重要。** 仓库自带的扫码二进制位于：
+### 4.3 启动脚本如何选择 venv
 
-```text
-JiFang_world/camera_lab/vendor/zxingcpp/zxingcpp.cpython-310-x86_64-linux-gnu.so
+选择顺序为：
+
+1. `EDOG_VENV` 指定的虚拟环境。
+2. 当前已激活的 `VIRTUAL_ENV`。
+3. 从脚本所在目录向上查找最近的 `.venv`。
+
+找不到可用环境时会提示创建环境和安装依赖，不会静默切回系统 Python。选中的环境必须装齐 requirements；请使用系统 `/usr/bin/python3` 创建需要接入 ROS 的 venv，确保 Python 版本与 ROS 二进制包一致。
+
+在本项目根目录建好 `.venv` 后，可以直接执行：
+
+```bash
+cd "$EDOG_PROJECT_ROOT/JiFang_world/two_rows_20_racks"
+bash run.sh
 ```
 
-它适用于 CPython 3.10、x86_64，不能直接给 Python 3.12 使用。下面把刚安装的依赖目录放到 `PYTHONPATH` 前面，使系统 Python 优先使用适合当前版本的扫码库。
+也可以指定其他位置的环境：
 
-创建个人环境文件，后续每次启动前加载：
+```bash
+EDOG_VENV="$HOME/其他目录/.venv" bash run.sh
+```
+
+原有 `ROOM_PYTHON` 不再选择解释器；请改用 `EDOG_VENV`。`MUJOCO_PYTHON_SITE` / `JIFANG_MUJOCO_SITE` 仅作为直接使用系统 Python 时的兼容配置，正常的 `.sh` 启动不再需要它们。
+
+如果希望保留一个随时可加载的个人环境文件，可创建：
 
 ```bash
 mkdir -p "$HOME/.config/e_dog_sim"
 cat > "$HOME/.config/e_dog_sim/env.sh" <<'ENV'
 export EDOG_PROJECT_ROOT="$HOME/E_dog_sim"
-export EDOG_PYTHON_SITE="$("$HOME/mujoco_work/.venv/bin/python" -c 'import sysconfig; print(sysconfig.get_path("purelib"))')"
-export JIFANG_MUJOCO_SITE="$EDOG_PYTHON_SITE"
-export MUJOCO_PYTHON_SITE="$EDOG_PYTHON_SITE"
-export PYTHONPATH="$EDOG_PYTHON_SITE${PYTHONPATH:+:$PYTHONPATH}"
+export EDOG_VENV="$EDOG_PROJECT_ROOT/.venv"
+source "$EDOG_VENV/bin/activate"
 export MUJOCO_GL="${MUJOCO_GL:-egl}"
 ENV
 source "$HOME/.config/e_dog_sim/env.sh"
 ```
 
-如果项目路径不是 `~/E_dog_sim`，也要修改环境文件中的 `EDOG_PROJECT_ROOT`。如果使用了其他虚拟环境目录，同样修改该文件中的环境路径。
+项目路径不同时请修改 `EDOG_PROJECT_ROOT`。旧环境文件中手动添加其他 venv 的 `PYTHONPATH` / site-packages 配置应移除，并在新终端重新加载，避免混用包。
 
-检查系统 Python 是否找到正确依赖：
+### 4.4 检查 Python 依赖
 
 ```bash
-/usr/bin/python3 - <<'PY'
+cd "$EDOG_PROJECT_ROOT"
+source .venv/bin/activate
+python -m pip check
+python - <<'PY'
 import sys
 import numpy
 import mujoco
@@ -165,8 +182,8 @@ import zxingcpp
 from PIL import Image
 from PyQt5 import QtCore
 from OpenGL import GL
-print('Python:', sys.version)
-print('NumPy:', numpy.__version__, numpy.__file__)
+print('Python:', sys.executable)
+print('NumPy:', numpy.__version__)
 print('MuJoCo:', mujoco.__version__)
 print('ZXing:', zxingcpp.__file__)
 print('Qt:', QtCore.QT_VERSION_STR)
@@ -174,7 +191,7 @@ print('基础依赖导入成功')
 PY
 ```
 
-这里的 ZXing 路径应指向虚拟环境安装目录。教程不使用 `sudo pip install`，也不需要修改 `/usr/bin/python3`。
+Python 路径应指向项目 `.venv/bin/python`。仓库自带的 ZXing 二进制只支持 CPython 3.10、x86_64；本清单会安装适合当前 Python 的扫码包，正常启动时优先使用 venv 中的版本。
 
 ## 5. 安装 ROS 2（可选）
 
@@ -232,12 +249,12 @@ source /opt/ros/humble/setup.bash
 source "$HOME/.config/e_dog_sim/env.sh"
 ```
 
-**当前启动脚本只会自动查找 Humble，不会自动加载 Jazzy。** 因此 24.04 上运行 ROS 模式前，必须显式 `source /opt/ros/jazzy/setup.bash`。
+相机脚本会按 Ubuntu 版本自动加载 Jazzy（24.04）或 Humble（22.04）；已有 `ROS_DISTRO` 时保留当前环境。`--no-ros` 不加载 ROS。也可按上述命令手动加载，使用自定义 ROS 安装时尤其如此。
 
 检查接口依赖：
 
 ```bash
-/usr/bin/python3 - <<'PY'
+python - <<'PY'
 import rclpy
 from rcl_interfaces.msg import SetParametersResult
 from sensor_msgs.msg import Image, CameraInfo
@@ -255,7 +272,7 @@ PY
 
 安装顺序：**下载 → 解压 → 放到安装目录 → 修改 `.bashrc` → source → 验证**。
 
-本节沿用当前机器实际使用的 `~/mujuco_work` 目录名。第 4 节 Python 虚拟环境位于 `~/mujoco_work/.venv`，两者是不同目录：前者存放独立程序，后者存放 Python 依赖。如果你选择其他目录，需同步修改下面的 `MUJOCO_HOME`。
+本节沿用当前机器实际使用的 `~/mujuco_work` 目录名。第 4 节 Python 虚拟环境位于 `~/E_dog_sim/.venv`，两者是不同目录：前者存放独立程序，后者存放 Python 依赖。如果你选择其他目录，需同步修改下面的 `MUJOCO_HOME`。
 
 如果已经存在 `~/mujuco_work/mujoco-3.16.0/bin/simulate`，可直接从 **6.4** 开始。
 
@@ -366,14 +383,14 @@ Python 相机程序仍需安装第 4 节的 Python 依赖。独立压缩包提�
 
 ## 7. 启动与验证
 
-以下命令默认已完成第 4 节环境配置。GUI 命令逐项运行，关闭当前窗口后再运行下一项。
+以下命令默认已完成第 4 节环境配置。直接执行 Python 命令前需激活 venv；`.sh` 会自动选择 venv。GUI 命令逐项运行，关闭当前窗口后再运行下一项。
 
 ### 7.1 单机柜：无窗口加载检查
 
 ```bash
 source "$HOME/.config/e_dog_sim/env.sh"
 cd "$EDOG_PROJECT_ROOT/JiFang_world"
-/usr/bin/python3 run.py --check
+python run.py --check
 ```
 
 成功时输出模型几何数量、body 数量和仿真时间。这个检查不创建图像，不能代替相机渲染检查。
@@ -384,10 +401,10 @@ cd "$EDOG_PROJECT_ROOT/JiFang_world"
 
 ```bash
 cd "$EDOG_PROJECT_ROOT/JiFang_world"
-/usr/bin/python3 run.py
+python run.py
 ```
 
-或者完成第 6 节后使用原生窗口：
+或者完成第 6 节后，通过同样加载 venv 的脚本启动独立 simulate：
 
 ```bash
 cd "$EDOG_PROJECT_ROOT/JiFang_world"
@@ -434,7 +451,7 @@ cd "$EDOG_PROJECT_ROOT/JiFang_world/two_rows_20_racks"
 bash run.sh
 ```
 
-该入口不依赖 ROS，也不包含机器狗和三相机平台。检查中文界面、总览、双门开关和门角度控制是否正常。
+该入口不需要 sudo，自动选择 venv，并使用其中的 MuJoCo、Qt/Pillow 等依赖。该入口不依赖 ROS，也不包含机器狗和三相机平台。检查中文界面、总览、双门开关和门角度控制是否正常。
 
 ### 7.5 ROS 图像与 TF 验证
 
@@ -464,9 +481,9 @@ ros2 run tf2_ros tf2_echo world left_camera_optical_frame
 
 ### 8.1 `No module named mujoco` / `zxingcpp`
 
-先执行 `source "$HOME/.config/e_dog_sim/env.sh"`，再用 `/usr/bin/python3` 运行第 4.3 节的导入检查。相机脚本固定使用系统 Python，只激活另一个环境可能无效。
+激活项目 `.venv`，执行 `python -m pip install -r requirements.txt`，再运行第 4.4 节的导入检查。确认 `EDOG_VENV` / `VIRTUAL_ENV` 没有指向其他未装齐依赖的环境。
 
-如果报错涉及 `zxingcpp.zxingcpp` 或 `cpython-310`，检查是否误用了仓库自带的 Python 3.10 二进制。确认安装了当前 Python 对应的 `zxing-cpp`，并将安装目录置于 `PYTHONPATH` 前面。
+如果报错涉及 `zxingcpp.zxingcpp` 或 `cpython-310`，检查是否误用了仓库自带的 Python 3.10 二进制。确认已在选中的 venv 中安装 `zxing-cpp`；清除指向旧环境的 `PYTHONPATH` 配置后重启终端。
 
 ### 8.2 `No module named rclpy`
 
@@ -507,7 +524,7 @@ cd "$EDOG_PROJECT_ROOT/JiFang_world"
 QT_QPA_PLATFORM=xcb bash run_camera.sh --no-ros
 ```
 
-本教程统一使用 apt 的 PyQt5。若仍有插件缺库错误，用 `QT_DEBUG_PLUGINS=1` 启动查看具体缺失库。
+本教程统一使用 venv 中通过 requirements 安装的 PyQt5。若仍有插件缺库错误，用 `QT_DEBUG_PLUGINS=1` 启动查看具体缺失库。
 
 ### 8.5 中文显示方框
 
@@ -530,7 +547,7 @@ chmod +x JiFang_world/*.sh JiFang_world/camera_lab/*.sh JiFang_world/two_rows_20
 
 ## 9. 可选：纳入 ROS 2 工作区
 
-直接运行上述脚本无需构建。要在已有 ROS 工作区中使用包，可安装 colcon：
+直接运行上述脚本无需构建。ROS 包构建是高级可选路径；colcon 生成的入口取决于构建时解释器，应确认该入口使用的 Python 能导入全部依赖。要在已有 ROS 工作区中使用包，可安装 colcon：
 
 ```bash
 sudo apt install -y python3-colcon-common-extensions
@@ -564,4 +581,4 @@ ros2 launch jifang_camera_lab robot_cameras.launch.py \
 
 系统版本与安装流程已核对官方 `ros2/ros2_documentation` 仓库中的 Humble/Jazzy 安装文档源码；MuJoCo 和 ZXing 的指定版本已核对官方发布页及 PyPI。
 
-本文完成了依赖核对及安装命令的静态检查，没有在一台全新 Ubuntu 系统上执行完整安装。以第 7 节的模型加载、图像输出、GUI 和 ROS 收发结果作为目标机器的安装验收。
+本次在项目 `.venv` 中安装了根 requirements 并通过 `pip check`，验证了启动环境选择、单相机和三相机无窗口采集、双排场景离屏渲染、Qt 初始化及 Jazzy 接口导入。没有在一台全新 Ubuntu 系统上执行完整安装；桌面交互和 ROS 实际收发仍需在目标机器按第 7 节验收。

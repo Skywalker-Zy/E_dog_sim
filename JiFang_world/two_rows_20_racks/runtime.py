@@ -11,12 +11,21 @@ ROOT = Path(__file__).resolve().parent
 os.environ.setdefault('MUJOCO_GL', 'egl')
 # System Python retains Qt/Pillow. Optionally use the existing MuJoCo library.
 # Moving this folder only requires a normal MuJoCo installation, not the old scene.
-if importlib.util.find_spec('mujoco') is None:
+if importlib.util.find_spec('mujoco') is None and sys.prefix == sys.base_prefix:
     candidates = []
     explicit = os.environ.get('MUJOCO_PYTHON_SITE')
     if explicit:
         candidates.append(Path(explicit))
-    candidates += sorted((Path.home() / 'mujoco_work/.venv/lib').glob('python*/site-packages'))
+    # Keep system NumPy/Qt/Pillow first, then find MuJoCo in a compatible venv.
+    # These locations are optional: a copied standalone folder still works.
+    venv_roots = []
+    active_venv = os.environ.get('VIRTUAL_ENV')
+    if active_venv:
+        venv_roots.append(Path(active_venv))
+    venv_roots += [directory / '.venv' for directory in (ROOT, ROOT.parent, ROOT.parent.parent)]
+    venv_roots.append(Path.home() / 'mujoco_work/.venv')
+    python_directory = f'python{sys.version_info.major}.{sys.version_info.minor}'
+    candidates += [venv / 'lib' / python_directory / 'site-packages' for venv in venv_roots]
     for candidate in candidates:
         if (candidate / 'mujoco').is_dir():
             sys.path.append(str(candidate))
@@ -24,7 +33,7 @@ if importlib.util.find_spec('mujoco') is None:
 try:
     import mujoco
 except ImportError as error:
-    raise SystemExit('未找到 MuJoCo Python 库。请安装 requirements.txt，或设置 MUJOCO_PYTHON_SITE。') from error
+    raise SystemExit(f'当前解释器 {sys.executable} 未找到 MuJoCo。请使用该解释器执行 -m pip install -r requirements.txt。') from error
 
 
 class RoomSimulation:

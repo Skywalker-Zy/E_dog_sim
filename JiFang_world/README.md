@@ -2,17 +2,29 @@
 
 按提供的机房照片和尺寸标注制作的简易场景，只有一个机柜。原生 MJCF/XML，无需 Blender、额外模型下载或第三方插件。本机使用 MuJoCo 3.16.0 验证。
 
+## 安装 Python 依赖与启动环境
+
+在项目根目录执行（不需要 sudo）：
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+所有 `.sh` 入口统一选择 venv：`EDOG_VENV` → 当前激活环境 → 向上查找最近的 `.venv`。独立 simulate 入口也会加载该环境，但仍需单独安装 MuJoCo 独立程序。完整步骤见根目录的 `Ubuntu安装与依赖指南.md`。
+
 ## 直接启动：独立 simulate 程序
 
 ```bash
-cd /home/zy/E_dog/JiFang_world
+cd /home/zy/E_dog_sim/JiFang_world
 ./run.sh
 ```
 
 或者直接加载 XML：
 
 ```bash
-~/mujoco_work/mujoco-3.16.0/bin/simulate /home/zy/E_dog/JiFang_world/scene.xml
+~/mujoco_work/mujoco-3.16.0/bin/simulate /home/zy/E_dog_sim/JiFang_world/scene.xml
 ```
 
 也可以把 `scene.xml` 拖入已经打开的 simulate 窗口。
@@ -23,19 +35,19 @@ cd /home/zy/E_dog/JiFang_world
 ./run.sh cabinet_only.xml
 ```
 
-`run.sh` 会依次查找 `$MUJOCO_HOME/bin/simulate`、PATH 中的 simulate、本机的 `~/mujoco_work/mujoco-3.16.0/bin/simulate`。
+`run.sh` 加载 venv 后，依次查找 `$MUJOCO_HOME/bin/simulate`、PATH 中的 simulate、`~/mujuco_work/mujoco-3.16.0/bin/simulate` 和 `~/mujoco_work/mujoco-3.16.0/bin/simulate`。
 
 ## Python 启动
 
 ```bash
-source ~/mujoco_work/.venv/bin/activate
-python /home/zy/E_dog/JiFang_world/run.py
+source ~/E_dog_sim/.venv/bin/activate
+python /home/zy/E_dog_sim/JiFang_world/run.py
 ```
 
 无窗口检查：
 
 ```bash
-python /home/zy/E_dog/JiFang_world/run.py --check
+python /home/zy/E_dog_sim/JiFang_world/run.py --check
 ```
 
 MuJoCo 界面中：空格暂停/继续，左键拖动旋转视角，滚轮缩放，右键拖动平移，F1 查看帮助。场景只有固定物体，所以运行后机柜本身保持静止。Python 启动脚本预设了合适的观察视角；XML 还提供 `overview`、`front`、`inspection`、`qr_detail_front`、`front_panels` 五台固定摄像机，后两台分别用于查看正面二维码和正面机箱面板。
@@ -119,7 +131,7 @@ MuJoCo 界面中：空格暂停/继续，左键拖动旋转视角，滚轮缩放
 编辑现有 XML 可以直接调整外观。若修改 `build_scene.py` 并执行：
 
 ```bash
-python3 /home/zy/E_dog/JiFang_world/build_scene.py
+python3 /home/zy/E_dog_sim/JiFang_world/build_scene.py
 ```
 
 它会重新生成 XML、尺寸图与纹理，覆盖这些生成文件；不会自动更新预览图和验证记录。宽度和深度还影响框架、面板和线缆位置，修改时请一起检查生成代码中的几何尺寸。
@@ -130,7 +142,7 @@ python3 /home/zy/E_dog/JiFang_world/build_scene.py
 新增相机实验平台，运行：
 
 ```bash
-cd /home/zy/E_dog/JiFang_world
+cd /home/zy/E_dog_sim/JiFang_world
 ./run_camera.sh
 ```
 
@@ -140,7 +152,7 @@ cd /home/zy/E_dog/JiFang_world
 ## 机器狗尺寸模型与顶部/双侧相机
 
 ```bash
-cd /home/zy/E_dog/JiFang_world
+cd /home/zy/E_dog_sim/JiFang_world
 ./run_robot_cameras.sh
 ```
 

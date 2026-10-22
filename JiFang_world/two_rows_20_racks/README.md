@@ -5,9 +5,11 @@
 ## 启动与开关门
 
 ```bash
-cd /home/zy/E_dog/JiFang_world/two_rows_20_racks
-./run.sh
+cd /home/zy/E_dog_sim/JiFang_world/two_rows_20_racks
+bash run.sh
 ```
+
+启动不需要 sudo。脚本依次使用 `EDOG_VENV`、已激活的 venv、从脚本目录向上查找到的最近 `.venv`；所有 Python 依赖均从选中的环境加载。第一次安装请在项目根目录执行 `python3 -m venv .venv`，再执行 `.venv/bin/python -m pip install -r requirements.txt`。
 
 窗口按钮：
 
@@ -23,7 +25,7 @@ cd /home/zy/E_dog/JiFang_world/two_rows_20_racks
 
 界面将物理推进和 OpenGL 渲染放在后台线程，静止时复用画面，避免长走廊模型阻塞按钮响应。
 
-若只使用官方独立 `simulate`：
+若只使用官方独立 `simulate`（同样加载 venv，另需安装独立程序）：
 
 ```bash
 ./open_native.sh
@@ -103,6 +105,7 @@ cd /home/zy/E_dog/JiFang_world/two_rows_20_racks
 | `vendor/` | 附带的 python-qrcode 8.2 及第三方许可证 |
 | `room_viewer.py` / `runtime.py` | 独立按钮界面与物理/渲染运行代码 |
 | `run.sh` / `open_native.sh` | 中文按钮入口／官方 simulate 入口 |
+| `venv.sh` / `requirements.txt` | 独立环境选择工具／Python 依赖清单 |
 | `validate_scene.py` | 布局、开关门、碰撞及可搬移性检查 |
 | `validation.json` / `gui_validation.json` | 本机验证记录 |
 | `previews/` | 开门、关门、门口、俯视及总览预览 |
@@ -115,10 +118,10 @@ cd /home/zy/E_dog/JiFang_world/two_rows_20_racks
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-ROOM_PYTHON="$PWD/.venv/bin/python" ./run.sh
+bash run.sh
 ```
 
-本机脚本默认使用系统 Python，补充查找本机已有 MuJoCo 包，避免要求重复安装。其他位置的 MuJoCo 包可用环境变量 `MUJOCO_PYTHON_SITE` 指定；`ROOM_PYTHON` 可指定完整 Python 路径。
+脚本会自动发现上面的 `.venv`，无需再次指定解释器。使用其他位置的环境时，执行 `EDOG_VENV=/环境目录 bash run.sh`。请一并复制本目录的 `venv.sh` 和 `requirements.txt`，保证独立运行。
 
 生成另一组布局：
 

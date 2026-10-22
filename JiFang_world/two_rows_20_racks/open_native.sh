@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 room_scene_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+source "$room_scene_dir/venv.sh"
+edog_use_venv "$room_scene_dir"
 room_simulator=""
 if [[ -n "${MUJOCO_HOME:-}" && -x "$MUJOCO_HOME/bin/simulate" ]]; then
   room_simulator="$MUJOCO_HOME/bin/simulate"
 elif command -v simulate >/dev/null 2>&1; then
   room_simulator="$(command -v simulate)"
+elif [[ -x "$HOME/mujuco_work/mujoco-3.16.0/bin/simulate" ]]; then
+  room_simulator="$HOME/mujuco_work/mujoco-3.16.0/bin/simulate"
 elif [[ -x "$HOME/mujoco_work/mujoco-3.16.0/bin/simulate" ]]; then
   room_simulator="$HOME/mujoco_work/mujoco-3.16.0/bin/simulate"
 fi

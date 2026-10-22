@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 robot_world_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-exec "$robot_world_root/camera_lab/run_robot_cameras.sh" --scene-dir "$robot_world_root" "$@"
+exec bash "$robot_world_root/camera_lab/run_robot_cameras.sh" --scene-dir "$robot_world_root" "$@"

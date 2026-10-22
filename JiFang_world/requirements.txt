@@ -1,0 +1,2 @@
+# Full project dependencies; paths are relative to this requirements file.
+-r ../requirements.txt

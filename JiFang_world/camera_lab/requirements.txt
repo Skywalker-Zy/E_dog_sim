@@ -1,0 +1,2 @@
+# Full camera platform dependencies (ROS 2 is installed separately).
+-r ../../requirements.txt

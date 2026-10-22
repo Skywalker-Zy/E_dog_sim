@@ -1,13 +1,13 @@
 # 机房巡检相机实验平台
 
-本平台复用 `/home/zy/E_dog/JiFang_world/scene.xml` 中的单机柜和 35 个正面二维码，提供可移动相机、中文控制窗口、实际二维码解码、ROS 2 接口和参数对比实验。
+本平台复用 `/home/zy/E_dog_sim/JiFang_world/scene.xml` 中的单机柜和 35 个正面二维码，提供可移动相机、中文控制窗口、实际二维码解码、ROS 2 接口和参数对比实验。
 
 已在本机 Ubuntu 22.04 / x86_64 / ROS 2 Humble / MuJoCo 3.16.0 验证。程序使用当前可用的 OpenGL 设备；宿主机实测使用 NVIDIA RTX 4060。受限测试环境会回退为 Mesa llvmpipe 软件渲染（CPU），状态栏会显示实际渲染设备。相机初始参数为 1920×1080、水平视场角 60°，目标帧率 5 Hz；实际速度取决于分辨率与识别耗时，CPU 忙时会降低更新频率。
 
 ## 1. 一键打开中文窗口
 
 ```bash
-cd /home/zy/E_dog/JiFang_world
+cd /home/zy/E_dog_sim/JiFang_world
 ./run_camera.sh
 ```
 
@@ -212,7 +212,7 @@ ros2 bag record -o camera_inspection_bag \
 ```bash
 source /opt/ros/humble/setup.bash
 mkdir -p ~/jifang_ros_ws/src
-ln -s /home/zy/E_dog/JiFang_world/camera_lab ~/jifang_ros_ws/src/jifang_camera_lab
+ln -s /home/zy/E_dog_sim/JiFang_world/camera_lab ~/jifang_ros_ws/src/jifang_camera_lab
 cd ~/jifang_ros_ws
 colcon build --symlink-install --packages-select jifang_camera_lab
 source install/setup.bash
@@ -225,7 +225,7 @@ ros2 launch jifang_camera_lab inspection_camera.launch.py
 ros2 launch jifang_camera_lab inspection_camera.launch.py headless:=true
 ```
 
-本机运行入口使用 `/usr/bin/python3`，保留 ROS 2 自带 NumPy，额外加载已安装的 MuJoCo Python 库；不把 NumPy 2.x 覆盖到 ROS Python 环境中。ZXing-C++ 已附带在 `vendor/`，包含第三方许可证。若 MuJoCo 不在本机已有的位置，可设置 `JIFANG_MUJOCO_SITE` 指向其 site-packages 目录。
+运行入口统一使用 venv，优先采用 `EDOG_VENV` 或已激活环境，否则向上查找 `.venv`。在项目根目录执行 `python3 -m venv .venv`，然后执行 `.venv/bin/python -m pip install -r requirements.txt`，即可安装完整 Python 依赖；本目录的 requirements 也转引根清单。ROS 需使用与 venv 匹配的系统 Python 版本，脚本支持 Ubuntu 24.04/Jazzy 和 22.04/Humble；`--no-ros` 跳过 ROS 加载。NumPy 约束为 `<2`。ZXing-C++ 优先使用 pip 安装的当前 Python 版本，`vendor/` 中的历史二进制仅作兼容保留。
 
 
 ## 8. 卡顿修复与性能诊断

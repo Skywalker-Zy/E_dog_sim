@@ -1,4 +1,4 @@
-"""Use system Python/ROS NumPy; append the existing MuJoCo environment last."""
+"""Prepare bundled resources without mixing other venvs into an active venv."""
 from pathlib import Path
 import os
 import sys
@@ -17,7 +17,10 @@ def prepare():
         except (ImportError, LookupError):
             pass
     runtime = os.environ.get('JIFANG_MUJOCO_SITE', '')
-    candidates = [Path(runtime)] if runtime else sorted((Path.home() / 'mujoco_work/.venv/lib').glob('python*/site-packages'))
+    candidates = []
+    if sys.prefix == sys.base_prefix:
+        python_directory = f'python{sys.version_info.major}.{sys.version_info.minor}'
+        candidates = [Path(runtime)] if runtime else [Path.home() / 'mujoco_work/.venv/lib' / python_directory / 'site-packages']
     for candidate in candidates:
         if candidate.is_dir():
             sys.path.append(str(candidate))
