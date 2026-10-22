@@ -1,0 +1,14 @@
+{
+  "manufacturer": "Unitree",
+  "model": "A2-W",
+  "url": "https://www.unitree.com/A2-W/",
+  "standing_size_m": [
+    0.9,
+    0.44,
+    0.625
+  ],
+  "tyre_diameter_m": 0.19,
+  "tyre_width_m": 0.051,
+  "checked_on": "2026-10-21",
+  "geometry_note": "Only overall size and tyre size are manufacturer dimensions; torso, legs, brackets and camera housing are simplified design assumptions."
+}

@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "three_images": true,
+  "three_camera_info": true,
+  "matching_timestamps": true,
+  "three_camera_pose_and_tf": true,
+  "asynchronous_pose_consistency": true,
+  "remote_parameter_control": true,
+  "invalid_parameters_atomic": true,
+  "robot_target_pose_translation": true
+}

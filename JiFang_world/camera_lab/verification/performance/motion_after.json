@@ -1,0 +1,10 @@
+{
+  "version": "after",
+  "resolution": "3840x2160",
+  "condition": "continuous_control_changes",
+  "measurement_seconds": 5.5,
+  "cpu_percent_one_core": 48.18,
+  "ui_heartbeat_p95_ms": 10.4,
+  "ui_heartbeat_max_ms": 13.5,
+  "distinct_displayed_positions": 25
+}

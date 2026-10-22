@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujocoinclude>
+  <body name="cabinet" pos="0 0 0">
+    <geom name="cabinet_collision" type="box" pos="0 0 1.0885" size="0.3 0.5 1.0885" contype="1" conaffinity="1" group="3" rgba="0 0 0 0" friction="0.8 0.01 0.001" mass="0" />
+    <body name="cabinet_visual" childclass="decoration">
+      <geom name="base" type="box" pos="0 0 0.05" size="0.3 0.5 0.05" material="silver" />
+      <geom name="base_front_inset" type="box" pos="0 -0.501 0.052" size="0.244 0.002 0.025" material="dark_metal" />
+      <geom name="roof" type="box" pos="0 0 2.162" size="0.3 0.5 0.015" material="silver" />
+      <geom name="post_left_front" type="box" pos="-0.285 -0.485 1.0885" size="0.015 0.015 1.0885" material="silver" />
+      <geom name="post_left_rear" type="box" pos="-0.285 0.485 1.0885" size="0.015 0.015 1.0885" material="silver" />
+      <geom name="post_right_front" type="box" pos="0.285 -0.485 1.0885" size="0.015 0.015 1.0885" material="silver" />
+      <geom name="post_right_rear" type="box" pos="0.285 0.485 1.0885" size="0.015 0.015 1.0885" material="silver" />
+      <geom name="left_side" type="box" pos="-0.294 0.01 1.127" size="0.005 0.458 1" material="side_panel" />
+      <geom name="left_side_seam_0.24" type="box" pos="-0.300174 0.01 0.24" size="0.0008 0.425 0.002" material="black" />
+      <geom name="left_side_seam_1.94" type="box" pos="-0.300174 0.01 1.94" size="0.0008 0.425 0.002" material="black" />
+      <geom name="right_side" type="box" pos="0.294 0.01 1.127" size="0.005 0.458 1" material="side_panel" />
+      <geom name="right_side_seam_0.24" type="box" pos="0.300174 0.01 0.24" size="0.0008 0.425 0.002" material="black" />
+      <geom name="right_side_seam_1.94" type="box" pos="0.300174 0.01 1.94" size="0.0008 0.425 0.002" material="black" />
+      <geom name="rear_panel" type="box" pos="0 0.492 1.127" size="0.269 0.005 1" material="dark_metal" />
+      <geom name="mounting_rail_left" type="box" pos="-0.258 -0.48 1.045" size="0.012 0.014 0.945" material="silver" />
+      <geom name="rail_hole_left_00" type="box" pos="-0.258 -0.495 0.145" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_01" type="box" pos="-0.258 -0.495 0.18945" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_02" type="box" pos="-0.258 -0.495 0.2339" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_03" type="box" pos="-0.258 -0.495 0.27835" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_04" type="box" pos="-0.258 -0.495 0.3228" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_05" type="box" pos="-0.258 -0.495 0.36725" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_06" type="box" pos="-0.258 -0.495 0.4117" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_07" type="box" pos="-0.258 -0.495 0.45615" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_08" type="box" pos="-0.258 -0.495 0.5006" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_09" type="box" pos="-0.258 -0.495 0.54505" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_10" type="box" pos="-0.258 -0.495 0.5895" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_11" type="box" pos="-0.258 -0.495 0.63395" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_12" type="box" pos="-0.258 -0.495 0.6784" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_13" type="box" pos="-0.258 -0.495 0.72285" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_14" type="box" pos="-0.258 -0.495 0.7673" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_15" type="box" pos="-0.258 -0.495 0.81175" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_16" type="box" pos="-0.258 -0.495 0.8562" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_17" type="box" pos="-0.258 -0.495 0.90065" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_18" type="box" pos="-0.258 -0.495 0.9451" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_19" type="box" pos="-0.258 -0.495 0.98955" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_20" type="box" pos="-0.258 -0.495 1.034" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_21" type="box" pos="-0.258 -0.495 1.07845" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_22" type="box" pos="-0.258 -0.495 1.1229" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_23" type="box" pos="-0.258 -0.495 1.16735" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_24" type="box" pos="-0.258 -0.495 1.2118" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_25" type="box" pos="-0.258 -0.495 1.25625" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_26" type="box" pos="-0.258 -0.495 1.3007" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_27" type="box" pos="-0.258 -0.495 1.34515" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_28" type="box" pos="-0.258 -0.495 1.3896" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_29" type="box" pos="-0.258 -0.495 1.43405" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_30" type="box" pos="-0.258 -0.495 1.4785" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_31" type="box" pos="-0.258 -0.495 1.52295" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_32" type="box" pos="-0.258 -0.495 1.5674" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_33" type="box" pos="-0.258 -0.495 1.61185" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_34" type="box" pos="-0.258 -0.495 1.6563" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_35" type="box" pos="-0.258 -0.495 1.70075" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_36" type="box" pos="-0.258 -0.495 1.7452" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_37" type="box" pos="-0.258 -0.495 1.78965" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_38" type="box" pos="-0.258 -0.495 1.8341" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_39" type="box" pos="-0.258 -0.495 1.87855" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_40" type="box" pos="-0.258 -0.495 1.923" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_41" type="box" pos="-0.258 -0.495 1.96745" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_left_42" type="box" pos="-0.258 -0.495 2.0119" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="mounting_rail_right" type="box" pos="0.258 -0.48 1.045" size="0.012 0.014 0.945" material="silver" />
+      <geom name="rail_hole_right_00" type="box" pos="0.258 -0.495 0.145" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_01" type="box" pos="0.258 -0.495 0.18945" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_02" type="box" pos="0.258 -0.495 0.2339" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_03" type="box" pos="0.258 -0.495 0.27835" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_04" type="box" pos="0.258 -0.495 0.3228" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_05" type="box" pos="0.258 -0.495 0.36725" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_06" type="box" pos="0.258 -0.495 0.4117" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_07" type="box" pos="0.258 -0.495 0.45615" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_08" type="box" pos="0.258 -0.495 0.5006" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_09" type="box" pos="0.258 -0.495 0.54505" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_10" type="box" pos="0.258 -0.495 0.5895" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_11" type="box" pos="0.258 -0.495 0.63395" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_12" type="box" pos="0.258 -0.495 0.6784" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_13" type="box" pos="0.258 -0.495 0.72285" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_14" type="box" pos="0.258 -0.495 0.7673" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_15" type="box" pos="0.258 -0.495 0.81175" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_16" type="box" pos="0.258 -0.495 0.8562" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_17" type="box" pos="0.258 -0.495 0.90065" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_18" type="box" pos="0.258 -0.495 0.9451" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_19" type="box" pos="0.258 -0.495 0.98955" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_20" type="box" pos="0.258 -0.495 1.034" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_21" type="box" pos="0.258 -0.495 1.07845" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_22" type="box" pos="0.258 -0.495 1.1229" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_23" type="box" pos="0.258 -0.495 1.16735" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_24" type="box" pos="0.258 -0.495 1.2118" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_25" type="box" pos="0.258 -0.495 1.25625" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_26" type="box" pos="0.258 -0.495 1.3007" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_27" type="box" pos="0.258 -0.495 1.34515" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_28" type="box" pos="0.258 -0.495 1.3896" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_29" type="box" pos="0.258 -0.495 1.43405" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_30" type="box" pos="0.258 -0.495 1.4785" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_31" type="box" pos="0.258 -0.495 1.52295" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_32" type="box" pos="0.258 -0.495 1.5674" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_33" type="box" pos="0.258 -0.495 1.61185" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_34" type="box" pos="0.258 -0.495 1.6563" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_35" type="box" pos="0.258 -0.495 1.70075" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_36" type="box" pos="0.258 -0.495 1.7452" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_37" type="box" pos="0.258 -0.495 1.78965" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_38" type="box" pos="0.258 -0.495 1.8341" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_39" type="box" pos="0.258 -0.495 1.87855" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_40" type="box" pos="0.258 -0.495 1.923" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_41" type="box" pos="0.258 -0.495 1.96745" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="rail_hole_right_42" type="box" pos="0.258 -0.495 2.0119" size="0.003 0.0008 0.0035" material="black" />
+      <geom name="separator_01" type="box" pos="0 -0.012 0.253" size="0.27 0.478 0.02" material="silver" />
+      <geom name="separator_shadow_01" type="box" pos="0 -0.492 0.239" size="0.242 0.002 0.002" material="dark_metal" />
+      <geom name="separator_02" type="box" pos="0 -0.012 0.471" size="0.27 0.478 0.02" material="silver" />
+      <geom name="separator_shadow_02" type="box" pos="0 -0.492 0.457" size="0.242 0.002 0.002" material="dark_metal" />
+      <geom name="separator_03" type="box" pos="0 -0.012 0.689" size="0.27 0.478 0.02" material="silver" />
+      <geom name="separator_shadow_03" type="box" pos="0 -0.492 0.675" size="0.242 0.002 0.002" material="dark_metal" />
+      <geom name="separator_04" type="box" pos="0 -0.012 0.907" size="0.27 0.478 0.02" material="silver" />
+      <geom name="separator_shadow_04" type="box" pos="0 -0.492 0.893" size="0.242 0.002 0.002" material="dark_metal" />
+      <geom name="separator_05" type="box" pos="0 -0.012 1.125" size="0.27 0.478 0.02" material="silver" />
+      <geom name="separator_shadow_05" type="box" pos="0 -0.492 1.111" size="0.242 0.002 0.002" material="dark_metal" />
+      <geom name="separator_06" type="box" pos="0 -0.012 1.345" size="0.27 0.478 0.02" material="silver" />
+      <geom name="separator_shadow_06" type="box" pos="0 -0.492 1.331" size="0.242 0.002 0.002" material="dark_metal" />
+      <geom name="separator_07" type="box" pos="0 -0.012 1.561" size="0.27 0.478 0.02" material="silver" />
+      <geom name="separator_shadow_07" type="box" pos="0 -0.492 1.547" size="0.242 0.002 0.002" material="dark_metal" />
+      <geom name="separator_08" type="box" pos="0 -0.012 1.779" size="0.27 0.478 0.02" material="silver" />
+      <geom name="separator_shadow_08" type="box" pos="0 -0.492 1.765" size="0.242 0.002 0.002" material="dark_metal" />
+      <geom name="server_bank_00" type="box" pos="0 -0.02 0.1665" size="0.2413 0.45 0.0655" material="black" />
+      <geom name="server_00_00_face" type="box" pos="0 -0.479 0.122167" size="0.24 0.006 0.020667" material="server_front" />
+      <geom name="server_00_00_slot_-0.006" type="box" pos="0.008 -0.4854 0.116167" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_00_00_slot_0.006" type="box" pos="0.008 -0.4854 0.128167" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_00_00_handle_-0.216" type="box" pos="-0.216 -0.49 0.122167" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_00_00_handle_0.214" type="box" pos="0.214 -0.49 0.122167" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_00_00_led_0" type="sphere" pos="0.183 -0.487 0.126167" size="0.0022" material="led_green" />
+      <geom name="server_00_00_led_1" type="sphere" pos="0.194 -0.487 0.126167" size="0.0022" material="led_blue" />
+      <geom name="server_00_01_face" type="box" pos="0 -0.479 0.1665" size="0.24 0.006 0.020667" material="server_front" />
+      <geom name="server_00_01_slot_-0.006" type="box" pos="0.008 -0.4854 0.1605" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_00_01_slot_0.006" type="box" pos="0.008 -0.4854 0.1725" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_00_01_handle_-0.216" type="box" pos="-0.216 -0.49 0.1665" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_00_01_handle_0.214" type="box" pos="0.214 -0.49 0.1665" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_00_01_led_0" type="sphere" pos="0.183 -0.487 0.1705" size="0.0022" material="led_green" />
+      <geom name="server_00_01_led_1" type="sphere" pos="0.194 -0.487 0.1705" size="0.0022" material="led_blue" />
+      <geom name="server_00_02_face" type="box" pos="0 -0.479 0.210833" size="0.24 0.006 0.020667" material="server_front" />
+      <geom name="server_00_02_slot_-0.006" type="box" pos="0.008 -0.4854 0.204833" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_00_02_slot_0.006" type="box" pos="0.008 -0.4854 0.216833" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_00_02_handle_-0.216" type="box" pos="-0.216 -0.49 0.210833" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_00_02_handle_0.214" type="box" pos="0.214 -0.49 0.210833" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_00_02_led_0" type="sphere" pos="0.183 -0.487 0.214833" size="0.0022" material="led_green" />
+      <geom name="server_00_02_led_1" type="sphere" pos="0.194 -0.487 0.214833" size="0.0022" material="led_blue" />
+      <geom name="server_bank_01" type="box" pos="0 -0.02 0.362" size="0.2413 0.45 0.088" material="black" />
+      <geom name="server_01_00_face" type="box" pos="0 -0.479 0.29525" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_01_00_slot_-0.006" type="box" pos="0.008 -0.4854 0.28925" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_01_00_slot_0.006" type="box" pos="0.008 -0.4854 0.30125" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_01_00_handle_-0.216" type="box" pos="-0.216 -0.49 0.29525" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_01_00_handle_0.214" type="box" pos="0.214 -0.49 0.29525" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_01_00_led_0" type="sphere" pos="0.183 -0.487 0.29925" size="0.0022" material="led_green" />
+      <geom name="server_01_00_led_1" type="sphere" pos="0.194 -0.487 0.29925" size="0.0022" material="led_blue" />
+      <geom name="server_01_01_face" type="box" pos="0 -0.479 0.33975" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_01_01_slot_-0.006" type="box" pos="0.008 -0.4854 0.33375" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_01_01_slot_0.006" type="box" pos="0.008 -0.4854 0.34575" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_01_01_handle_-0.216" type="box" pos="-0.216 -0.49 0.33975" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_01_01_handle_0.214" type="box" pos="0.214 -0.49 0.33975" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_01_01_led_0" type="sphere" pos="0.183 -0.487 0.34375" size="0.0022" material="led_green" />
+      <geom name="server_01_01_led_1" type="sphere" pos="0.194 -0.487 0.34375" size="0.0022" material="led_blue" />
+      <geom name="server_01_02_face" type="box" pos="0 -0.479 0.38425" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_01_02_slot_-0.006" type="box" pos="0.008 -0.4854 0.37825" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_01_02_slot_0.006" type="box" pos="0.008 -0.4854 0.39025" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_01_02_handle_-0.216" type="box" pos="-0.216 -0.49 0.38425" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_01_02_handle_0.214" type="box" pos="0.214 -0.49 0.38425" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_01_02_led_0" type="sphere" pos="0.183 -0.487 0.38825" size="0.0022" material="led_green" />
+      <geom name="server_01_02_led_1" type="sphere" pos="0.194 -0.487 0.38825" size="0.0022" material="led_blue" />
+      <geom name="server_01_03_face" type="box" pos="0 -0.479 0.42875" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_01_03_slot_-0.006" type="box" pos="0.008 -0.4854 0.42275" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_01_03_slot_0.006" type="box" pos="0.008 -0.4854 0.43475" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_01_03_handle_-0.216" type="box" pos="-0.216 -0.49 0.42875" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_01_03_handle_0.214" type="box" pos="0.214 -0.49 0.42875" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_01_03_led_0" type="sphere" pos="0.183 -0.487 0.43275" size="0.0022" material="led_green" />
+      <geom name="server_01_03_led_1" type="sphere" pos="0.194 -0.487 0.43275" size="0.0022" material="led_blue" />
+      <geom name="server_bank_02" type="box" pos="0 -0.02 0.58" size="0.2413 0.45 0.088" material="black" />
+      <geom name="server_02_00_face" type="box" pos="0 -0.479 0.51325" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_02_00_slot_-0.006" type="box" pos="0.008 -0.4854 0.50725" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_02_00_slot_0.006" type="box" pos="0.008 -0.4854 0.51925" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_02_00_handle_-0.216" type="box" pos="-0.216 -0.49 0.51325" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_02_00_handle_0.214" type="box" pos="0.214 -0.49 0.51325" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_02_00_led_0" type="sphere" pos="0.183 -0.487 0.51725" size="0.0022" material="led_green" />
+      <geom name="server_02_00_led_1" type="sphere" pos="0.194 -0.487 0.51725" size="0.0022" material="led_blue" />
+      <geom name="server_02_01_face" type="box" pos="0 -0.479 0.55775" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_02_01_slot_-0.006" type="box" pos="0.008 -0.4854 0.55175" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_02_01_slot_0.006" type="box" pos="0.008 -0.4854 0.56375" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_02_01_handle_-0.216" type="box" pos="-0.216 -0.49 0.55775" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_02_01_handle_0.214" type="box" pos="0.214 -0.49 0.55775" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_02_01_led_0" type="sphere" pos="0.183 -0.487 0.56175" size="0.0022" material="led_green" />
+      <geom name="server_02_01_led_1" type="sphere" pos="0.194 -0.487 0.56175" size="0.0022" material="led_blue" />
+      <geom name="server_02_02_face" type="box" pos="0 -0.479 0.60225" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_02_02_slot_-0.006" type="box" pos="0.008 -0.4854 0.59625" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_02_02_slot_0.006" type="box" pos="0.008 -0.4854 0.60825" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_02_02_handle_-0.216" type="box" pos="-0.216 -0.49 0.60225" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_02_02_handle_0.214" type="box" pos="0.214 -0.49 0.60225" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_02_02_led_0" type="sphere" pos="0.183 -0.487 0.60625" size="0.0022" material="led_green" />
+      <geom name="server_02_02_led_1" type="sphere" pos="0.194 -0.487 0.60625" size="0.0022" material="led_blue" />
+      <geom name="server_02_03_face" type="box" pos="0 -0.479 0.64675" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_02_03_slot_-0.006" type="box" pos="0.008 -0.4854 0.64075" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_02_03_slot_0.006" type="box" pos="0.008 -0.4854 0.65275" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_02_03_handle_-0.216" type="box" pos="-0.216 -0.49 0.64675" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_02_03_handle_0.214" type="box" pos="0.214 -0.49 0.64675" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_02_03_led_0" type="sphere" pos="0.183 -0.487 0.65075" size="0.0022" material="led_green" />
+      <geom name="server_02_03_led_1" type="sphere" pos="0.194 -0.487 0.65075" size="0.0022" material="led_blue" />
+      <geom name="server_bank_03" type="box" pos="0 -0.02 0.798" size="0.2413 0.45 0.088" material="black" />
+      <geom name="server_03_00_face" type="box" pos="0 -0.479 0.73125" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_03_00_slot_-0.006" type="box" pos="0.008 -0.4854 0.72525" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_03_00_slot_0.006" type="box" pos="0.008 -0.4854 0.73725" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_03_00_handle_-0.216" type="box" pos="-0.216 -0.49 0.73125" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_03_00_handle_0.214" type="box" pos="0.214 -0.49 0.73125" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_03_00_led_0" type="sphere" pos="0.183 -0.487 0.73525" size="0.0022" material="led_green" />
+      <geom name="server_03_00_led_1" type="sphere" pos="0.194 -0.487 0.73525" size="0.0022" material="led_blue" />
+      <geom name="server_03_01_face" type="box" pos="0 -0.479 0.77575" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_03_01_slot_-0.006" type="box" pos="0.008 -0.4854 0.76975" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_03_01_slot_0.006" type="box" pos="0.008 -0.4854 0.78175" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_03_01_handle_-0.216" type="box" pos="-0.216 -0.49 0.77575" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_03_01_handle_0.214" type="box" pos="0.214 -0.49 0.77575" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_03_01_led_0" type="sphere" pos="0.183 -0.487 0.77975" size="0.0022" material="led_green" />
+      <geom name="server_03_01_led_1" type="sphere" pos="0.194 -0.487 0.77975" size="0.0022" material="led_blue" />
+      <geom name="server_03_02_face" type="box" pos="0 -0.479 0.82025" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_03_02_slot_-0.006" type="box" pos="0.008 -0.4854 0.81425" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_03_02_slot_0.006" type="box" pos="0.008 -0.4854 0.82625" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_03_02_handle_-0.216" type="box" pos="-0.216 -0.49 0.82025" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_03_02_handle_0.214" type="box" pos="0.214 -0.49 0.82025" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_03_02_led_0" type="sphere" pos="0.183 -0.487 0.82425" size="0.0022" material="led_green" />
+      <geom name="server_03_02_led_1" type="sphere" pos="0.194 -0.487 0.82425" size="0.0022" material="led_blue" />
+      <geom name="server_03_03_face" type="box" pos="0 -0.479 0.86475" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_03_03_slot_-0.006" type="box" pos="0.008 -0.4854 0.85875" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_03_03_slot_0.006" type="box" pos="0.008 -0.4854 0.87075" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_03_03_handle_-0.216" type="box" pos="-0.216 -0.49 0.86475" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_03_03_handle_0.214" type="box" pos="0.214 -0.49 0.86475" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_03_03_led_0" type="sphere" pos="0.183 -0.487 0.86875" size="0.0022" material="led_green" />
+      <geom name="server_03_03_led_1" type="sphere" pos="0.194 -0.487 0.86875" size="0.0022" material="led_blue" />
+      <geom name="server_bank_04" type="box" pos="0 -0.02 1.016" size="0.2413 0.45 0.088" material="black" />
+      <geom name="server_04_00_face" type="box" pos="0 -0.479 0.94925" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_04_00_slot_-0.006" type="box" pos="0.008 -0.4854 0.94325" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_04_00_slot_0.006" type="box" pos="0.008 -0.4854 0.95525" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_04_00_handle_-0.216" type="box" pos="-0.216 -0.49 0.94925" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_04_00_handle_0.214" type="box" pos="0.214 -0.49 0.94925" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_04_00_led_0" type="sphere" pos="0.183 -0.487 0.95325" size="0.0022" material="led_green" />
+      <geom name="server_04_00_led_1" type="sphere" pos="0.194 -0.487 0.95325" size="0.0022" material="led_blue" />
+      <geom name="server_04_01_face" type="box" pos="0 -0.479 0.99375" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_04_01_slot_-0.006" type="box" pos="0.008 -0.4854 0.98775" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_04_01_slot_0.006" type="box" pos="0.008 -0.4854 0.99975" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_04_01_handle_-0.216" type="box" pos="-0.216 -0.49 0.99375" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_04_01_handle_0.214" type="box" pos="0.214 -0.49 0.99375" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_04_01_led_0" type="sphere" pos="0.183 -0.487 0.99775" size="0.0022" material="led_green" />
+      <geom name="server_04_01_led_1" type="sphere" pos="0.194 -0.487 0.99775" size="0.0022" material="led_blue" />
+      <geom name="server_04_02_face" type="box" pos="0 -0.479 1.03825" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_04_02_slot_-0.006" type="box" pos="0.008 -0.4854 1.03225" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_04_02_slot_0.006" type="box" pos="0.008 -0.4854 1.04425" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_04_02_handle_-0.216" type="box" pos="-0.216 -0.49 1.03825" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_04_02_handle_0.214" type="box" pos="0.214 -0.49 1.03825" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_04_02_led_0" type="sphere" pos="0.183 -0.487 1.04225" size="0.0022" material="led_green" />
+      <geom name="server_04_02_led_1" type="sphere" pos="0.194 -0.487 1.04225" size="0.0022" material="led_blue" />
+      <geom name="server_04_03_face" type="box" pos="0 -0.479 1.08275" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_04_03_slot_-0.006" type="box" pos="0.008 -0.4854 1.07675" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_04_03_slot_0.006" type="box" pos="0.008 -0.4854 1.08875" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_04_03_handle_-0.216" type="box" pos="-0.216 -0.49 1.08275" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_04_03_handle_0.214" type="box" pos="0.214 -0.49 1.08275" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_04_03_led_0" type="sphere" pos="0.183 -0.487 1.08675" size="0.0022" material="led_green" />
+      <geom name="server_04_03_led_1" type="sphere" pos="0.194 -0.487 1.08675" size="0.0022" material="led_blue" />
+      <geom name="server_bank_05" type="box" pos="0 -0.02 1.235" size="0.2413 0.45 0.089" material="black" />
+      <geom name="server_05_00_face" type="box" pos="0 -0.479 1.1675" size="0.24 0.006 0.021" material="server_front" />
+      <geom name="server_05_00_slot_-0.006" type="box" pos="0.008 -0.4854 1.1615" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_05_00_slot_0.006" type="box" pos="0.008 -0.4854 1.1735" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_05_00_handle_-0.216" type="box" pos="-0.216 -0.49 1.1675" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_05_00_handle_0.214" type="box" pos="0.214 -0.49 1.1675" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_05_00_led_0" type="sphere" pos="0.183 -0.487 1.1715" size="0.0022" material="led_green" />
+      <geom name="server_05_00_led_1" type="sphere" pos="0.194 -0.487 1.1715" size="0.0022" material="led_blue" />
+      <geom name="server_05_01_face" type="box" pos="0 -0.479 1.2125" size="0.24 0.006 0.021" material="server_front" />
+      <geom name="server_05_01_slot_-0.006" type="box" pos="0.008 -0.4854 1.2065" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_05_01_slot_0.006" type="box" pos="0.008 -0.4854 1.2185" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_05_01_handle_-0.216" type="box" pos="-0.216 -0.49 1.2125" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_05_01_handle_0.214" type="box" pos="0.214 -0.49 1.2125" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_05_01_led_0" type="sphere" pos="0.183 -0.487 1.2165" size="0.0022" material="led_green" />
+      <geom name="server_05_01_led_1" type="sphere" pos="0.194 -0.487 1.2165" size="0.0022" material="led_blue" />
+      <geom name="server_05_02_face" type="box" pos="0 -0.479 1.2575" size="0.24 0.006 0.021" material="server_front" />
+      <geom name="server_05_02_slot_-0.006" type="box" pos="0.008 -0.4854 1.2515" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_05_02_slot_0.006" type="box" pos="0.008 -0.4854 1.2635" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_05_02_handle_-0.216" type="box" pos="-0.216 -0.49 1.2575" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_05_02_handle_0.214" type="box" pos="0.214 -0.49 1.2575" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_05_02_led_0" type="sphere" pos="0.183 -0.487 1.2615" size="0.0022" material="led_green" />
+      <geom name="server_05_02_led_1" type="sphere" pos="0.194 -0.487 1.2615" size="0.0022" material="led_blue" />
+      <geom name="server_05_03_face" type="box" pos="0 -0.479 1.3025" size="0.24 0.006 0.021" material="server_front" />
+      <geom name="server_05_03_slot_-0.006" type="box" pos="0.008 -0.4854 1.2965" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_05_03_slot_0.006" type="box" pos="0.008 -0.4854 1.3085" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_05_03_handle_-0.216" type="box" pos="-0.216 -0.49 1.3025" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_05_03_handle_0.214" type="box" pos="0.214 -0.49 1.3025" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_05_03_led_0" type="sphere" pos="0.183 -0.487 1.3065" size="0.0022" material="led_green" />
+      <geom name="server_05_03_led_1" type="sphere" pos="0.194 -0.487 1.3065" size="0.0022" material="led_blue" />
+      <geom name="server_bank_06" type="box" pos="0 -0.02 1.453" size="0.2413 0.45 0.087" material="black" />
+      <geom name="server_06_00_face" type="box" pos="0 -0.479 1.387" size="0.24 0.006 0.0205" material="server_front" />
+      <geom name="server_06_00_slot_-0.006" type="box" pos="0.008 -0.4854 1.381" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_06_00_slot_0.006" type="box" pos="0.008 -0.4854 1.393" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_06_00_handle_-0.216" type="box" pos="-0.216 -0.49 1.387" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_06_00_handle_0.214" type="box" pos="0.214 -0.49 1.387" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_06_00_led_0" type="sphere" pos="0.183 -0.487 1.391" size="0.0022" material="led_green" />
+      <geom name="server_06_00_led_1" type="sphere" pos="0.194 -0.487 1.391" size="0.0022" material="led_blue" />
+      <geom name="server_06_01_face" type="box" pos="0 -0.479 1.431" size="0.24 0.006 0.0205" material="server_front" />
+      <geom name="server_06_01_slot_-0.006" type="box" pos="0.008 -0.4854 1.425" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_06_01_slot_0.006" type="box" pos="0.008 -0.4854 1.437" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_06_01_handle_-0.216" type="box" pos="-0.216 -0.49 1.431" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_06_01_handle_0.214" type="box" pos="0.214 -0.49 1.431" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_06_01_led_0" type="sphere" pos="0.183 -0.487 1.435" size="0.0022" material="led_green" />
+      <geom name="server_06_01_led_1" type="sphere" pos="0.194 -0.487 1.435" size="0.0022" material="led_blue" />
+      <geom name="server_06_02_face" type="box" pos="0 -0.479 1.475" size="0.24 0.006 0.0205" material="server_front" />
+      <geom name="server_06_02_slot_-0.006" type="box" pos="0.008 -0.4854 1.469" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_06_02_slot_0.006" type="box" pos="0.008 -0.4854 1.481" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_06_02_handle_-0.216" type="box" pos="-0.216 -0.49 1.475" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_06_02_handle_0.214" type="box" pos="0.214 -0.49 1.475" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_06_02_led_0" type="sphere" pos="0.183 -0.487 1.479" size="0.0022" material="led_green" />
+      <geom name="server_06_02_led_1" type="sphere" pos="0.194 -0.487 1.479" size="0.0022" material="led_blue" />
+      <geom name="server_06_03_face" type="box" pos="0 -0.479 1.519" size="0.24 0.006 0.0205" material="server_front" />
+      <geom name="server_06_03_slot_-0.006" type="box" pos="0.008 -0.4854 1.513" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_06_03_slot_0.006" type="box" pos="0.008 -0.4854 1.525" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_06_03_handle_-0.216" type="box" pos="-0.216 -0.49 1.519" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_06_03_handle_0.214" type="box" pos="0.214 -0.49 1.519" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_06_03_led_0" type="sphere" pos="0.183 -0.487 1.523" size="0.0022" material="led_green" />
+      <geom name="server_06_03_led_1" type="sphere" pos="0.194 -0.487 1.523" size="0.0022" material="led_blue" />
+      <geom name="server_bank_07" type="box" pos="0 -0.02 1.67" size="0.2413 0.45 0.088" material="black" />
+      <geom name="server_07_00_face" type="box" pos="0 -0.479 1.60325" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_07_00_slot_-0.006" type="box" pos="0.008 -0.4854 1.59725" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_07_00_slot_0.006" type="box" pos="0.008 -0.4854 1.60925" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_07_00_handle_-0.216" type="box" pos="-0.216 -0.49 1.60325" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_07_00_handle_0.214" type="box" pos="0.214 -0.49 1.60325" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_07_00_led_0" type="sphere" pos="0.183 -0.487 1.60725" size="0.0022" material="led_green" />
+      <geom name="server_07_00_led_1" type="sphere" pos="0.194 -0.487 1.60725" size="0.0022" material="led_blue" />
+      <geom name="server_07_01_face" type="box" pos="0 -0.479 1.64775" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_07_01_slot_-0.006" type="box" pos="0.008 -0.4854 1.64175" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_07_01_slot_0.006" type="box" pos="0.008 -0.4854 1.65375" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_07_01_handle_-0.216" type="box" pos="-0.216 -0.49 1.64775" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_07_01_handle_0.214" type="box" pos="0.214 -0.49 1.64775" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_07_01_led_0" type="sphere" pos="0.183 -0.487 1.65175" size="0.0022" material="led_green" />
+      <geom name="server_07_01_led_1" type="sphere" pos="0.194 -0.487 1.65175" size="0.0022" material="led_blue" />
+      <geom name="server_07_02_face" type="box" pos="0 -0.479 1.69225" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_07_02_slot_-0.006" type="box" pos="0.008 -0.4854 1.68625" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_07_02_slot_0.006" type="box" pos="0.008 -0.4854 1.69825" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_07_02_handle_-0.216" type="box" pos="-0.216 -0.49 1.69225" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_07_02_handle_0.214" type="box" pos="0.214 -0.49 1.69225" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_07_02_led_0" type="sphere" pos="0.183 -0.487 1.69625" size="0.0022" material="led_green" />
+      <geom name="server_07_02_led_1" type="sphere" pos="0.194 -0.487 1.69625" size="0.0022" material="led_blue" />
+      <geom name="server_07_03_face" type="box" pos="0 -0.479 1.73675" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_07_03_slot_-0.006" type="box" pos="0.008 -0.4854 1.73075" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_07_03_slot_0.006" type="box" pos="0.008 -0.4854 1.74275" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_07_03_handle_-0.216" type="box" pos="-0.216 -0.49 1.73675" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_07_03_handle_0.214" type="box" pos="0.214 -0.49 1.73675" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_07_03_led_0" type="sphere" pos="0.183 -0.487 1.74075" size="0.0022" material="led_green" />
+      <geom name="server_07_03_led_1" type="sphere" pos="0.194 -0.487 1.74075" size="0.0022" material="led_blue" />
+      <geom name="server_bank_08" type="box" pos="0 -0.02 1.888" size="0.2413 0.45 0.088" material="black" />
+      <geom name="server_08_00_face" type="box" pos="0 -0.479 1.82125" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_08_00_slot_-0.006" type="box" pos="0.008 -0.4854 1.81525" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_08_00_slot_0.006" type="box" pos="0.008 -0.4854 1.82725" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_08_00_handle_-0.216" type="box" pos="-0.216 -0.49 1.82125" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_08_00_handle_0.214" type="box" pos="0.214 -0.49 1.82125" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_08_00_led_0" type="sphere" pos="0.183 -0.487 1.82525" size="0.0022" material="led_green" />
+      <geom name="server_08_00_led_1" type="sphere" pos="0.194 -0.487 1.82525" size="0.0022" material="led_blue" />
+      <geom name="server_08_01_face" type="box" pos="0 -0.479 1.86575" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_08_01_slot_-0.006" type="box" pos="0.008 -0.4854 1.85975" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_08_01_slot_0.006" type="box" pos="0.008 -0.4854 1.87175" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_08_01_handle_-0.216" type="box" pos="-0.216 -0.49 1.86575" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_08_01_handle_0.214" type="box" pos="0.214 -0.49 1.86575" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_08_01_led_0" type="sphere" pos="0.183 -0.487 1.86975" size="0.0022" material="led_green" />
+      <geom name="server_08_01_led_1" type="sphere" pos="0.194 -0.487 1.86975" size="0.0022" material="led_blue" />
+      <geom name="server_08_02_face" type="box" pos="0 -0.479 1.91025" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_08_02_slot_-0.006" type="box" pos="0.008 -0.4854 1.90425" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_08_02_slot_0.006" type="box" pos="0.008 -0.4854 1.91625" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_08_02_handle_-0.216" type="box" pos="-0.216 -0.49 1.91025" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_08_02_handle_0.214" type="box" pos="0.214 -0.49 1.91025" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_08_02_led_0" type="sphere" pos="0.183 -0.487 1.91425" size="0.0022" material="led_green" />
+      <geom name="server_08_02_led_1" type="sphere" pos="0.194 -0.487 1.91425" size="0.0022" material="led_blue" />
+      <geom name="server_08_03_face" type="box" pos="0 -0.479 1.95475" size="0.24 0.006 0.02075" material="server_front" />
+      <geom name="server_08_03_slot_-0.006" type="box" pos="0.008 -0.4854 1.94875" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_08_03_slot_0.006" type="box" pos="0.008 -0.4854 1.96075" size="0.151 0.0007 0.0016" material="black" />
+      <geom name="server_08_03_handle_-0.216" type="box" pos="-0.216 -0.49 1.95475" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_08_03_handle_0.214" type="box" pos="0.214 -0.49 1.95475" size="0.005 0.004 0.013" material="silver" />
+      <geom name="server_08_03_led_0" type="sphere" pos="0.183 -0.487 1.95875" size="0.0022" material="led_green" />
+      <geom name="server_08_03_led_1" type="sphere" pos="0.194 -0.487 1.95875" size="0.0022" material="led_blue" />
+      <geom name="top_recess" type="box" pos="0 -0.421 2.069" size="0.245 0.025 0.077" material="black" />
+      <geom name="top_patch_port_0" type="box" pos="-0.218 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_0_0" type="capsule" fromto="-0.218 -0.466 2.059 -0.218 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_0_1" type="capsule" fromto="-0.218 -0.482 2.092 -0.1962 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_0_2" type="capsule" fromto="-0.1962 -0.484 2.12 0.229 -0.483 2.12" size="0.0028" material="blue" />
+      <geom name="top_patch_port_1" type="box" pos="-0.1745 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_1_0" type="capsule" fromto="-0.1745 -0.466 2.059 -0.1745 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_1_1" type="capsule" fromto="-0.1745 -0.482 2.092 -0.15705 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_1_2" type="capsule" fromto="-0.15705 -0.484 2.12 0.229 -0.4823 2.1216" size="0.0028" material="blue" />
+      <geom name="top_patch_port_2" type="box" pos="-0.131 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_2_0" type="capsule" fromto="-0.131 -0.466 2.059 -0.131 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_2_1" type="capsule" fromto="-0.131 -0.482 2.092 -0.1179 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_2_2" type="capsule" fromto="-0.1179 -0.484 2.12 0.229 -0.4816 2.1232" size="0.0028" material="blue" />
+      <geom name="top_patch_port_3" type="box" pos="-0.0875 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_3_0" type="capsule" fromto="-0.0875 -0.466 2.059 -0.0875 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_3_1" type="capsule" fromto="-0.0875 -0.482 2.092 -0.07875 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_3_2" type="capsule" fromto="-0.07875 -0.484 2.12 0.229 -0.4809 2.1248" size="0.0028" material="blue" />
+      <geom name="top_patch_port_4" type="box" pos="-0.044 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_4_0" type="capsule" fromto="-0.044 -0.466 2.059 -0.044 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_4_1" type="capsule" fromto="-0.044 -0.482 2.092 -0.0396 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_4_2" type="capsule" fromto="-0.0396 -0.484 2.12 0.229 -0.4802 2.1264" size="0.0028" material="blue" />
+      <geom name="top_patch_port_5" type="box" pos="-0.0005 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_5_0" type="capsule" fromto="-0.0005 -0.466 2.059 -0.0005 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_5_1" type="capsule" fromto="-0.0005 -0.482 2.092 -0.00045 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_5_2" type="capsule" fromto="-0.00045 -0.484 2.12 0.229 -0.4795 2.128" size="0.0028" material="blue" />
+      <geom name="top_patch_port_6" type="box" pos="0.043 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_6_0" type="capsule" fromto="0.043 -0.466 2.059 0.043 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_6_1" type="capsule" fromto="0.043 -0.482 2.092 0.0387 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_6_2" type="capsule" fromto="0.0387 -0.484 2.12 0.229 -0.4788 2.1296" size="0.0028" material="blue" />
+      <geom name="top_patch_port_7" type="box" pos="0.0865 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_7_0" type="capsule" fromto="0.0865 -0.466 2.059 0.0865 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_7_1" type="capsule" fromto="0.0865 -0.482 2.092 0.07785 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_7_2" type="capsule" fromto="0.07785 -0.484 2.12 0.229 -0.4781 2.1312" size="0.0028" material="blue" />
+      <geom name="top_patch_port_8" type="box" pos="0.13 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_8_0" type="capsule" fromto="0.13 -0.466 2.059 0.13 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_8_1" type="capsule" fromto="0.13 -0.482 2.092 0.117 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_8_2" type="capsule" fromto="0.117 -0.484 2.12 0.229 -0.4774 2.1328" size="0.0028" material="blue" />
+      <geom name="top_patch_port_9" type="box" pos="0.1735 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_9_0" type="capsule" fromto="0.1735 -0.466 2.059 0.1735 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_9_1" type="capsule" fromto="0.1735 -0.482 2.092 0.15615 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_9_2" type="capsule" fromto="0.15615 -0.484 2.12 0.229 -0.4767 2.1344" size="0.0028" material="blue" />
+      <geom name="top_patch_port_10" type="box" pos="0.217 -0.451 2.037" size="0.012 0.006 0.023" material="yellow" />
+      <geom name="top_cable_10_0" type="capsule" fromto="0.217 -0.466 2.059 0.217 -0.482 2.092" size="0.0028" material="blue" />
+      <geom name="top_cable_10_1" type="capsule" fromto="0.217 -0.482 2.092 0.1953 -0.484 2.12" size="0.0028" material="blue" />
+      <geom name="top_cable_10_2" type="capsule" fromto="0.1953 -0.484 2.12 0.229 -0.476 2.136" size="0.0028" material="blue" />
+      <geom name="patch_tag_left_0" type="box" pos="-0.247 -0.503 0.249" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_left_1" type="box" pos="-0.247 -0.503 0.467" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_left_2" type="box" pos="-0.247 -0.503 0.685" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_left_3" type="box" pos="-0.247 -0.503 0.903" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_left_4" type="box" pos="-0.247 -0.503 1.121" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_left_5" type="box" pos="-0.247 -0.503 1.341" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_left_6" type="box" pos="-0.247 -0.503 1.557" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_left_7" type="box" pos="-0.247 -0.503 1.775" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_right_0" type="box" pos="0.247 -0.503 0.249" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_right_1" type="box" pos="0.247 -0.503 0.467" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_right_2" type="box" pos="0.247 -0.503 0.685" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_right_3" type="box" pos="0.247 -0.503 0.903" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_right_4" type="box" pos="0.247 -0.503 1.121" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_right_5" type="box" pos="0.247 -0.503 1.341" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_right_6" type="box" pos="0.247 -0.503 1.557" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="patch_tag_right_7" type="box" pos="0.247 -0.503 1.775" size="0.008 0.004 0.012" material="yellow" />
+      <geom name="lower_cable_0_0" type="capsule" fromto="-0.246 -0.491 0.69 -0.239172 -0.49178 0.6675" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_1" type="capsule" fromto="-0.239172 -0.49178 0.6675 -0.232606 -0.492531 0.645" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_2" type="capsule" fromto="-0.232606 -0.492531 0.645 -0.226555 -0.493222 0.6225" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_3" type="capsule" fromto="-0.226555 -0.493222 0.6225 -0.221251 -0.493828 0.6" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_4" type="capsule" fromto="-0.221251 -0.493828 0.6 -0.216899 -0.494326 0.5775" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_5" type="capsule" fromto="-0.216899 -0.494326 0.5775 -0.213664 -0.494696 0.555" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_6" type="capsule" fromto="-0.213664 -0.494696 0.555 -0.211673 -0.494923 0.5325" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_7" type="capsule" fromto="-0.211673 -0.494923 0.5325 -0.211 -0.495 0.51" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_8" type="capsule" fromto="-0.211 -0.495 0.51 -0.211673 -0.494923 0.4875" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_9" type="capsule" fromto="-0.211673 -0.494923 0.4875 -0.213664 -0.494696 0.465" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_10" type="capsule" fromto="-0.213664 -0.494696 0.465 -0.216899 -0.494326 0.4425" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_11" type="capsule" fromto="-0.216899 -0.494326 0.4425 -0.221251 -0.493828 0.42" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_12" type="capsule" fromto="-0.221251 -0.493828 0.42 -0.226555 -0.493222 0.3975" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_13" type="capsule" fromto="-0.226555 -0.493222 0.3975 -0.232606 -0.492531 0.375" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_14" type="capsule" fromto="-0.232606 -0.492531 0.375 -0.239172 -0.49178 0.3525" size="0.0022" material="blue" />
+      <geom name="lower_cable_0_15" type="capsule" fromto="-0.239172 -0.49178 0.3525 -0.246 -0.491 0.33" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_0" type="capsule" fromto="-0.246 -0.491 0.697 -0.239172 -0.49178 0.6745" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_1" type="capsule" fromto="-0.239172 -0.49178 0.6745 -0.232606 -0.492531 0.652" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_2" type="capsule" fromto="-0.232606 -0.492531 0.652 -0.226555 -0.493222 0.6295" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_3" type="capsule" fromto="-0.226555 -0.493222 0.6295 -0.221251 -0.493828 0.607" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_4" type="capsule" fromto="-0.221251 -0.493828 0.607 -0.216899 -0.494326 0.5845" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_5" type="capsule" fromto="-0.216899 -0.494326 0.5845 -0.213664 -0.494696 0.562" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_6" type="capsule" fromto="-0.213664 -0.494696 0.562 -0.211673 -0.494923 0.5395" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_7" type="capsule" fromto="-0.211673 -0.494923 0.5395 -0.211 -0.495 0.517" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_8" type="capsule" fromto="-0.211 -0.495 0.517 -0.211673 -0.494923 0.4945" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_9" type="capsule" fromto="-0.211673 -0.494923 0.4945 -0.213664 -0.494696 0.472" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_10" type="capsule" fromto="-0.213664 -0.494696 0.472 -0.216899 -0.494326 0.4495" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_11" type="capsule" fromto="-0.216899 -0.494326 0.4495 -0.221251 -0.493828 0.427" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_12" type="capsule" fromto="-0.221251 -0.493828 0.427 -0.226555 -0.493222 0.4045" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_13" type="capsule" fromto="-0.226555 -0.493222 0.4045 -0.232606 -0.492531 0.382" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_14" type="capsule" fromto="-0.232606 -0.492531 0.382 -0.239172 -0.49178 0.3595" size="0.0022" material="blue" />
+      <geom name="lower_cable_1_15" type="capsule" fromto="-0.239172 -0.49178 0.3595 -0.246 -0.491 0.337" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_0" type="capsule" fromto="-0.246 -0.491 0.704 -0.239172 -0.49178 0.6815" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_1" type="capsule" fromto="-0.239172 -0.49178 0.6815 -0.232606 -0.492531 0.659" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_2" type="capsule" fromto="-0.232606 -0.492531 0.659 -0.226555 -0.493222 0.6365" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_3" type="capsule" fromto="-0.226555 -0.493222 0.6365 -0.221251 -0.493828 0.614" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_4" type="capsule" fromto="-0.221251 -0.493828 0.614 -0.216899 -0.494326 0.5915" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_5" type="capsule" fromto="-0.216899 -0.494326 0.5915 -0.213664 -0.494696 0.569" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_6" type="capsule" fromto="-0.213664 -0.494696 0.569 -0.211673 -0.494923 0.5465" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_7" type="capsule" fromto="-0.211673 -0.494923 0.5465 -0.211 -0.495 0.524" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_8" type="capsule" fromto="-0.211 -0.495 0.524 -0.211673 -0.494923 0.5015" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_9" type="capsule" fromto="-0.211673 -0.494923 0.5015 -0.213664 -0.494696 0.479" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_10" type="capsule" fromto="-0.213664 -0.494696 0.479 -0.216899 -0.494326 0.4565" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_11" type="capsule" fromto="-0.216899 -0.494326 0.4565 -0.221251 -0.493828 0.434" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_12" type="capsule" fromto="-0.221251 -0.493828 0.434 -0.226555 -0.493222 0.4115" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_13" type="capsule" fromto="-0.226555 -0.493222 0.4115 -0.232606 -0.492531 0.389" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_14" type="capsule" fromto="-0.232606 -0.492531 0.389 -0.239172 -0.49178 0.3665" size="0.0022" material="blue" />
+      <geom name="lower_cable_2_15" type="capsule" fromto="-0.239172 -0.49178 0.3665 -0.246 -0.491 0.344" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_0" type="capsule" fromto="-0.246 -0.491 0.711 -0.239172 -0.49178 0.6885" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_1" type="capsule" fromto="-0.239172 -0.49178 0.6885 -0.232606 -0.492531 0.666" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_2" type="capsule" fromto="-0.232606 -0.492531 0.666 -0.226555 -0.493222 0.6435" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_3" type="capsule" fromto="-0.226555 -0.493222 0.6435 -0.221251 -0.493828 0.621" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_4" type="capsule" fromto="-0.221251 -0.493828 0.621 -0.216899 -0.494326 0.5985" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_5" type="capsule" fromto="-0.216899 -0.494326 0.5985 -0.213664 -0.494696 0.576" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_6" type="capsule" fromto="-0.213664 -0.494696 0.576 -0.211673 -0.494923 0.5535" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_7" type="capsule" fromto="-0.211673 -0.494923 0.5535 -0.211 -0.495 0.531" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_8" type="capsule" fromto="-0.211 -0.495 0.531 -0.211673 -0.494923 0.5085" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_9" type="capsule" fromto="-0.211673 -0.494923 0.5085 -0.213664 -0.494696 0.486" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_10" type="capsule" fromto="-0.213664 -0.494696 0.486 -0.216899 -0.494326 0.4635" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_11" type="capsule" fromto="-0.216899 -0.494326 0.4635 -0.221251 -0.493828 0.441" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_12" type="capsule" fromto="-0.221251 -0.493828 0.441 -0.226555 -0.493222 0.4185" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_13" type="capsule" fromto="-0.226555 -0.493222 0.4185 -0.232606 -0.492531 0.396" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_14" type="capsule" fromto="-0.232606 -0.492531 0.396 -0.239172 -0.49178 0.3735" size="0.0022" material="blue" />
+      <geom name="lower_cable_3_15" type="capsule" fromto="-0.239172 -0.49178 0.3735 -0.246 -0.491 0.351" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_0" type="capsule" fromto="-0.246 -0.491 0.718 -0.239172 -0.49178 0.6955" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_1" type="capsule" fromto="-0.239172 -0.49178 0.6955 -0.232606 -0.492531 0.673" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_2" type="capsule" fromto="-0.232606 -0.492531 0.673 -0.226555 -0.493222 0.6505" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_3" type="capsule" fromto="-0.226555 -0.493222 0.6505 -0.221251 -0.493828 0.628" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_4" type="capsule" fromto="-0.221251 -0.493828 0.628 -0.216899 -0.494326 0.6055" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_5" type="capsule" fromto="-0.216899 -0.494326 0.6055 -0.213664 -0.494696 0.583" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_6" type="capsule" fromto="-0.213664 -0.494696 0.583 -0.211673 -0.494923 0.5605" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_7" type="capsule" fromto="-0.211673 -0.494923 0.5605 -0.211 -0.495 0.538" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_8" type="capsule" fromto="-0.211 -0.495 0.538 -0.211673 -0.494923 0.5155" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_9" type="capsule" fromto="-0.211673 -0.494923 0.5155 -0.213664 -0.494696 0.493" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_10" type="capsule" fromto="-0.213664 -0.494696 0.493 -0.216899 -0.494326 0.4705" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_11" type="capsule" fromto="-0.216899 -0.494326 0.4705 -0.221251 -0.493828 0.448" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_12" type="capsule" fromto="-0.221251 -0.493828 0.448 -0.226555 -0.493222 0.4255" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_13" type="capsule" fromto="-0.226555 -0.493222 0.4255 -0.232606 -0.492531 0.403" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_14" type="capsule" fromto="-0.232606 -0.492531 0.403 -0.239172 -0.49178 0.3805" size="0.0022" material="blue" />
+      <geom name="lower_cable_4_15" type="capsule" fromto="-0.239172 -0.49178 0.3805 -0.246 -0.491 0.358" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_0" type="capsule" fromto="-0.246 -0.491 0.725 -0.239172 -0.49178 0.7025" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_1" type="capsule" fromto="-0.239172 -0.49178 0.7025 -0.232606 -0.492531 0.68" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_2" type="capsule" fromto="-0.232606 -0.492531 0.68 -0.226555 -0.493222 0.6575" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_3" type="capsule" fromto="-0.226555 -0.493222 0.6575 -0.221251 -0.493828 0.635" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_4" type="capsule" fromto="-0.221251 -0.493828 0.635 -0.216899 -0.494326 0.6125" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_5" type="capsule" fromto="-0.216899 -0.494326 0.6125 -0.213664 -0.494696 0.59" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_6" type="capsule" fromto="-0.213664 -0.494696 0.59 -0.211673 -0.494923 0.5675" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_7" type="capsule" fromto="-0.211673 -0.494923 0.5675 -0.211 -0.495 0.545" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_8" type="capsule" fromto="-0.211 -0.495 0.545 -0.211673 -0.494923 0.5225" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_9" type="capsule" fromto="-0.211673 -0.494923 0.5225 -0.213664 -0.494696 0.5" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_10" type="capsule" fromto="-0.213664 -0.494696 0.5 -0.216899 -0.494326 0.4775" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_11" type="capsule" fromto="-0.216899 -0.494326 0.4775 -0.221251 -0.493828 0.455" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_12" type="capsule" fromto="-0.221251 -0.493828 0.455 -0.226555 -0.493222 0.4325" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_13" type="capsule" fromto="-0.226555 -0.493222 0.4325 -0.232606 -0.492531 0.41" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_14" type="capsule" fromto="-0.232606 -0.492531 0.41 -0.239172 -0.49178 0.3875" size="0.0022" material="blue" />
+      <geom name="lower_cable_5_15" type="capsule" fromto="-0.239172 -0.49178 0.3875 -0.246 -0.491 0.365" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_0" type="capsule" fromto="-0.246 -0.491 0.732 -0.239172 -0.49178 0.7095" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_1" type="capsule" fromto="-0.239172 -0.49178 0.7095 -0.232606 -0.492531 0.687" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_2" type="capsule" fromto="-0.232606 -0.492531 0.687 -0.226555 -0.493222 0.6645" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_3" type="capsule" fromto="-0.226555 -0.493222 0.6645 -0.221251 -0.493828 0.642" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_4" type="capsule" fromto="-0.221251 -0.493828 0.642 -0.216899 -0.494326 0.6195" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_5" type="capsule" fromto="-0.216899 -0.494326 0.6195 -0.213664 -0.494696 0.597" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_6" type="capsule" fromto="-0.213664 -0.494696 0.597 -0.211673 -0.494923 0.5745" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_7" type="capsule" fromto="-0.211673 -0.494923 0.5745 -0.211 -0.495 0.552" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_8" type="capsule" fromto="-0.211 -0.495 0.552 -0.211673 -0.494923 0.5295" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_9" type="capsule" fromto="-0.211673 -0.494923 0.5295 -0.213664 -0.494696 0.507" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_10" type="capsule" fromto="-0.213664 -0.494696 0.507 -0.216899 -0.494326 0.4845" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_11" type="capsule" fromto="-0.216899 -0.494326 0.4845 -0.221251 -0.493828 0.462" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_12" type="capsule" fromto="-0.221251 -0.493828 0.462 -0.226555 -0.493222 0.4395" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_13" type="capsule" fromto="-0.226555 -0.493222 0.4395 -0.232606 -0.492531 0.417" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_14" type="capsule" fromto="-0.232606 -0.492531 0.417 -0.239172 -0.49178 0.3945" size="0.0022" material="blue" />
+      <geom name="lower_cable_6_15" type="capsule" fromto="-0.239172 -0.49178 0.3945 -0.246 -0.491 0.372" size="0.0022" material="blue" />
+      <geom name="cable_strap_0.379" type="box" pos="-0.235 -0.497 0.379" size="0.012 0.001 0.005" material="black" />
+      <geom name="cable_strap_0.535" type="box" pos="-0.235 -0.497 0.535" size="0.012 0.001 0.005" material="black" />
+      <geom name="cable_strap_0.67" type="box" pos="-0.235 -0.497 0.67" size="0.012 0.001 0.005" material="black" />
+      <geom name="qr_front_01" type="box" pos="-0.17 -0.488 0.122167" size="0.02 0.0004 0.02" material="qr_material_01" />
+      <geom name="height_label_front_01" type="box" pos="-0.107 -0.488 0.122167" size="0.038 0.0004 0.007" material="height_material_01" />
+      <geom name="qr_front_02" type="box" pos="-0.17 -0.488 0.1665" size="0.02 0.0004 0.02" material="qr_material_02" />
+      <geom name="height_label_front_02" type="box" pos="-0.107 -0.488 0.1665" size="0.038 0.0004 0.007" material="height_material_02" />
+      <geom name="qr_front_03" type="box" pos="-0.17 -0.488 0.210833" size="0.02 0.0004 0.02" material="qr_material_03" />
+      <geom name="height_label_front_03" type="box" pos="-0.107 -0.488 0.210833" size="0.038 0.0004 0.007" material="height_material_03" />
+      <geom name="qr_front_04" type="box" pos="-0.17 -0.488 0.29525" size="0.02 0.0004 0.02" material="qr_material_04" />
+      <geom name="height_label_front_04" type="box" pos="-0.107 -0.488 0.29525" size="0.038 0.0004 0.007" material="height_material_04" />
+      <geom name="qr_front_05" type="box" pos="-0.17 -0.488 0.33975" size="0.02 0.0004 0.02" material="qr_material_05" />
+      <geom name="height_label_front_05" type="box" pos="-0.107 -0.488 0.33975" size="0.038 0.0004 0.007" material="height_material_05" />
+      <geom name="qr_front_06" type="box" pos="-0.17 -0.488 0.38425" size="0.02 0.0004 0.02" material="qr_material_06" />
+      <geom name="height_label_front_06" type="box" pos="-0.107 -0.488 0.38425" size="0.038 0.0004 0.007" material="height_material_06" />
+      <geom name="qr_front_07" type="box" pos="-0.17 -0.488 0.42875" size="0.02 0.0004 0.02" material="qr_material_07" />
+      <geom name="height_label_front_07" type="box" pos="-0.107 -0.488 0.42875" size="0.038 0.0004 0.007" material="height_material_07" />
+      <geom name="qr_front_08" type="box" pos="-0.17 -0.488 0.51325" size="0.02 0.0004 0.02" material="qr_material_08" />
+      <geom name="height_label_front_08" type="box" pos="-0.107 -0.488 0.51325" size="0.038 0.0004 0.007" material="height_material_08" />
+      <geom name="qr_front_09" type="box" pos="-0.17 -0.488 0.55775" size="0.02 0.0004 0.02" material="qr_material_09" />
+      <geom name="height_label_front_09" type="box" pos="-0.107 -0.488 0.55775" size="0.038 0.0004 0.007" material="height_material_09" />
+      <geom name="qr_front_10" type="box" pos="-0.17 -0.488 0.60225" size="0.02 0.0004 0.02" material="qr_material_10" />
+      <geom name="height_label_front_10" type="box" pos="-0.107 -0.488 0.60225" size="0.038 0.0004 0.007" material="height_material_10" />
+      <geom name="qr_front_11" type="box" pos="-0.17 -0.488 0.64675" size="0.02 0.0004 0.02" material="qr_material_11" />
+      <geom name="height_label_front_11" type="box" pos="-0.107 -0.488 0.64675" size="0.038 0.0004 0.007" material="height_material_11" />
+      <geom name="qr_front_12" type="box" pos="-0.17 -0.488 0.73125" size="0.02 0.0004 0.02" material="qr_material_12" />
+      <geom name="height_label_front_12" type="box" pos="-0.107 -0.488 0.73125" size="0.038 0.0004 0.007" material="height_material_12" />
+      <geom name="qr_front_13" type="box" pos="-0.17 -0.488 0.77575" size="0.02 0.0004 0.02" material="qr_material_13" />
+      <geom name="height_label_front_13" type="box" pos="-0.107 -0.488 0.77575" size="0.038 0.0004 0.007" material="height_material_13" />
+      <geom name="qr_front_14" type="box" pos="-0.17 -0.488 0.82025" size="0.02 0.0004 0.02" material="qr_material_14" />
+      <geom name="height_label_front_14" type="box" pos="-0.107 -0.488 0.82025" size="0.038 0.0004 0.007" material="height_material_14" />
+      <geom name="qr_front_15" type="box" pos="-0.17 -0.488 0.86475" size="0.02 0.0004 0.02" material="qr_material_15" />
+      <geom name="height_label_front_15" type="box" pos="-0.107 -0.488 0.86475" size="0.038 0.0004 0.007" material="height_material_15" />
+      <geom name="qr_front_16" type="box" pos="-0.17 -0.488 0.94925" size="0.02 0.0004 0.02" material="qr_material_16" />
+      <geom name="height_label_front_16" type="box" pos="-0.107 -0.488 0.94925" size="0.038 0.0004 0.007" material="height_material_16" />
+      <geom name="qr_front_17" type="box" pos="-0.17 -0.488 0.99375" size="0.02 0.0004 0.02" material="qr_material_17" />
+      <geom name="height_label_front_17" type="box" pos="-0.107 -0.488 0.99375" size="0.038 0.0004 0.007" material="height_material_17" />
+      <geom name="qr_front_18" type="box" pos="-0.17 -0.488 1.03825" size="0.02 0.0004 0.02" material="qr_material_18" />
+      <geom name="height_label_front_18" type="box" pos="-0.107 -0.488 1.03825" size="0.038 0.0004 0.007" material="height_material_18" />
+      <geom name="qr_front_19" type="box" pos="-0.17 -0.488 1.08275" size="0.02 0.0004 0.02" material="qr_material_19" />
+      <geom name="height_label_front_19" type="box" pos="-0.107 -0.488 1.08275" size="0.038 0.0004 0.007" material="height_material_19" />
+      <geom name="qr_front_20" type="box" pos="-0.17 -0.488 1.1675" size="0.02 0.0004 0.02" material="qr_material_20" />
+      <geom name="height_label_front_20" type="box" pos="-0.107 -0.488 1.1675" size="0.038 0.0004 0.007" material="height_material_20" />
+      <geom name="qr_front_21" type="box" pos="-0.17 -0.488 1.2125" size="0.02 0.0004 0.02" material="qr_material_21" />
+      <geom name="height_label_front_21" type="box" pos="-0.107 -0.488 1.2125" size="0.038 0.0004 0.007" material="height_material_21" />
+      <geom name="qr_front_22" type="box" pos="-0.17 -0.488 1.2575" size="0.02 0.0004 0.02" material="qr_material_22" />
+      <geom name="height_label_front_22" type="box" pos="-0.107 -0.488 1.2575" size="0.038 0.0004 0.007" material="height_material_22" />
+      <geom name="qr_front_23" type="box" pos="-0.17 -0.488 1.3025" size="0.02 0.0004 0.02" material="qr_material_23" />
+      <geom name="height_label_front_23" type="box" pos="-0.107 -0.488 1.3025" size="0.038 0.0004 0.007" material="height_material_23" />
+      <geom name="qr_front_24" type="box" pos="-0.17 -0.488 1.387" size="0.02 0.0004 0.02" material="qr_material_24" />
+      <geom name="height_label_front_24" type="box" pos="-0.107 -0.488 1.387" size="0.038 0.0004 0.007" material="height_material_24" />
+      <geom name="qr_front_25" type="box" pos="-0.17 -0.488 1.431" size="0.02 0.0004 0.02" material="qr_material_25" />
+      <geom name="height_label_front_25" type="box" pos="-0.107 -0.488 1.431" size="0.038 0.0004 0.007" material="height_material_25" />
+      <geom name="qr_front_26" type="box" pos="-0.17 -0.488 1.475" size="0.02 0.0004 0.02" material="qr_material_26" />
+      <geom name="height_label_front_26" type="box" pos="-0.107 -0.488 1.475" size="0.038 0.0004 0.007" material="height_material_26" />
+      <geom name="qr_front_27" type="box" pos="-0.17 -0.488 1.519" size="0.02 0.0004 0.02" material="qr_material_27" />
+      <geom name="height_label_front_27" type="box" pos="-0.107 -0.488 1.519" size="0.038 0.0004 0.007" material="height_material_27" />
+      <geom name="qr_front_28" type="box" pos="-0.17 -0.488 1.60325" size="0.02 0.0004 0.02" material="qr_material_28" />
+      <geom name="height_label_front_28" type="box" pos="-0.107 -0.488 1.60325" size="0.038 0.0004 0.007" material="height_material_28" />
+      <geom name="qr_front_29" type="box" pos="-0.17 -0.488 1.64775" size="0.02 0.0004 0.02" material="qr_material_29" />
+      <geom name="height_label_front_29" type="box" pos="-0.107 -0.488 1.64775" size="0.038 0.0004 0.007" material="height_material_29" />
+      <geom name="qr_front_30" type="box" pos="-0.17 -0.488 1.69225" size="0.02 0.0004 0.02" material="qr_material_30" />
+      <geom name="height_label_front_30" type="box" pos="-0.107 -0.488 1.69225" size="0.038 0.0004 0.007" material="height_material_30" />
+      <geom name="qr_front_31" type="box" pos="-0.17 -0.488 1.73675" size="0.02 0.0004 0.02" material="qr_material_31" />
+      <geom name="height_label_front_31" type="box" pos="-0.107 -0.488 1.73675" size="0.038 0.0004 0.007" material="height_material_31" />
+      <geom name="qr_front_32" type="box" pos="-0.17 -0.488 1.82125" size="0.02 0.0004 0.02" material="qr_material_32" />
+      <geom name="height_label_front_32" type="box" pos="-0.107 -0.488 1.82125" size="0.038 0.0004 0.007" material="height_material_32" />
+      <geom name="qr_front_33" type="box" pos="-0.17 -0.488 1.86575" size="0.02 0.0004 0.02" material="qr_material_33" />
+      <geom name="height_label_front_33" type="box" pos="-0.107 -0.488 1.86575" size="0.038 0.0004 0.007" material="height_material_33" />
+      <geom name="qr_front_34" type="box" pos="-0.17 -0.488 1.91025" size="0.02 0.0004 0.02" material="qr_material_34" />
+      <geom name="height_label_front_34" type="box" pos="-0.107 -0.488 1.91025" size="0.038 0.0004 0.007" material="height_material_34" />
+      <geom name="qr_front_35" type="box" pos="-0.17 -0.488 1.95475" size="0.02 0.0004 0.02" material="qr_material_35" />
+      <geom name="height_label_front_35" type="box" pos="-0.107 -0.488 1.95475" size="0.038 0.0004 0.007" material="height_material_35" />
+    </body>
+    <site name="cabinet_front_target" pos="0 -0.52 1.105" type="sphere" size="0.012" rgba="0 0 0 0" group="4" />
+    <site name="cabinet_top" pos="0 0 2.177" size="0.01" rgba="0 0 0 0" group="4" />
+  </body>
+</mujocoinclude>

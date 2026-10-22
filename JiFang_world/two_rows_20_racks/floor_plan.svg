@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620">
+<rect width="1100" height="620" fill="#f3f6fa"/>
+<g font-family="sans-serif" fill="#183247">
+<text x="42" y="45" font-size="24">双列 20 机柜 / Two rows · 20 racks</text>
+<rect x="50" y="123" width="900" height="354" fill="#e2e8ef" stroke="#8396a7" stroke-width="3"/>
+<rect x="160" y="240" width="600" height="120" fill="#fafcff"/>
+<rect x="160" y="140" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="190" y="185" text-anchor="middle" font-size="16" fill="white">L01</text>
+<text x="190" y="207" text-anchor="middle" font-size="10" fill="white">QR 38</text>
+<rect x="220" y="140" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="250" y="185" text-anchor="middle" font-size="16" fill="white">L02</text>
+<text x="250" y="207" text-anchor="middle" font-size="10" fill="white">QR 39</text>
+<rect x="280" y="140" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="310" y="185" text-anchor="middle" font-size="16" fill="white">L03</text>
+<text x="310" y="207" text-anchor="middle" font-size="10" fill="white">QR 28</text>
+<rect x="340" y="140" width="60" height="100" fill="#758d9f" stroke="white" stroke-width="2"/>
+<text x="370" y="185" text-anchor="middle" font-size="16" fill="white">L04</text>
+<text x="370" y="207" text-anchor="middle" font-size="10" fill="white">QR 28</text>
+<rect x="400" y="140" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="430" y="185" text-anchor="middle" font-size="16" fill="white">L05</text>
+<text x="430" y="207" text-anchor="middle" font-size="10" fill="white">QR 34</text>
+<rect x="460" y="140" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="490" y="185" text-anchor="middle" font-size="16" fill="white">L06</text>
+<text x="490" y="207" text-anchor="middle" font-size="10" fill="white">QR 38</text>
+<rect x="520" y="140" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="550" y="185" text-anchor="middle" font-size="16" fill="white">L07</text>
+<text x="550" y="207" text-anchor="middle" font-size="10" fill="white">QR 37</text>
+<rect x="580" y="140" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="610" y="185" text-anchor="middle" font-size="16" fill="white">L08</text>
+<text x="610" y="207" text-anchor="middle" font-size="10" fill="white">QR 41</text>
+<rect x="640" y="140" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="670" y="185" text-anchor="middle" font-size="16" fill="white">L09</text>
+<text x="670" y="207" text-anchor="middle" font-size="10" fill="white">QR 38</text>
+<rect x="700" y="140" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="730" y="185" text-anchor="middle" font-size="16" fill="white">L10</text>
+<text x="730" y="207" text-anchor="middle" font-size="10" fill="white">QR 26</text>
+<rect x="160" y="360" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="190" y="405" text-anchor="middle" font-size="16" fill="white">R01</text>
+<text x="190" y="427" text-anchor="middle" font-size="10" fill="white">QR 35</text>
+<rect x="220" y="360" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="250" y="405" text-anchor="middle" font-size="16" fill="white">R02</text>
+<text x="250" y="427" text-anchor="middle" font-size="10" fill="white">QR 32</text>
+<rect x="280" y="360" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="310" y="405" text-anchor="middle" font-size="16" fill="white">R03</text>
+<text x="310" y="427" text-anchor="middle" font-size="10" fill="white">QR 38</text>
+<rect x="340" y="360" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="370" y="405" text-anchor="middle" font-size="16" fill="white">R04</text>
+<text x="370" y="427" text-anchor="middle" font-size="10" fill="white">QR 34</text>
+<rect x="400" y="360" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="430" y="405" text-anchor="middle" font-size="16" fill="white">R05</text>
+<text x="430" y="427" text-anchor="middle" font-size="10" fill="white">QR 36</text>
+<rect x="460" y="360" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="490" y="405" text-anchor="middle" font-size="16" fill="white">R06</text>
+<text x="490" y="427" text-anchor="middle" font-size="10" fill="white">QR 39</text>
+<rect x="520" y="360" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="550" y="405" text-anchor="middle" font-size="16" fill="white">R07</text>
+<text x="550" y="427" text-anchor="middle" font-size="10" fill="white">QR 29</text>
+<rect x="580" y="360" width="60" height="100" fill="#758d9f" stroke="white" stroke-width="2"/>
+<text x="610" y="405" text-anchor="middle" font-size="16" fill="white">R08</text>
+<text x="610" y="427" text-anchor="middle" font-size="10" fill="white">QR 25</text>
+<rect x="640" y="360" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="670" y="405" text-anchor="middle" font-size="16" fill="white">R09</text>
+<text x="670" y="427" text-anchor="middle" font-size="10" fill="white">QR 32</text>
+<rect x="700" y="360" width="60" height="100" fill="#315b7b" stroke="white" stroke-width="2"/>
+<text x="730" y="405" text-anchor="middle" font-size="16" fill="white">R10</text>
+<text x="730" y="427" text-anchor="middle" font-size="10" fill="white">QR 29</text>
+<path d="M 110 240 V 360 M 104 240 H 116 M 104 360 H 116" stroke="#16886a" stroke-width="2" fill="none"/>
+<text x="98" y="310" text-anchor="middle" font-size="15" transform="rotate(-90 98 310)">净距 1.20 m</text>
+<path d="M 160 105 H 760 M 160 99 V 111 M 760 99 V 111" stroke="#315b7b" fill="none"/>
+<text x="460" y="92" text-anchor="middle" font-size="16">每列 10 × 0.60 = 6.00 m</text>
+<path d="M 825 240 V 299 M 825 301 V 360" stroke="#b34848" stroke-width="5"/>
+<path d="M 825 299 A 59 59 0 0 0 884 240 M 825 301 A 59 59 0 0 1 884 360" stroke="#2b9a71" stroke-width="2" fill="none" stroke-dasharray="5 4"/>
+<path d="M 825 240 H 884 M 825 360 H 884" stroke="#2b9a71" stroke-width="4" stroke-dasharray="5 3"/>
+<text x="840" y="217" font-size="15">手动双扇门</text>
+<text x="830" y="395" font-size="13">向后方前室开启</text>
+<text x="72" y="300" font-size="15">入口 →</text>
+<text x="165" y="512" font-size="16">单柜宽 0.60 m × 深 1.00 m × 高 2.177 m；正面朝向通道。</text>
+<text x="165" y="542" font-size="15">浅色柜体表示配置较稀疏；空槽保留柜壳；红色为关门，绿色为开门示意。</text>
+<text x="165" y="572" font-size="15">随机种子 20261022；所有几何、纹理和元数据均随本目录保存。</text>
+</g></svg>

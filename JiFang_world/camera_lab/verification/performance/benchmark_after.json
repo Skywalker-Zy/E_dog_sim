@@ -1,0 +1,10 @@
+{
+  "version": "after",
+  "resolution": "3840x2160",
+  "target_fps": 5,
+  "measurement_seconds": 5.948,
+  "cpu_percent_one_core": 3.36,
+  "actual_new_captures": 0,
+  "ui_heartbeat_p95_ms": 10.2,
+  "ui_heartbeat_max_ms": 28.85
+}

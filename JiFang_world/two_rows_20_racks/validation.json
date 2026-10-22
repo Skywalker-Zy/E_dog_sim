@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "seed": 20261022,
+  "layout": {
+    "racks": 20,
+    "distinct_layouts": 20,
+    "equipment": 288,
+    "qr_count": 676,
+    "missing_qr": 0,
+    "vacant_u": 164
+  },
+  "model": {
+    "geoms": 5672,
+    "bodies": 46,
+    "dof": 2,
+    "actuators": 2,
+    "world_lights": 7,
+    "clear_aisle_m": 1.2,
+    "repeated_open_close": true,
+    "independent_leaves": true,
+    "hold_position": true
+  },
+  "collision_tests": [
+    {
+      "door_open": false,
+      "probe_diameter_m": 0.36,
+      "maximum_x_m": 6.45454,
+      "touched_door": true,
+      "passed": true
+    },
+    {
+      "door_open": true,
+      "probe_diameter_m": 0.36,
+      "maximum_x_m": 7.55,
+      "touched_door": false,
+      "passed": true
+    }
+  ],
+  "portable_copy_loads": true,
+  "all_scene_asset_paths_relative": true,
+  "qr": {
+    "skipped": false,
+    "source_images_decoded": 676,
+    "rendered_checks": [
+      {
+        "rack_id": "L01",
+        "equipment_id": "L01_S01",
+        "payload": "L01-1/38-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "L02",
+        "equipment_id": "L02_S01",
+        "payload": "L02-1/39-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "L03",
+        "equipment_id": "L03_S01",
+        "payload": "L03-1/28-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "L04",
+        "equipment_id": "L04_S01",
+        "payload": "L04-1/28-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "L05",
+        "equipment_id": "L05_S01",
+        "payload": "L05-1/34-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "L06",
+        "equipment_id": "L06_S01",
+        "payload": "L06-1/38-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "L07",
+        "equipment_id": "L07_S01",
+        "payload": "L07-1/37-0.17",
+        "passed": true
+      },
+      {
+        "rack_id": "L08",
+        "equipment_id": "L08_S01",
+        "payload": "L08-1/41-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "L09",
+        "equipment_id": "L09_S01",
+        "payload": "L09-1/38-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "L10",
+        "equipment_id": "L10_S01",
+        "payload": "L10-1/26-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "R01",
+        "equipment_id": "R01_S01",
+        "payload": "R01-1/35-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "R02",
+        "equipment_id": "R02_S01",
+        "payload": "R02-1/32-0.26",
+        "passed": true
+      },
+      {
+        "rack_id": "R03",
+        "equipment_id": "R03_S01",
+        "payload": "R03-1/38-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "R04",
+        "equipment_id": "R04_S01",
+        "payload": "R04-1/34-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "R05",
+        "equipment_id": "R05_S01",
+        "payload": "R05-1/36-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "R06",
+        "equipment_id": "R06_S01",
+        "payload": "R06-1/39-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "R07",
+        "equipment_id": "R07_S01",
+        "payload": "R07-1/29-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "R08",
+        "equipment_id": "R08_S01",
+        "payload": "R08-1/25-0.30",
+        "passed": true
+      },
+      {
+        "rack_id": "R09",
+        "equipment_id": "R09_S01",
+        "payload": "R09-1/32-0.12",
+        "passed": true
+      },
+      {
+        "rack_id": "R10",
+        "equipment_id": "R10_S01",
+        "payload": "R10-1/29-0.21",
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "same_seed_deterministic_rebuild": true
+}

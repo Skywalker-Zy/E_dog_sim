@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "physical_mode_anisotropic_intrinsics": true,
+  "projection_matches_rendered_qr": true,
+  "optical_frame_matches_mujoco": true,
+  "expected_black_edges_px": [
+    54.55655172413787,
+    68.1993103448276,
+    54.55655172413787,
+    68.1993103448276
+  ],
+  "decoded_edges_px": [
+    54.0,
+    68.0,
+    54.0,
+    68.0
+  ],
+  "opengl_renderer": "llvmpipe (LLVM 15.0.7, 256 bits)"
+}

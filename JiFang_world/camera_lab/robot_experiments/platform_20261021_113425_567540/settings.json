@@ -1,0 +1,19 @@
+{
+  "robot_x_m": -0.17,
+  "robot_y_m": -1.42,
+  "robot_yaw_deg": 0.0,
+  "pole_length_m": 0.6,
+  "top_yaw_deg": 0.0,
+  "top_pitch_deg": 0.0,
+  "left_yaw_deg": -0.0,
+  "left_pitch_deg": -30.0,
+  "right_yaw_deg": 180.0,
+  "right_pitch_deg": -40.0,
+  "top_hfov_deg": 115.0,
+  "left_hfov_deg": 60.0,
+  "right_hfov_deg": 60.0,
+  "width": 3840,
+  "height": 2160,
+  "fps": 3.0,
+  "detect_enabled": true
+}

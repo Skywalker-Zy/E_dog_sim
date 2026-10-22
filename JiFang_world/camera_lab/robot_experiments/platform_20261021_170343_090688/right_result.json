@@ -1,0 +1,1069 @@
+{
+  "settings": {
+    "x_m": -0.07,
+    "height_m": 0.7,
+    "yaw_deg": 180.0,
+    "pitch_deg": -40.0,
+    "width": 3840,
+    "height": 2160,
+    "hfov_deg": 60.0,
+    "lens_mode": "fov",
+    "sensor_width_mm": 6.4,
+    "sensor_height_mm": 3.6,
+    "focal_mm": 3.2,
+    "fps": 3.0,
+    "detect_enabled": true
+  },
+  "intrinsics": [
+    [
+      3325.5375505322445,
+      0.0,
+      1920.0
+    ],
+    [
+      0.0,
+      3325.5375505322445,
+      1080.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "hfov_deg": 59.99999999999999,
+  "vfov_deg": 35.98339777135764,
+  "detections": [],
+  "metrics": [
+    {
+      "index": 1,
+      "payload": "0.122167",
+      "height_m": 0.122166667,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 14.72,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 2,
+      "payload": "0.166500",
+      "height_m": 0.1665,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 13.67,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 3,
+      "payload": "0.210833",
+      "height_m": 0.210833333,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 12.61,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 4,
+      "payload": "0.295250",
+      "height_m": 0.29525,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 10.58,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 5,
+      "payload": "0.339750",
+      "height_m": 0.33975,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 9.51,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 6,
+      "payload": "0.384250",
+      "height_m": 0.38425,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 8.44,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 7,
+      "payload": "0.428750",
+      "height_m": 0.42875,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 7.38,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 8,
+      "payload": "0.513250",
+      "height_m": 0.51325,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 5.42,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 9,
+      "payload": "0.557750",
+      "height_m": 0.55775,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 4.46,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 10,
+      "payload": "0.602250",
+      "height_m": 0.60225,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 3.59,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 11,
+      "payload": "0.646750",
+      "height_m": 0.64675,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 2.91,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 12,
+      "payload": "0.731250",
+      "height_m": 0.73125,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 2.69,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 13,
+      "payload": "0.775750",
+      "height_m": 0.77575,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 3.22,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 14,
+      "payload": "0.820250",
+      "height_m": 0.82025,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 4.01,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 15,
+      "payload": "0.864750",
+      "height_m": 0.86475,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 4.94,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 16,
+      "payload": "0.949250",
+      "height_m": 0.94925,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 6.86,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 17,
+      "payload": "0.993750",
+      "height_m": 0.99375,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 7.92,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 18,
+      "payload": "1.038250",
+      "height_m": 1.03825,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 8.98,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 19,
+      "payload": "1.082750",
+      "height_m": 1.08275,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 10.05,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 20,
+      "payload": "1.167500",
+      "height_m": 1.1675,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 12.09,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 21,
+      "payload": "1.212500",
+      "height_m": 1.2125,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 13.17,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 22,
+      "payload": "1.257500",
+      "height_m": 1.2575,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 14.24,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 23,
+      "payload": "1.302500",
+      "height_m": 1.3025,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 15.31,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 24,
+      "payload": "1.387000",
+      "height_m": 1.387,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 17.28,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 25,
+      "payload": "1.431000",
+      "height_m": 1.431,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 18.29,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 26,
+      "payload": "1.475000",
+      "height_m": 1.475,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 19.3,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 27,
+      "payload": "1.519000",
+      "height_m": 1.519,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 20.29,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 28,
+      "payload": "1.603250",
+      "height_m": 1.60325,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 22.16,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 29,
+      "payload": "1.647750",
+      "height_m": 1.64775,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 23.13,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 30,
+      "payload": "1.692250",
+      "height_m": 1.69225,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 24.08,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 31,
+      "payload": "1.736750",
+      "height_m": 1.73675,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 25.02,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 32,
+      "payload": "1.821250",
+      "height_m": 1.82125,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 26.77,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 33,
+      "payload": "1.865750",
+      "height_m": 1.86575,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 27.67,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 34,
+      "payload": "1.910250",
+      "height_m": 1.91025,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 28.55,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "index": 35,
+      "payload": "1.954750",
+      "height_m": 1.95475,
+      "complete_in_frame": false,
+      "sampled_unoccluded": false,
+      "min_edge_px": 0.0,
+      "viewing_angle_deg": 29.43,
+      "corners_px": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    }
+  ],
+  "decoded_indices": [],
+  "processing_seconds": 0.0644,
+  "timings_ms": {
+    "render": 32.64,
+    "decode": 30.43,
+    "geometry": 1.3
+  },
+  "camera": "right",
+  "platform_settings": {
+    "robot_x_m": -0.07,
+    "robot_y_m": -2.4,
+    "robot_yaw_deg": 0.0,
+    "pole_length_m": 0.6,
+    "top_yaw_deg": 0.0,
+    "top_pitch_deg": -39.5,
+    "left_yaw_deg": 0.0,
+    "left_pitch_deg": 0.0,
+    "right_yaw_deg": 180.0,
+    "right_pitch_deg": -40.0,
+    "top_hfov_deg": 60.0,
+    "left_hfov_deg": 60.0,
+    "right_hfov_deg": 60.0,
+    "width": 3840,
+    "height": 2160,
+    "fps": 3.0,
+    "detect_enabled": true
+  },
+  "camera_position_m": [
+    -0.07,
+    -2.7199999999999998,
+    0.7
+  ],
+  "camera_rotation_world": [
+    [
+      -9.381338752702731e-17,
+      1.0,
+      -7.871877887341985e-17
+    ],
+    [
+      -0.766044443118978,
+      -1.2246467991473532e-16,
+      -0.6427876096865393
+    ],
+    [
+      -0.6427876096865393,
+      0.0,
+      0.766044443118978
+    ]
+  ],
+  "camera_quaternion_wxyz": [
+    0.6644630243886747,
+    0.24184476264797525,
+    0.24184476264797522,
+    -0.6644630243886747
+  ],
+  "local_position_m": [
+    0.0,
+    -0.32,
+    0.7
+  ],
+  "local_rotation": [
+    [
+      -9.381338752702731e-17,
+      1.0,
+      -7.871877887341985e-17
+    ],
+    [
+      -0.766044443118978,
+      -1.2246467991473532e-16,
+      -0.6427876096865393
+    ],
+    [
+      -0.6427876096865393,
+      -0.0,
+      0.766044443118978
+    ]
+  ],
+  "camera_y_m": -2.7199999999999998,
+  "bottom_three_decoded": [],
+  "body_dimensions_m": [
+    0.9,
+    0.44,
+    0.625
+  ],
+  "cumulative_indices": []
+}

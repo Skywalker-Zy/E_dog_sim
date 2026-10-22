@@ -1,0 +1,557 @@
+{
+  "mujoco_version": "3.16.0",
+  "units": "metres",
+  "cabinet_dimensions": [
+    0.6,
+    1,
+    2.177
+  ],
+  "models": {
+    "scene.xml": {
+      "geoms": 634,
+      "bodies": 5,
+      "steps": 100,
+      "qr_count": 35,
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "cabinet_only.xml": {
+      "geoms": 620,
+      "bodies": 3,
+      "steps": 100,
+      "qr_count": 35,
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "collision_checks": [
+    {
+      "model": "scene.xml",
+      "test": "cabinet_top",
+      "expected": 2.227,
+      "final": 2.226784,
+      "contact_detected": true,
+      "passed": true
+    },
+    {
+      "model": "scene.xml",
+      "test": "ground",
+      "expected": 0.05,
+      "final": 0.049784,
+      "contact_detected": true,
+      "passed": true
+    },
+    {
+      "model": "scene.xml",
+      "test": "cabinet_front",
+      "expected": -0.55,
+      "final": -0.549953,
+      "contact_detected": true,
+      "passed": true
+    },
+    {
+      "model": "cabinet_only.xml",
+      "test": "cabinet_top",
+      "expected": 2.227,
+      "final": 2.226784,
+      "contact_detected": true,
+      "passed": true
+    },
+    {
+      "model": "cabinet_only.xml",
+      "test": "ground",
+      "expected": 0.05,
+      "final": 0.049784,
+      "contact_detected": true,
+      "passed": true
+    },
+    {
+      "model": "cabinet_only.xml",
+      "test": "cabinet_front",
+      "expected": -0.55,
+      "final": -0.549953,
+      "contact_detected": true,
+      "passed": true
+    }
+  ],
+  "qr_render_checks": [
+    {
+      "face": "front",
+      "server": 1,
+      "expected": "0.122167",
+      "decoded": "0.122167",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 2,
+      "expected": "0.166500",
+      "decoded": "0.166500",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 3,
+      "expected": "0.210833",
+      "decoded": "0.210833",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 4,
+      "expected": "0.295250",
+      "decoded": "0.295250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 5,
+      "expected": "0.339750",
+      "decoded": "0.339750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 6,
+      "expected": "0.384250",
+      "decoded": "0.384250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 7,
+      "expected": "0.428750",
+      "decoded": "0.428750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 8,
+      "expected": "0.513250",
+      "decoded": "0.513250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 9,
+      "expected": "0.557750",
+      "decoded": "0.557750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 10,
+      "expected": "0.602250",
+      "decoded": "0.602250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 11,
+      "expected": "0.646750",
+      "decoded": "0.646750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 12,
+      "expected": "0.731250",
+      "decoded": "0.731250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 13,
+      "expected": "0.775750",
+      "decoded": "0.775750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 14,
+      "expected": "0.820250",
+      "decoded": "0.820250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 15,
+      "expected": "0.864750",
+      "decoded": "0.864750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 16,
+      "expected": "0.949250",
+      "decoded": "0.949250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 17,
+      "expected": "0.993750",
+      "decoded": "0.993750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 18,
+      "expected": "1.038250",
+      "decoded": "1.038250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 19,
+      "expected": "1.082750",
+      "decoded": "1.082750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 20,
+      "expected": "1.167500",
+      "decoded": "1.167500",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 21,
+      "expected": "1.212500",
+      "decoded": "1.212500",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 22,
+      "expected": "1.257500",
+      "decoded": "1.257500",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 23,
+      "expected": "1.302500",
+      "decoded": "1.302500",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 24,
+      "expected": "1.387000",
+      "decoded": "1.387000",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 25,
+      "expected": "1.431000",
+      "decoded": "1.431000",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 26,
+      "expected": "1.475000",
+      "decoded": "1.475000",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 27,
+      "expected": "1.519000",
+      "decoded": "1.519000",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 28,
+      "expected": "1.603250",
+      "decoded": "1.603250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 29,
+      "expected": "1.647750",
+      "decoded": "1.647750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 30,
+      "expected": "1.692250",
+      "decoded": "1.692250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 31,
+      "expected": "1.736750",
+      "decoded": "1.736750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 32,
+      "expected": "1.821250",
+      "decoded": "1.821250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 33,
+      "expected": "1.865750",
+      "decoded": "1.865750",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 34,
+      "expected": "1.910250",
+      "decoded": "1.910250",
+      "passed": true
+    },
+    {
+      "face": "front",
+      "server": 35,
+      "expected": "1.954750",
+      "decoded": "1.954750",
+      "passed": true
+    }
+  ],
+  "renders": [
+    "previews/overview.png",
+    "previews/front.png",
+    "previews/qr_detail_front.png",
+    "previews/front_panels.png"
+  ],
+  "qr_source_checks": [
+    {
+      "server": 1,
+      "expected": "0.122167",
+      "decoded": "0.122167",
+      "passed": true
+    },
+    {
+      "server": 2,
+      "expected": "0.166500",
+      "decoded": "0.166500",
+      "passed": true
+    },
+    {
+      "server": 3,
+      "expected": "0.210833",
+      "decoded": "0.210833",
+      "passed": true
+    },
+    {
+      "server": 4,
+      "expected": "0.295250",
+      "decoded": "0.295250",
+      "passed": true
+    },
+    {
+      "server": 5,
+      "expected": "0.339750",
+      "decoded": "0.339750",
+      "passed": true
+    },
+    {
+      "server": 6,
+      "expected": "0.384250",
+      "decoded": "0.384250",
+      "passed": true
+    },
+    {
+      "server": 7,
+      "expected": "0.428750",
+      "decoded": "0.428750",
+      "passed": true
+    },
+    {
+      "server": 8,
+      "expected": "0.513250",
+      "decoded": "0.513250",
+      "passed": true
+    },
+    {
+      "server": 9,
+      "expected": "0.557750",
+      "decoded": "0.557750",
+      "passed": true
+    },
+    {
+      "server": 10,
+      "expected": "0.602250",
+      "decoded": "0.602250",
+      "passed": true
+    },
+    {
+      "server": 11,
+      "expected": "0.646750",
+      "decoded": "0.646750",
+      "passed": true
+    },
+    {
+      "server": 12,
+      "expected": "0.731250",
+      "decoded": "0.731250",
+      "passed": true
+    },
+    {
+      "server": 13,
+      "expected": "0.775750",
+      "decoded": "0.775750",
+      "passed": true
+    },
+    {
+      "server": 14,
+      "expected": "0.820250",
+      "decoded": "0.820250",
+      "passed": true
+    },
+    {
+      "server": 15,
+      "expected": "0.864750",
+      "decoded": "0.864750",
+      "passed": true
+    },
+    {
+      "server": 16,
+      "expected": "0.949250",
+      "decoded": "0.949250",
+      "passed": true
+    },
+    {
+      "server": 17,
+      "expected": "0.993750",
+      "decoded": "0.993750",
+      "passed": true
+    },
+    {
+      "server": 18,
+      "expected": "1.038250",
+      "decoded": "1.038250",
+      "passed": true
+    },
+    {
+      "server": 19,
+      "expected": "1.082750",
+      "decoded": "1.082750",
+      "passed": true
+    },
+    {
+      "server": 20,
+      "expected": "1.167500",
+      "decoded": "1.167500",
+      "passed": true
+    },
+    {
+      "server": 21,
+      "expected": "1.212500",
+      "decoded": "1.212500",
+      "passed": true
+    },
+    {
+      "server": 22,
+      "expected": "1.257500",
+      "decoded": "1.257500",
+      "passed": true
+    },
+    {
+      "server": 23,
+      "expected": "1.302500",
+      "decoded": "1.302500",
+      "passed": true
+    },
+    {
+      "server": 24,
+      "expected": "1.387000",
+      "decoded": "1.387000",
+      "passed": true
+    },
+    {
+      "server": 25,
+      "expected": "1.431000",
+      "decoded": "1.431000",
+      "passed": true
+    },
+    {
+      "server": 26,
+      "expected": "1.475000",
+      "decoded": "1.475000",
+      "passed": true
+    },
+    {
+      "server": 27,
+      "expected": "1.519000",
+      "decoded": "1.519000",
+      "passed": true
+    },
+    {
+      "server": 28,
+      "expected": "1.603250",
+      "decoded": "1.603250",
+      "passed": true
+    },
+    {
+      "server": 29,
+      "expected": "1.647750",
+      "decoded": "1.647750",
+      "passed": true
+    },
+    {
+      "server": 30,
+      "expected": "1.692250",
+      "decoded": "1.692250",
+      "passed": true
+    },
+    {
+      "server": 31,
+      "expected": "1.736750",
+      "decoded": "1.736750",
+      "passed": true
+    },
+    {
+      "server": 32,
+      "expected": "1.821250",
+      "decoded": "1.821250",
+      "passed": true
+    },
+    {
+      "server": 33,
+      "expected": "1.865750",
+      "decoded": "1.865750",
+      "passed": true
+    },
+    {
+      "server": 34,
+      "expected": "1.910250",
+      "decoded": "1.910250",
+      "passed": true
+    },
+    {
+      "server": 35,
+      "expected": "1.954750",
+      "decoded": "1.954750",
+      "passed": true
+    }
+  ],
+  "qr_placement": "one per 1U chassis, front panel left, facing -Y"
+}
