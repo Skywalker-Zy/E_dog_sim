@@ -4,11 +4,11 @@ os.environ.setdefault('ROS_DOMAIN_ID', '154')
 os.environ.setdefault('ROS_LOG_DIR', str(__import__('pathlib').Path(__file__).resolve().parent / 'runtime/ros_logs'))
 import json
 import math
-from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import signal
 import subprocess
 import time
-import numpy as np
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist, PoseStamped, TwistStamped
@@ -24,18 +24,31 @@ def main():
     server = subprocess.Popen(['bash', str(ROOT / 'run.sh'), '--headless'], stdout=log, stderr=subprocess.STDOUT)
     rclpy.init()
     probe = Node('robot_environment_acceptance')
+    started_at = datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()
     state = {}; statuses = []; images = {}; infos = {}; detections = {}; angles = {}; heights = {}; velocities = []
-    probe.create_subscription(String, PREFIX + '/state', lambda msg: state.update(json.loads(msg.data)), STATE_QOS)
-    probe.create_subscription(String, PREFIX + '/command_status', lambda msg: statuses.append(json.loads(msg.data)), 10)
-    probe.create_subscription(TwistStamped, PREFIX + '/robot/velocity', lambda msg: velocities.append(msg), 10)
+    feedback = {}; received = {}
+
+    def subscribe(suffix, typ, callback, qos):
+        def record(msg):
+            received[suffix] = msg
+            callback(msg)
+        return probe.create_subscription(typ, PREFIX + '/' + suffix, record, qos)
+    subscribe('state', String, lambda msg: state.update(json.loads(msg.data)), STATE_QOS)
+    subscribe('command_status', String, lambda msg: statuses.append(json.loads(msg.data)), 10)
+    subscribe('robot/velocity', TwistStamped, lambda msg: velocities.append(msg), 10)
+    subscribe('robot/pose', PoseStamped, lambda msg: feedback.__setitem__('robot_pose', msg), 10)
+    subscribe('qr_detection/enabled', Bool, lambda msg: feedback.__setitem__('enabled', msg.data), STATE_QOS)
+    image_subs = {}
     for name in ('top', 'left', 'right'):
-        base = PREFIX + '/cameras/' + name
-        probe.create_subscription(CameraInfo, base + '/camera_info', lambda msg, n=name: infos.__setitem__(n, msg), IMAGE_QOS)
-        probe.create_subscription(String, base + '/qr_detections', lambda msg, n=name: detections.__setitem__(n, json.loads(msg.data)), 10)
+        base = 'cameras/' + name
+        subscribe(base + '/camera_info', CameraInfo, lambda msg, n=name: infos.__setitem__(n, msg), IMAGE_QOS)
+        subscribe(base + '/qr_detections', String, lambda msg, n=name: detections.__setitem__(n, json.loads(msg.data)), 10)
         for axis in ('yaw', 'pitch'):
-            probe.create_subscription(Float64, base + '/' + axis, lambda msg, n=name, a=axis: angles.__setitem__((n, a), msg.data), STATE_QOS)
-    probe.create_subscription(Float64, PREFIX + '/cameras/top/height', lambda msg: heights.__setitem__('top', msg.data), STATE_QOS)
-    image_sub = probe.create_subscription(Image, PREFIX + '/cameras/left/image_raw', lambda msg: images.__setitem__('left', msg), IMAGE_QOS)
+            subscribe(base + '/' + axis, Float64, lambda msg, n=name, a=axis: angles.__setitem__((n, a), msg.data), STATE_QOS)
+        subscribe(base + '/hfov', Float64, lambda msg, n=name: feedback.__setitem__((n, 'hfov'), msg.data), STATE_QOS)
+        subscribe(base + '/resolution', UInt32MultiArray, lambda msg, n=name: feedback.__setitem__((n, 'resolution'), list(msg.data)), STATE_QOS)
+        image_subs[name] = subscribe(base + '/image_raw', Image, lambda msg, n=name: images.__setitem__(n, msg), IMAGE_QOS)
+    subscribe('cameras/top/height', Float64, lambda msg: heights.__setitem__('top', msg.data), STATE_QOS)
     pubs = {}
     for suffix, typ in [('robot/cmd_vel', Twist), ('robot/set_pose', PoseStamped), ('qr_detection/set_enabled', Bool)]:
         pubs[suffix] = probe.create_publisher(typ, PREFIX + '/' + suffix, 10)
@@ -62,12 +75,14 @@ def main():
 
     checks = []
     try:
-        wait(lambda: bool(state) and 'left' in images and all(name in infos for name in ('top', 'left', 'right')))
+        wait(lambda: bool(state) and all(name in images and name in infos for name in ('top', 'left', 'right')))
         assert state['controls'] == default_controls()
-        image = images['left']
-        assert (image.width, image.height, image.encoding, image.step, len(image.data)) == (3840, 2160, 'rgb8', 11520, 24883200)
-        checks.append('4K rgb8 image delivered over DDS with correct byte size')
-        probe.destroy_subscription(image_sub)
+        for name in ('top', 'left', 'right'):
+            image = images[name]
+            assert (image.width, image.height, image.encoding, image.step, len(image.data)) == (3840, 2160, 'rgb8', 11520, 24883200)
+            assert image.header.frame_id == name + '_camera_optical_frame'
+            probe.destroy_subscription(image_subs[name])
+        checks.append('all three 4K rgb8 image topics deliver correctly sized DDS messages')
         for name in ('top', 'left', 'right'):
             send(f'cameras/{name}/set_resolution', UInt32MultiArray(data=[640, 360]))
         wait(lambda: all(state['controls'][name + '_width'] == 640 for name in ('top', 'left', 'right')))
@@ -78,7 +93,11 @@ def main():
         for name in ('top', 'left', 'right'):
             hfov = state['controls'][name + '_hfov_deg']
             wait(lambda n=name, h=hfov: abs(infos[n].k[0] - 640 / (2 * math.tan(math.radians(h) / 2))) < 1e-8)
-        checks.append('independent optics commands update images and camera intrinsics')
+        wait(lambda: all(feedback.get((n, 'hfov')) == h and feedback.get((n, 'resolution')) == [640, 360] for n, h in [('top', 100.), ('left', 75.), ('right', 85.)]))
+        for name in ('top', 'left', 'right'):
+            assert infos[name].header.frame_id == name + '_camera_optical_frame'
+            assert list(infos[name].d) == [0.] * 5
+        checks.append('independent optics commands update intrinsics and scalar HFOV/resolution feedback')
         for name, yaw, pitch in [('top', 25., -20.), ('left', -15., -30.), ('right', 150., 10.)]:
             send(f'cameras/{name}/set_yaw', Float64(data=yaw))
             send(f'cameras/{name}/set_pitch', Float64(data=pitch))
@@ -114,11 +133,27 @@ def main():
             if name != 'top':
                 assert base + '/set_height' not in subscriptions and base + '/height' not in publishers
         assert '/tf' not in publishers and '/tf_static' not in publishers
+        expected_inputs = {PREFIX + '/' + key: [pub.msg_type.__module__.split('.')[0] + '/msg/' + pub.msg_type.__name__] for key, pub in pubs.items()}
+        assert {key: value for key, value in subscriptions.items() if key.startswith(PREFIX + '/')} == expected_inputs
+        expected_outputs = {PREFIX + '/' + key: [type(msg).__module__.split('.')[0] + '/msg/' + type(msg).__name__] for key, msg in received.items()}
+        actual_outputs = {key: value for key, value in publishers.items() if key.startswith(PREFIX + '/')}
+        assert actual_outputs == expected_outputs, (set(actual_outputs) - set(expected_outputs))
+        assert len(expected_inputs) == 16 and len(expected_outputs) == 27
+        checks.append('all 16 command and 27 output topics discovered with exact expected message types and received data')
+        for suffix in received:
+            endpoint = next(item for item in probe.get_publishers_info_by_topic(PREFIX + '/' + suffix) if item.node_name == 'jifang_robot_environment')
+            expected_qos = IMAGE_QOS if suffix.endswith(('/image_raw', '/camera_info')) else STATE_QOS if suffix in ('state', 'qr_detection/enabled', 'cameras/top/height') or suffix.endswith(('/yaw', '/pitch', '/hfov', '/resolution')) else None
+            if expected_qos is not None:
+                assert endpoint.qos_profile.reliability == expected_qos.reliability
+                assert endpoint.qos_profile.durability == expected_qos.durability
+        checks.append('actual publisher QoS matches sensor and latched-state interface definitions')
         checks.append('obsolete camera pose and TF endpoints absent; only top camera exposes height')
         pose = PoseStamped(); pose.header.frame_id = 'world'; pose.pose.position.x = .9
         pose.pose.orientation.z = math.sin(math.pi / 4); pose.pose.orientation.w = math.cos(math.pi / 4)
         send('robot/set_pose', pose)
-        wait(lambda: abs(state['controls']['robot_yaw_deg'] - 90.) < 1e-6)
+        wait(lambda: abs(state['controls']['robot_yaw_deg'] - 90.) < 1e-6 and 'robot_pose' in feedback and abs(feedback['robot_pose'].pose.orientation.z - math.sin(math.pi/4)) < 1e-6)
+        assert feedback['robot_pose'].header.frame_id == 'world'
+        assert feedback['robot_pose'].pose.position.z == 0.
         twist = Twist(); twist.linear.x = .2; twist.linear.y = .1; twist.angular.z = .3
         end = time.monotonic() + .7
         while time.monotonic() < end:
@@ -126,12 +161,14 @@ def main():
             rclpy.spin_once(probe, timeout_sec=.03)
             time.sleep(.03)
         wait(lambda: abs(state['controls']['robot_y_m']) > .05 and state['controls']['robot_yaw_deg'] > 95.)
+        assert any(abs(msg.twist.linear.x - .2) < 1e-9 and abs(msg.twist.linear.y - .1) < 1e-9 and abs(msg.twist.angular.z - .3) < 1e-9 and msg.header.frame_id == 'robot_base' for msg in velocities)
         wait(lambda: state['velocity'] == [0., 0., 0.], seconds=4)
         stopped = state['controls'].copy()
         end = time.monotonic() + .3
         while time.monotonic() < end:
             rclpy.spin_once(probe, timeout_sec=.02)
         assert stopped == state['controls']
+        wait(lambda: velocities and velocities[-1].twist.linear.x == 0. and velocities[-1].twist.linear.y == 0. and velocities[-1].twist.angular.z == 0.)
         assert stopped['robot_x_m'] < .9 and stopped['robot_y_m'] > .05
         checks.append('body-frame vx/vy/yaw integration and 0.5 s watchdog stop')
         # Restore a QR-facing pose for real decoding at 4K.
@@ -142,11 +179,11 @@ def main():
         send('cameras/left/set_resolution', UInt32MultiArray(data=[3840, 2160]))
         send('cameras/left/set_hfov', Float64(data=60.))
         send('qr_detection/set_enabled', Bool(data=True))
-        wait(lambda: detections.get('left', {}).get('enabled') and len(detections['left']['detections']) > 0)
+        wait(lambda: feedback.get('enabled') is True and detections.get('left', {}).get('enabled') and len(detections['left']['detections']) > 0)
         assert all(d['rack_id'] == 'L02' for d in detections['left']['detections'])
         result_count = len(detections['left']['detections'])
         send('qr_detection/set_enabled', Bool(data=False))
-        wait(lambda: all(name in detections and not detections[name]['enabled'] and detections[name]['detections'] == [] for name in ('top', 'left', 'right')))
+        wait(lambda: feedback.get('enabled') is False and all(name in detections and not detections[name]['enabled'] and detections[name]['detections'] == [] for name in ('top', 'left', 'right')))
         checks.append('real QR detection enabled, result metadata published, all results cleared when disabled')
         # Match Image and CameraInfo/QR results by acquisition stamp.
         matched_images = {}; matched_info = {}; matched_results = {}
@@ -163,7 +200,11 @@ def main():
         assert matched_results[key]['camera_height_m'] == .7
         probe.destroy_subscription(sub)
         checks.append('image/info/QR share acquisition stamp, frame and resolution; scalar camera metadata')
-        report = dict(ros_distro=os.environ.get('ROS_DISTRO'), domain_id=os.environ['ROS_DOMAIN_ID'], processes=2,
+        report = dict(started_at=started_at, completed_at=datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(),
+                      git_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+                      command_topic_count=len(expected_inputs), output_topic_count=len(expected_outputs),
+                      tested_command_topics=sorted(expected_inputs), tested_output_topics=sorted(expected_outputs),
+                      ros_distro=os.environ.get('ROS_DISTRO'), domain_id=os.environ['ROS_DOMAIN_ID'], processes=2,
                       qr_count=result_count, checks=checks)
         (ROOT / 'verification/ros_validation.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
         print(json.dumps(report, ensure_ascii=False, indent=2))

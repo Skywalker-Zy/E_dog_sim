@@ -244,6 +244,6 @@ source /opt/ros/jazzy/setup.bash
 .venv/bin/python JiFang_world/04_robot_envirments/validate_ros_gui.py
 ```
 
-测试默认分别使用隔离的 ROS_DOMAIN_ID=154/155；可以通过环境变量覆盖。前者启动独立无窗口服务进程与测试客户端，验证真实 DDS 收发、4K 字节数、三路角度、顶部高度、内参、旧话题与 TF 的移除、速度超时、非法命令拒绝、真实二维码解码及图像/内参/结果一致性；后者验证 ROS 与离屏 GUI 的双向同步。记录见 `verification/ros_validation.json` 和 `verification/ros_gui_validation.json`。
+测试默认分别使用隔离的 ROS_DOMAIN_ID=154/155；可以通过环境变量覆盖。前者启动独立无窗口服务进程与测试客户端，逐项覆盖全部 **16 个控制话题和 27 个输出话题**，核对消息类型、实际接收和发布端 QoS，并验证三路 4K 图像字节数、三路角度、顶部高度、内参、旧话题与 TF 的移除、速度超时、非法命令拒绝、真实二维码解码及图像/内参/结果一致性；后者验证 ROS 与离屏 GUI 的双向同步。记录见 `verification/ros_validation.json` 和 `verification/ros_gui_validation.json`；前者包含本轮测试时间、代码提交号及逐话题清单。
 
 消息定义参考 ROS 官方 [Float64](https://github.com/ros2/common_interfaces/blob/jazzy/std_msgs/msg/Float64.msg)、[Twist](https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/Twist.msg) 和 [CameraInfo](https://github.com/ros2/common_interfaces/blob/jazzy/sensor_msgs/msg/CameraInfo.msg)。
