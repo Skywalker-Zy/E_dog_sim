@@ -1,0 +1,12 @@
+{
+  "geometry_count": 5712,
+  "image_sha256": "95bf503aed6bbf4b382684e80e3a190c9c9974f0172f82276b433d3a07eec512",
+  "qr_count": 10,
+  "checks": [
+    "copy uses only local source files and assets",
+    "empty PYTHONPATH",
+    "rebuild matches delivered XML bytes",
+    "independent 4K capture and actual QR decoding",
+    "headless CLI starts without ROS or old directories"
+  ]
+}

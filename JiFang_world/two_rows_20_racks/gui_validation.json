@@ -1,9 +1,0 @@
-{
-  "passed": true,
-  "button_open_both": true,
-  "button_close_left": true,
-  "button_hold": true,
-  "button_reset": true,
-  "view_switch_and_orbit": true,
-  "background_render": true
-}

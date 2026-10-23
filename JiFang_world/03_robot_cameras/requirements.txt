@@ -1,2 +1,0 @@
-# Shared project dependencies, relative to this file.
--r ../../requirements.txt

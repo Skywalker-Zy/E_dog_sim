@@ -42,14 +42,9 @@ MUJOCO_LOG.TXT
 .DS_Store
 Thumbs.db
 
-# 运行时生成的实验输出（已跟踪的历史实验保留）
-/JiFang_world/02_single_camera/runtime/
-/JiFang_world/02_single_camera/experiments/
-/JiFang_world/03_robot_cameras/runtime/
-/JiFang_world/03_robot_cameras/experiments/
-/JiFang_world/two_rows_20_racks/captures/
-/JiFang_world/04_robot_envirments/captures/
-/JiFang_world/04_robot_envirments/runtime/
+# 当前仿真运行输出
+/captures/
+/runtime/
 
 # ROS 2 录包文件
 *.bag
@@ -58,4 +53,4 @@ Thumbs.db
 *.db3-wal
 *.mcap
 
-# 场景 XML、纹理、二维码、vendor、基线实验和验证记录继续纳入版本管理。
+# 模型、纹理、预览与验证记录纳入版本管理。

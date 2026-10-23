@@ -1,4 +1,4 @@
-# Ubuntu 22.04 / Python 3.10 or Ubuntu 24.04 / Python 3.12.
+# Ubuntu 24.04 / Python 3.12 / ROS 2 Jazzy.
 # Install into a venv: python -m pip install -r requirements.txt
 mujoco==3.16.0
 # NumPy 1.x is also compatible with the supported ROS binary environments.
@@ -10,4 +10,5 @@ PyOpenGL>=3.1.7,<4
 zxing-cpp==3.1.1
 # Needed by rclpy when using an isolated venv with system ROS packages.
 PyYAML>=6,<7
-# qrcode is bundled in vendor/. ROS 2 and GPU/system libraries are installed separately.
+# ROS 2 Jazzy and GPU/system libraries are installed separately.
+# QR textures are included in assets/; no QR generation dependency is needed.

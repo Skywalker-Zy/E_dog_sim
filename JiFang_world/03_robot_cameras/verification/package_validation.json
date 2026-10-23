@@ -1,6 +1,0 @@
-{
-  "colcon_build": true,
-  "installed_ros2_run": true,
-  "default_near_camera_bottom_three_decoded": true,
-  "resolution_preset": true
-}

@@ -1,8 +1,0 @@
-{
-  "passed": true,
-  "translation": true,
-  "mast": true,
-  "independent_yaw_pitch": true,
-  "side_switch": true,
-  "snapshot_three_images": true
-}

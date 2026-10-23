@@ -1,0 +1,20 @@
+{
+  "checks": [
+    "old experiment tree removed",
+    "all XML includes and textures resolve inside project",
+    "root controls and geometry match pre-refactor baseline",
+    "three 4K RGB buffers and QR results match baseline byte-for-byte"
+  ],
+  "geometry_count": 5712,
+  "texture_count": 700,
+  "original_image_sha256": {
+    "top": "51dad16d8713366d5932064b015ea4f4183282f96367deaa1ef59e87ce925f16",
+    "left": "95bf503aed6bbf4b382684e80e3a190c9c9974f0172f82276b433d3a07eec512",
+    "right": "8937f24d4e187d890c45755f3b647a49b6eec22b4aaa5651fa2bfd8f1f881610"
+  },
+  "original_qr_counts": {
+    "top": 28,
+    "left": 10,
+    "right": 7
+  }
+}

@@ -1,7 +1,0 @@
-{
-  "passed": true,
-  "image_camera_info_pose_use_captured_settings": true,
-  "matching_timestamps": true,
-  "remote_parameters": true,
-  "scan_lock": true
-}

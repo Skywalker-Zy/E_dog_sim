@@ -1,8 +1,0 @@
-{
-  "passed": true,
-  "qt_controls": true,
-  "precise_numeric_input": true,
-  "automatic_scan_35_of_35": true,
-  "colcon_build": true,
-  "installed_ros2_run": true
-}
