@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "single door toggle button",
+    "body-relative forward/back/left/right",
+    "both rotation buttons",
+    "six camera angles and mast controls",
+    "three preview camera selections",
+    "rapid edits keep matching image revision",
+    "reset pose/camera controls",
+    "QR overlay/results enabled and cleared when disabled",
+    "saved images match capture settings",
+    "background renderer shuts down cleanly"
+  ]
+}

@@ -4,7 +4,7 @@ import argparse,json,os,signal,sys,time
 import xml.etree.ElementTree as ET
 from .bootstrap import prepare, default_scene_dir
 ROOT=prepare()
-from .robot_platform import RobotSettings,RobotCameraEngine,CAMERAS,platform_xml,SOURCES
+from .robot_platform import RobotSettings,RobotCameraEngine,CAMERAS,platform_xml,export_robot,SOURCES
 
 
 def main():
@@ -15,11 +15,16 @@ def main():
     parser.add_argument('--no-ros',action='store_true')
     parser.add_argument('--headless',action='store_true')
     parser.add_argument('--frames',type=int,default=0)
-    parser.add_argument('--export-model',type=Path)
+    exports=parser.add_mutually_exclusive_group()
+    exports.add_argument('--export-model',type=Path)
+    exports.add_argument('--export-robot',type=Path,help='导出独立三摄机器狗目录（robot.xml 与 scene.xml）')
     args,ros_args=parser.parse_known_args()
     if ros_args and '--ros-args' not in ros_args:parser.error('未知参数: '+' '.join(ros_args))
     if args.frames<0:parser.error('--frames 不可为负数')
     settings=RobotSettings().updated(json.loads(args.config.read_text())) if args.config else RobotSettings().validate()
+    if args.export_robot:
+        export_robot(args.export_robot,settings)
+        print('已导出独立三摄机器狗：',args.export_robot);return
     if args.export_model:
         args.export_model.parent.mkdir(parents=True,exist_ok=True)
         root=platform_xml(args.scene_dir,settings)

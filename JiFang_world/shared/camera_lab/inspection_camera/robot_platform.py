@@ -10,7 +10,8 @@ from .core import CameraEngine, Settings, NATIVE_IN_LINK, OPTICAL_IN_LINK, quate
 CAMERAS = ('top', 'left', 'right')
 LABELS = {'top':'顶部升降相机', 'left':'左侧低位相机', 'right':'右侧低位相机'}
 LENGTH, WIDTH, HEIGHT = .900, .440, .625
-SIDE_OFFSET = .320
+# Torso half-width 160 mm + 50 mm for the rotating camera housing.
+SIDE_OFFSET = .210
 SIDE_HEIGHT = .700
 CAMERA_SWEEP_RADIUS = .050
 SOURCES = {'manufacturer':'Unitree', 'model':'A2-W', 'url':'https://www.unitree.com/A2-W/',
@@ -111,7 +112,14 @@ def platform_xml(scene_dir,settings):
     root.find('statistic').set('center','0 -0.65 1.0');root.find('statistic').set('extent','2.5')
     world=root.find('worldbody')
     element(world,'geom',name='robot_translation_track',type='capsule',fromto='-1.2 -1.42 .008 1.2 -1.42 .008',size='.004',rgba='.1 .9 .3 1',contype=0,conaffinity=0,group=2)
-    body=element(world,'body',name='robot_base',mocap='true',pos=[settings.robot_x_m,settings.robot_y_m,0.],quat=quaternion(settings.base_rotation()))
+    world.append(robot_body_xml(settings))
+    return root
+
+
+def robot_body_xml(settings):
+    """Reusable robot subtree, with no cabinet assets or scene defaults."""
+    parent=ET.Element('mujocoinclude')
+    body=element(parent,'body',name='robot_base',mocap='true',pos=[settings.robot_x_m,settings.robot_y_m,0.],quat=quaternion(settings.base_rotation()))
     def box(name,pos,size,color,group=1):
         return element(body,'geom',name=name,type='box',pos=pos,size=size,rgba=color,contype=0,conaffinity=0,group=group)
     box('robot_torso',[0,0,.503],[.37,.16,.098],'.24 .28 .34 1')
@@ -134,7 +142,7 @@ def platform_xml(scene_dir,settings):
     # These struts are real occluders, not hidden diagram elements.
     for side,sign in [('left',1),('right',-1)]:
         element(body,'geom',name=side+'_mount_arm',type='capsule',fromto=[0,sign*.14,.59,0,sign*SIDE_OFFSET,.59],size='.012',rgba='.7 .73 .76 1',contype=0,conaffinity=0,group=1)
-        element(body,'geom',name=side+'_mount_riser',type='capsule',fromto=[0,sign*SIDE_OFFSET,.59,0,sign*SIDE_OFFSET,.64],size='.012',rgba='.7 .73 .76 1',contype=0,conaffinity=0,group=1)
+        element(body,'geom',name=side+'_mount_riser',type='capsule',fromto=[0,sign*SIDE_OFFSET,.59,0,sign*SIDE_OFFSET,SIDE_HEIGHT-.025],size='.012',rgba='.7 .73 .76 1',contype=0,conaffinity=0,group=1)
     box('mast_base',[0,0,.64],[.06,.055,.015],'.15 .17 .2 1')
     element(body,'geom',name='telescopic_pole',type='cylinder',pos=[0,0,HEIGHT+settings.pole_length_m/2],size=[.022,settings.pole_length_m/2],rgba='.63 .67 .72 1',contype=0,conaffinity=0,group=1)
     element(body,'geom',name='top_gimbal_riser',type='cylinder',pos=[0,0,HEIGHT+settings.pole_length_m+.025],size=[.025,.025],rgba='.22 .25 .3 1',contype=0,conaffinity=0,group=1)
@@ -146,7 +154,30 @@ def platform_xml(scene_dir,settings):
         element(mount,'geom',name=camera+'_camera_lens',type='cylinder',pos=[.002,0,0],size=[.012,.004],quat=[.707106781,0,.707106781,0],rgba='.02 .04 .06 1',contype=0,conaffinity=0,group=2)
         k=ViewSettings(settings,camera).intrinsics()
         element(mount,'camera',name=camera+'_inspection_camera',quat=quaternion(NATIVE_IN_LINK),sensorsize=[settings.width/k[0,0],settings.height/k[1,1]],resolution=[settings.width,settings.height],focal=[1.,1.])
-    return root
+    return body
+
+
+def export_robot(directory,settings):
+    """Export an origin-centred include and a self-contained preview scene."""
+    directory=Path(directory)
+    directory.mkdir(parents=True,exist_ok=True)
+    root=ET.Element('mujocoinclude')
+    root.append(robot_body_xml(replace(settings,robot_x_m=0.,robot_y_m=0.,robot_yaw_deg=0.)))
+    scene=ET.Element('mujoco',model='A2W_three_cameras_standalone')
+    element(scene,'compiler',angle='degree',autolimits='true')
+    element(scene,'option',timestep='.002',gravity='0 0 -9.81')
+    visual=element(scene,'visual')
+    element(visual,'global',azimuth='135',elevation='-20',offwidth=max(settings.width,800),offheight=max(settings.height,450))
+    element(visual,'map',znear='.01',zfar='20')
+    element(scene,'statistic',center=[0,0,.8],extent='1.3')
+    world=element(scene,'worldbody')
+    element(world,'light',name='key',pos=[-1,-2,4],dir=[.2,.3,-1])
+    element(world,'geom',name='floor',type='plane',size=[3,3,.1],rgba='.22 .25 .28 1')
+    element(world,'camera',name='overview',pos=[2,-3,1.8],xyaxes=[.83205,.5547,0,-.14825,.22237,.96362],fovy='38')
+    element(world,'include',file='robot.xml')
+    for name,tree in [('robot.xml',root),('scene.xml',scene)]:
+        ET.indent(tree,space='  ')
+        ET.ElementTree(tree).write(directory/name,encoding='utf-8',xml_declaration=True)
 
 
 class RobotCameraEngine(CameraEngine):

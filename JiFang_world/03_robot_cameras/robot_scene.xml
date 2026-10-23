@@ -73,10 +73,10 @@
       <geom name="robot_dimension_edge_9" type="capsule" fromto="0.45 -0.22 0.0 0.45 0.22 0.0" size=".0015" rgba=".7 .76 .82 .7" contype="0" conaffinity="0" group="2" />
       <geom name="robot_dimension_edge_10" type="capsule" fromto="0.45 -0.22 0.625 0.45 0.22 0.625" size=".0015" rgba=".7 .76 .82 .7" contype="0" conaffinity="0" group="2" />
       <geom name="robot_dimension_edge_11" type="capsule" fromto="0.45 0.22 0.0 0.45 0.22 0.625" size=".0015" rgba=".7 .76 .82 .7" contype="0" conaffinity="0" group="2" />
-      <geom name="left_mount_arm" type="capsule" fromto="0 0.14 0.59 0 0.32 0.59" size=".012" rgba=".7 .73 .76 1" contype="0" conaffinity="0" group="1" />
-      <geom name="left_mount_riser" type="capsule" fromto="0 0.32 0.59 0 0.32 0.64" size=".012" rgba=".7 .73 .76 1" contype="0" conaffinity="0" group="1" />
-      <geom name="right_mount_arm" type="capsule" fromto="0 -0.14 0.59 0 -0.32 0.59" size=".012" rgba=".7 .73 .76 1" contype="0" conaffinity="0" group="1" />
-      <geom name="right_mount_riser" type="capsule" fromto="0 -0.32 0.59 0 -0.32 0.64" size=".012" rgba=".7 .73 .76 1" contype="0" conaffinity="0" group="1" />
+      <geom name="left_mount_arm" type="capsule" fromto="0 0.14 0.59 0 0.21 0.59" size=".012" rgba=".7 .73 .76 1" contype="0" conaffinity="0" group="1" />
+      <geom name="left_mount_riser" type="capsule" fromto="0 0.21 0.59 0 0.21 0.6749999999999999" size=".012" rgba=".7 .73 .76 1" contype="0" conaffinity="0" group="1" />
+      <geom name="right_mount_arm" type="capsule" fromto="0 -0.14 0.59 0 -0.21 0.59" size=".012" rgba=".7 .73 .76 1" contype="0" conaffinity="0" group="1" />
+      <geom name="right_mount_riser" type="capsule" fromto="0 -0.21 0.59 0 -0.21 0.6749999999999999" size=".012" rgba=".7 .73 .76 1" contype="0" conaffinity="0" group="1" />
       <geom name="mast_base" type="box" pos="0 0 0.64" size="0.06 0.055 0.015" rgba=".15 .17 .2 1" contype="0" conaffinity="0" group="1" />
       <geom name="telescopic_pole" type="cylinder" pos="0 0 0.925" size="0.022 0.3" rgba=".63 .67 .72 1" contype="0" conaffinity="0" group="1" />
       <geom name="top_gimbal_riser" type="cylinder" pos="0 0 1.25" size="0.025 0.025" rgba=".22 .25 .3 1" contype="0" conaffinity="0" group="1" />
@@ -85,12 +85,12 @@
         <geom name="top_camera_lens" type="cylinder" pos="0.002 0 0" size="0.012 0.004" quat="0.707106781 0 0.707106781 0" rgba=".02 .04 .06 1" contype="0" conaffinity="0" group="2" />
         <camera name="top_inspection_camera" quat="-0.5 -0.5 0.5 0.5" sensorsize="1.1547005383792515 0.649519052838329" resolution="1920 1080" focal="1.0 1.0" />
       </body>
-      <body name="left_camera_mount" pos="0.0 0.32 0.7" quat="0.6644630243886747 -0.24184476264797525 0.24184476264797525 0.6644630243886747">
+      <body name="left_camera_mount" pos="0.0 0.21 0.7" quat="0.6644630243886747 -0.24184476264797525 0.24184476264797525 0.6644630243886747">
         <geom name="left_camera_housing" type="box" pos="-0.019 0 0" size="0.019 0.02 0.02" rgba=".08 .8 .9 1" contype="0" conaffinity="0" group="2" />
         <geom name="left_camera_lens" type="cylinder" pos="0.002 0 0" size="0.012 0.004" quat="0.707106781 0 0.707106781 0" rgba=".02 .04 .06 1" contype="0" conaffinity="0" group="2" />
         <camera name="left_inspection_camera" quat="-0.5 -0.5 0.5 0.5" sensorsize="1.1547005383792515 0.649519052838329" resolution="1920 1080" focal="1.0 1.0" />
       </body>
-      <body name="right_camera_mount" pos="0.0 -0.32 0.7" quat="0.6644630243886747 0.24184476264797525 0.24184476264797522 -0.6644630243886747">
+      <body name="right_camera_mount" pos="0.0 -0.21 0.7" quat="0.6644630243886747 0.24184476264797525 0.24184476264797522 -0.6644630243886747">
         <geom name="right_camera_housing" type="box" pos="-0.019 0 0" size="0.019 0.02 0.02" rgba=".9 .35 .5 1" contype="0" conaffinity="0" group="2" />
         <geom name="right_camera_lens" type="cylinder" pos="0.002 0 0" size="0.012 0.004" quat="0.707106781 0 0.707106781 0" rgba=".02 .04 .06 1" contype="0" conaffinity="0" group="2" />
         <camera name="right_inspection_camera" quat="-0.5 -0.5 0.5 0.5" sensorsize="1.1547005383792515 0.649519052838329" resolution="1920 1080" focal="1.0 1.0" />

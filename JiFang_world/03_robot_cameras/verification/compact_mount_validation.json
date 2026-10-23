@@ -1,0 +1,101 @@
+{
+  "side_offset_m": 0.21,
+  "optical_centre_to_torso_side_m": 0.05,
+  "interference": {
+    "top": {
+      "centre_local_m": [
+        0.0,
+        0.0,
+        1.3250000000000002
+      ],
+      "swept_radius_m": 0.05,
+      "clearance_to_body_envelope_m": 0.6500000000000001,
+      "interference": false
+    },
+    "left": {
+      "centre_local_m": [
+        0.0,
+        0.21,
+        0.7
+      ],
+      "swept_radius_m": 0.05,
+      "clearance_to_body_envelope_m": 0.024999999999999953,
+      "interference": false
+    },
+    "right": {
+      "centre_local_m": [
+        0.0,
+        -0.21,
+        0.7
+      ],
+      "swept_radius_m": 0.05,
+      "clearance_to_body_envelope_m": 0.024999999999999953,
+      "interference": false
+    }
+  },
+  "default_cameras": {
+    "top": {
+      "position_m": [
+        -0.17,
+        -1.42,
+        1.3250000000000002
+      ],
+      "bottom_three_decoded": [],
+      "decoded_indices": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    "left": {
+      "position_m": [
+        -0.17,
+        -1.21,
+        0.7
+      ],
+      "bottom_three_decoded": [
+        1,
+        2,
+        3
+      ],
+      "decoded_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "right": {
+      "position_m": [
+        -0.17,
+        -1.63,
+        0.7
+      ],
+      "bottom_three_decoded": [],
+      "decoded_indices": []
+    }
+  },
+  "right_near_cabinet_bottom_three_decoded": [
+    1,
+    2,
+    3
+  ],
+  "checks": [
+    "optical centres 50 mm from torso sides",
+    "full scene loads",
+    "standalone loads after copying only two XML files",
+    "three camera renders at 1920x1080",
+    "near-side left and right cameras decode bottom three codes",
+    "camera poses follow base translation/yaw and pole endpoints",
+    "side height stays 0.7 m",
+    "no body-envelope interference",
+    "zero joints, one mocap body"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "default_left_decoded": [
+    "L02-10/39-0.52",
+    "L02-9/39-0.48",
+    "L02-8/39-0.43",
+    "L02-7/39-0.39",
+    "L02-6/39-0.34",
+    "L02-5/39-0.30",
+    "L02-4/39-0.26",
+    "L02-3/39-0.21",
+    "L02-2/39-0.17",
+    "L02-1/39-0.12"
+  ],
+  "rack_count": 20,
+  "camera_positions_m": {
+    "top": [
+      0.9,
+      0.0,
+      1.3250000000000002
+    ],
+    "left": [
+      0.9,
+      0.21,
+      0.7
+    ],
+    "right": [
+      0.9,
+      -0.21,
+      0.7
+    ]
+  },
+  "side_camera_to_torso_side_m": 0.05,
+  "swept_width_m": 0.52,
+  "clearance_to_each_row_m": 0.34,
+  "door_open_angles_deg": [
+    99.99999999581597,
+    99.99999999581597
+  ],
+  "door_closed_angles_deg": [
+    4.184043690140959e-09,
+    4.184043690140959e-09
+  ],
+  "geometry_count": 5712,
+  "checks": [
+    "20 rack collision proxies",
+    "three camera positions",
+    "six views rendered",
+    "camera self-housing hidden in sensor views",
+    "doors open and close",
+    "mocap translation/yaw camera following",
+    "reset restores robot pose",
+    "all camera yaw/pitch optical axes",
+    "mast extension with fixed side camera height",
+    "actual QR recognition and metadata",
+    "disabled recognition skips decoder"
+  ]
+}
