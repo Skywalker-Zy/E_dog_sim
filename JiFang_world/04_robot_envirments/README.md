@@ -22,6 +22,21 @@ bash JiFang_world/04_robot_envirments/run.sh
 
 MuJoCo 渲染与识别在后台线程完成；静止时缓存图像和识别结果。三路传感器视图隐藏相机自身外壳，保留机身和支架遮挡。
 
+## Jazzy 接口
+
+默认启动同时启用 ROS 2 Jazzy，命名空间为 `/robot_environment`。支持机器狗机身速度、三路相机 yaw/pitch、顶部光心高度、视场角/分辨率控制、原始图像与内参发布、二维码检测开关与结果及机器狗位姿。完整话题、消息类型、坐标系、QoS、限制和调用示例见 [ROS2接口文档.md](ROS2接口文档.md)。
+
+```bash
+# 有界面 + ROS
+bash JiFang_world/04_robot_envirments/run.sh
+# 无窗口 ROS 服务
+bash JiFang_world/04_robot_envirments/run.sh --headless
+# 只用本地界面
+bash JiFang_world/04_robot_envirments/run.sh --no-ros
+```
+
+上述命令在项目根目录执行，启动脚本自动加载已有的 ROS 环境。机器狗速度命令默认 0.5 s 未更新即停止；GUI 与 ROS 共享状态。相机采用 Float64 数值话题控制 yaw/pitch 和顶部光心高度，04 不发布 TF，相机接口无需四元数。
+
 ## 布局与接口
 
 - 两列各 10 个机柜，正面净距 1.20 m，沿用原有设备、二维码和双扇铰链门。
@@ -31,7 +46,7 @@ MuJoCo 渲染与识别在后台线程完成；静止时缓存图像和识别结�
 - 机器狗为固定站姿 mocap 模型，位姿入口为 `robot_base`；相机名称为 `top_inspection_camera`、`left_inspection_camera`、`right_inspection_camera`。保留了第三阶段的 body/geom/camera 名称。
 - 门接口为 `door_left_hinge` / `door_right_hinge` 和 `door_left_motor` / `door_right_motor`。
 
-机器狗直接通过 mocap 更新位姿，不包含步态、轮驱动或机器人碰撞动力学；手动平移可以穿过柜体。当前入口不发布 ROS 消息。
+机器狗直接通过 mocap 更新位姿，不包含步态、轮驱动或机器人碰撞动力学；手动平移可以穿过柜体。Jazzy 接口采用系统时间，支持 GUI 和无窗口运行。
 
 后续程序可直接加载联合场景，并通过 `data.mocap_pos` / `data.mocap_quat` 控制整机。使用绝对路径加载，以兼容嵌套 include：
 
@@ -54,6 +69,9 @@ mujoco.mj_forward(model, data)
 - `build_scene.py`：重新读取第三阶段独立模型，生成联合入口、机器狗快照和布局摘要。
 - `viewer.py` / `run.sh`：联合控制台与启动入口。
 - `camera_config.py`：界面、仿真和场景导出共用的视场角、分辨率默认值与投影换算。
+- `ros_interface.py`：Jazzy 命令、状态、图像和检测结果接口。
+- `controller.py`：ROS 状态与单线程 MuJoCo 渲染协调、按需采集和静态缓存。
+- `ROS2接口文档.md`：完整 ROS 接口与调用示例。
 - `simulation.py`：复用双列场景物理运行代码，增加机器人位姿、三路相机转向、顶部升降与二维码识别。
 - `validate_scene.py` / `validate_gui.py`：模型与离屏界面验证脚本。
 - `layout.json`：布局摘要与机器狗初始位置。

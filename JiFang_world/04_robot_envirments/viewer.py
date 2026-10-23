@@ -3,11 +3,13 @@ import argparse
 import json
 import math
 import signal
+import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from simulation import ROOT, RobotRoomSimulation, default_controls, CAMERAS, np
+from simulation import ROOT, default_controls, CAMERAS, np
 from PyQt5 import QtCore, QtGui, QtWidgets
 from camera_config import RESOLUTIONS
+from controller import EnvironmentRuntime
 
 LABELS = {'top': '顶部相机', 'left': '左侧相机', 'right': '右侧相机'}
 
@@ -66,9 +68,10 @@ class Worker(QtCore.QObject):
     failed = QtCore.pyqtSignal(str)
     stopped = QtCore.pyqtSignal()
 
-    def __init__(self):
+    def __init__(self, ros_enabled=False, ros_args=None):
         super().__init__()
-        self.simulation = None
+        self.runtime = None
+        self.ros_enabled, self.ros_args = ros_enabled, ros_args
         self.overview_key = self.sensor_key = None
         self.overview_image = self.sensor_image = None
         self.detections = []
@@ -76,28 +79,26 @@ class Worker(QtCore.QObject):
     @QtCore.pyqtSlot(object)
     def frame(self, request):
         try:
-            if self.simulation is None:
-                self.simulation = RobotRoomSimulation(ROOT)
-            sim = self.simulation
-            if request['controls'] != sim.controls:
-                sim.apply_controls(request['controls'])
-            sim.set_targets([100., 100.] if request['door_open'] else [0., 0.])
-            sim.step()
+            if self.runtime is None:
+                self.runtime = EnvironmentRuntime(self.ros_enabled, self.ros_args)
+            snapshot = self.runtime.prepare(request['edits'], request['detect_edit'], request['door_open'])
+            sim = self.runtime.simulation
             # Quantize door motion below visible angular changes; cache static images.
             state = (tuple(sim.controls.values()), tuple(np.round(sim.data.qpos, 4)))
             overview_key = (state, request['view'], tuple(request['angles']))
-            sensor_key = (state, request['camera'], request['detect'])
+            sensor_key = (state, request['camera'], snapshot['detect'])
             overview_changed = overview_key != self.overview_key
             sensor_changed = sensor_key != self.sensor_key
             if overview_changed:
                 self.overview_image = sim.overview(request['view'], request['angles'])
                 self.overview_key = overview_key
             if sensor_changed:
-                self.sensor_image, self.detections = sim.capture(request['camera'], request['detect'])
+                self.sensor_image, self.detections = self.runtime.capture(request['camera'])
                 self.sensor_key = sensor_key
+            self.runtime.publish_due(snapshot)
             self.ready.emit(dict(revision=request['revision'], overview=self.overview_image, sensor=self.sensor_image,
                                  overview_changed=overview_changed, sensor_changed=sensor_changed,
-                                 detections=self.detections, camera=request['camera'], detect=request['detect'],
+                                 detections=self.detections, camera=request['camera'], detect=snapshot['detect'],
                                  controls=sim.controls.copy(), door_angles=sim.angles(), door_open=request['door_open'],
                                  view=request['view'], angles=request['angles']))
         except Exception as error:
@@ -106,8 +107,8 @@ class Worker(QtCore.QObject):
     @QtCore.pyqtSlot()
     def shutdown(self):
         try:
-            if self.simulation is not None:
-                self.simulation.close()
+            if self.runtime is not None:
+                self.runtime.close()
         finally:
             self.stopped.emit()
 
@@ -115,7 +116,7 @@ class Worker(QtCore.QObject):
 class RobotRoomWindow(QtWidgets.QMainWindow):
     requested = QtCore.pyqtSignal(object)
 
-    def __init__(self):
+    def __init__(self, ros_enabled=False, ros_args=None):
         super().__init__()
         self.setWindowTitle('三摄机器狗 · 双列机柜控制台')
         self.resize(1550, 950)
@@ -124,6 +125,8 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         self.last_payload = None
         self.inputs = {}
         self.resolution_inputs = {}
+        self.pending_controls = default_controls()
+        self.pending_detect = False
         self.follow_angles = [195., -18., 2.5]
         self.free_angles = [150., -24., 8.]
         central = QtWidgets.QWidget()
@@ -167,7 +170,7 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
             for title, size in RESOLUTIONS:
                 resolution.addItem(title, size)
             resolution.setCurrentIndex(3)
-            resolution.currentIndexChanged.connect(self.changed)
+            resolution.currentIndexChanged.connect(lambda unused, n=name: self.resolution_edited(n))
             self.resolution_inputs[name] = resolution
             optics_grid.addWidget(resolution, row, 2)
         left.addWidget(optics_group)
@@ -240,7 +243,7 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         self.camera_select.setCurrentIndex(1)
         self.detect_checkbox = QtWidgets.QCheckBox('识别二维码')
         self.camera_select.currentIndexChanged.connect(self.sensor_changed)
-        self.detect_checkbox.toggled.connect(self.sensor_changed)
+        self.detect_checkbox.toggled.connect(self.detection_edited)
         bar.addWidget(self.camera_select)
         bar.addWidget(self.detect_checkbox)
         bar.addStretch()
@@ -261,7 +264,7 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         layout.addLayout(right, 1)
         layout.addWidget(sensor_box)
         self.changed()
-        self.worker = Worker()
+        self.worker = Worker(ros_enabled, ros_args)
         self.thread = QtCore.QThread(self)
         self.worker.moveToThread(self.thread)
         self.requested.connect(self.worker.frame)
@@ -282,8 +285,41 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         spin.setValue(default_controls()[key])
         spin.setKeyboardTracking(False)
         self.inputs[key] = spin
-        spin.valueChanged.connect(self.changed)
+        spin.valueChanged.connect(lambda value, k=key: self.control_edited(k, value))
         return spin
+
+    def control_edited(self, key, value):
+        self.pending_controls[key] = value
+        self.changed()
+
+    def resolution_edited(self, name):
+        width, height = self.resolution_inputs[name].currentData()
+        self.pending_controls.update({name + '_width': int(width), name + '_height': int(height)})
+        self.changed()
+
+    def detection_edited(self, enabled):
+        self.pending_detect = enabled
+        self.sensor_changed()
+
+    def sync_controls(self, controls, detect):
+        # Block signals: ROS state feedback must never become a new GUI command.
+        for key, spin in self.inputs.items():
+            spin.blockSignals(True)
+            spin.setValue(controls[key])
+            spin.blockSignals(False)
+        for name, combo in self.resolution_inputs.items():
+            size = (controls[name + '_width'], controls[name + '_height'])
+            index = next((i for i in range(combo.count()) if tuple(combo.itemData(i)) == size), -1)
+            combo.blockSignals(True)
+            if index == -1:
+                combo.addItem(f'自定义 · {size[0]}×{size[1]}', size)
+                index = combo.count() - 1
+            combo.setCurrentIndex(index)
+            combo.blockSignals(False)
+        self.detect_checkbox.blockSignals(True)
+        self.detect_checkbox.setChecked(detect)
+        self.detect_checkbox.blockSignals(False)
+        self.update_labels()
 
     def controls(self):
         controls = {key: spin.value() for key, spin in self.inputs.items()}
@@ -295,6 +331,9 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
 
     def changed(self, *unused):
         self.revision += 1
+        self.update_labels()
+
+    def update_labels(self):
         if hasattr(self, 'sensor_info'):
             name = self.camera_select.currentData()
             width, height = self.resolution_inputs[name].currentData()
@@ -327,6 +366,7 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
 
     def reset_controls(self):
         defaults = default_controls()
+        self.pending_controls.update(defaults)
         for key, spin in self.inputs.items():
             spin.setValue(defaults[key])
         for name, combo in self.resolution_inputs.items():
@@ -354,9 +394,11 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         if self.busy or self.closing:
             return
         self.busy = True
-        self.requested.emit(dict(revision=self.revision, controls=self.controls(), door_open=self.door_open,
+        self.requested.emit(dict(revision=self.revision, edits=self.pending_controls.copy(), detect_edit=self.pending_detect, door_open=self.door_open,
                                  camera=self.camera_select.currentData(), detect=self.detect_checkbox.isChecked(),
                                  view=self.view.currentData(), angles=(self.follow_angles if self.view.currentData() == 'follow' else self.free_angles).copy()))
+        self.pending_controls.clear()
+        self.pending_detect = None
 
     @QtCore.pyqtSlot(object)
     def received(self, payload):
@@ -366,6 +408,7 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         previous = self.last_payload
         refresh = previous is None or previous['revision'] != payload['revision']
         self.last_payload = payload
+        self.sync_controls(payload['controls'], payload['detect'])
         # A skipped stale frame may have populated the worker cache; always
         # display the latest matching snapshot even when its image was reused.
         if refresh or payload['overview_changed']:
@@ -417,16 +460,37 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         event.accept()
 
 
-def create_window():
-    return RobotRoomWindow()
+def create_window(ros_enabled=False, ros_args=None):
+    return RobotRoomWindow(ros_enabled, ros_args)
 
 
 def main():
     parser = argparse.ArgumentParser(description='三摄机器狗与双列机柜控制台')
-    parser.parse_args()
+    parser.add_argument('--no-ros', action='store_true', help='仅运行本地控制台')
+    parser.add_argument('--headless', action='store_true', help='无窗口运行 ROS 接口')
+    parser.add_argument('--frames', type=int, default=0, help='无窗口循环次数，0 为持续运行')
+    args, ros_args = parser.parse_known_args()
+    if args.frames < 0:
+        parser.error('--frames 不可为负数')
+    if ros_args and '--ros-args' not in ros_args:
+        parser.error('未知参数: ' + ' '.join(ros_args))
+    if args.headless:
+        runtime = EnvironmentRuntime(not args.no_ros, ros_args)
+        try:
+            count = 0
+            while not args.frames or count < args.frames:
+                snapshot = runtime.prepare()
+                runtime.publish_due(snapshot)
+                count += 1
+                time.sleep(.02)
+        except KeyboardInterrupt:
+            pass
+        finally:
+            runtime.close()
+        return
     app = QtWidgets.QApplication([])
     app.setStyle('Fusion')
-    window = create_window()
+    window = create_window(not args.no_ros, ros_args)
     window.show()
     signal.signal(signal.SIGINT, lambda *unused: window.close())
     timer = QtCore.QTimer()

@@ -22,6 +22,29 @@ def default_controls():
     return controls
 
 
+def validate_controls(controls):
+    values = default_controls()
+    if set(controls) - set(values):
+        raise ValueError('未知机器人控制参数')
+    values.update(controls)
+    limits = {'robot_x_m': (-2., 9.), 'robot_y_m': (-3., 3.),
+              'robot_yaw_deg': (-180., 180.), 'pole_length_m': (.6, 1.2)}
+    for name in CAMERAS:
+        limits[name + '_yaw_deg'] = (-180., 180.)
+        limits[name + '_pitch_deg'] = (-80., 80.)
+        limits[name + '_hfov_deg'] = (10., 150.)
+        for axis in ('width', 'height'):
+            key = name + '_' + axis
+            limits[key] = (240, 4096)
+            if type(values[key]) is not int:
+                raise ValueError(f'{key} 必须为整数')
+    for key, value in values.items():
+        low, high = limits[key]
+        if not math.isfinite(value) or not low <= value <= high:
+            raise ValueError(f'{key} 范围 [{low}, {high}]')
+    return values
+
+
 class RobotRoomSimulation(RoomSimulation):
     def __init__(self, directory=ROOT):
         super().__init__(directory)
@@ -34,25 +57,7 @@ class RobotRoomSimulation(RoomSimulation):
         self.apply_controls(self.controls)
 
     def apply_controls(self, controls):
-        values = default_controls()
-        if set(controls) - set(values):
-            raise ValueError('未知机器人控制参数')
-        values.update(controls)
-        limits = {'robot_x_m': (-2., 9.), 'robot_y_m': (-3., 3.),
-                  'robot_yaw_deg': (-180., 180.), 'pole_length_m': (.6, 1.2)}
-        for name in CAMERAS:
-            limits[name + '_yaw_deg'] = (-180., 180.)
-            limits[name + '_pitch_deg'] = (-80., 80.)
-            limits[name + '_hfov_deg'] = (10., 150.)
-            for axis in ('width', 'height'):
-                key = name + '_' + axis
-                limits[key] = (240, 4096)
-                if type(values[key]) is not int:
-                    raise ValueError(f'{key} 必须为整数')
-        for key, value in values.items():
-            low, high = limits[key]
-            if not math.isfinite(value) or not low <= value <= high:
-                raise ValueError(f'{key} 范围 [{low}, {high}]')
+        values = validate_controls(controls)
         settings = RobotSettings(**{field.name: values[field.name] for field in fields(RobotSettings) if field.name in values})
         base = self.model.body('robot_base').mocapid[0]
         self.data.mocap_pos[base] = [settings.robot_x_m, settings.robot_y_m, 0.]

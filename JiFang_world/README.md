@@ -31,7 +31,7 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-脚本依次选择 `EDOG_VENV`、已激活的 venv、从脚本目录向上查找到的最近 `.venv`。方案二、三首次使用 ROS 前还需安装对应的 ROS 2；不接 ROS 时加 `--no-ros`。第四阶段为场景查看入口，无需 ROS。方案一的 `run.sh` 使用独立 MuJoCo simulate，需按[安装教程](../Ubuntu安装与依赖指南.md)配置该程序，也可在激活 venv 后运行 `python 01_single_cabinet/run.py`。
+脚本依次选择 `EDOG_VENV`、已激活的 venv、从脚本目录向上查找到的最近 `.venv`。方案二、三首次使用 ROS 前还需安装对应的 ROS 2；不接 ROS 时加 `--no-ros`。第四阶段默认启用 Jazzy 接口，纯本地查看可加 `--no-ros`，完整接口见 [04 接口文档](04_robot_envirments/ROS2接口文档.md)。方案一的 `run.sh` 使用独立 MuJoCo simulate，需按[安装教程](../Ubuntu安装与依赖指南.md)配置该程序，也可在激活 venv 后运行 `python 01_single_cabinet/run.py`。
 
 方案二和方案三共同读取方案一的机柜模型，共用 `shared/camera_lab` 中的成像代码；保留完整 `JiFang_world` 目录即可运行。新结果分别保存到方案二、三各自的 `experiments/`；整理前的原始结果及采集配置完整保留，历史 JSON 中的原始路径不重写。
 

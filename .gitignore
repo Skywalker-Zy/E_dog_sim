@@ -49,6 +49,7 @@ Thumbs.db
 /JiFang_world/03_robot_cameras/experiments/
 /JiFang_world/two_rows_20_racks/captures/
 /JiFang_world/04_robot_envirments/captures/
+/JiFang_world/04_robot_envirments/runtime/
 
 # ROS 2 录包文件
 *.bag

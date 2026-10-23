@@ -1,0 +1,17 @@
+{
+  "ros_distro": "jazzy",
+  "domain_id": "154",
+  "processes": 2,
+  "qr_count": 10,
+  "checks": [
+    "4K rgb8 image delivered over DDS with correct byte size",
+    "independent optics commands update images and camera intrinsics",
+    "three camera scalar yaw/pitch commands and scalar top optical height",
+    "exact optical height and angle endpoints accepted",
+    "invalid angle, NaN, height, resolution and velocity commands rejected without changing camera state",
+    "obsolete camera pose and TF endpoints absent; only top camera exposes height",
+    "body-frame vx/vy/yaw integration and 0.5 s watchdog stop",
+    "real QR detection enabled, result metadata published, all results cleared when disabled",
+    "image/info/QR share acquisition stamp, frame and resolution; scalar camera metadata"
+  ]
+}

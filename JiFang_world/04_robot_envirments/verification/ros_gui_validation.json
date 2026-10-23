@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "scalar camera yaw/pitch/height commands reflected in GUI",
+    "ROS optics/custom resolution reflected in UI and image",
+    "ROS velocity moves robot without stale UI pose overwrite",
+    "GUI camera edit publishes to ROS state",
+    "GUI manual pose controls remain authoritative",
+    "ROS detection toggle reflected in checkbox",
+    "GUI detection toggle reflected in ROS state"
+  ]
+}
