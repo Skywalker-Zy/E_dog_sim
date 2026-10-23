@@ -7,6 +7,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from simulation import ROOT, RobotRoomSimulation, default_controls, CAMERAS, np
 from PyQt5 import QtCore, QtGui, QtWidgets
+from camera_config import RESOLUTIONS
 
 LABELS = {'top': '顶部相机', 'left': '左侧相机', 'right': '右侧相机'}
 
@@ -117,11 +118,12 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('三摄机器狗 · 双列机柜控制台')
-        self.resize(1450, 950)
+        self.resize(1550, 950)
         self.busy = self.closing = self.door_open = False
         self.revision = 0
         self.last_payload = None
         self.inputs = {}
+        self.resolution_inputs = {}
         self.follow_angles = [195., -18., 2.5]
         self.free_angles = [150., -24., 8.]
         central = QtWidgets.QWidget()
@@ -154,6 +156,21 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         hint = QtWidgets.QLabel('yaw 0° 朝机身左侧，±180° 朝右侧；\npitch 正值抬头，负值低头。')
         camera_grid.addWidget(hint, 6, 0, 1, 3)
         left.addWidget(camera_group)
+        optics_group = QtWidgets.QGroupBox('各相机视场角 / 分辨率')
+        optics_grid = QtWidgets.QGridLayout(optics_group)
+        for column, text in enumerate(['相机', '水平视场角 (°)', '分辨率']):
+            optics_grid.addWidget(QtWidgets.QLabel(text), 0, column)
+        for row, name in enumerate(CAMERAS, 1):
+            optics_grid.addWidget(QtWidgets.QLabel(LABELS[name]), row, 0)
+            optics_grid.addWidget(self.number(name + '_hfov_deg', 10, 150, 5, 1), row, 1)
+            resolution = QtWidgets.QComboBox()
+            for title, size in RESOLUTIONS:
+                resolution.addItem(title, size)
+            resolution.setCurrentIndex(3)
+            resolution.currentIndexChanged.connect(self.changed)
+            self.resolution_inputs[name] = resolution
+            optics_grid.addWidget(resolution, row, 2)
+        left.addWidget(optics_group)
         robot_group = QtWidgets.QGroupBox('机器狗位姿')
         grid = QtWidgets.QGridLayout(robot_group)
         for row, (key, title, low, high, step) in enumerate([
@@ -196,6 +213,8 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         self.notice.setWordWrap(True)
         left.addWidget(self.notice)
         left.addStretch()
+        # Include the new optics table and vertical scrollbar in the width.
+        scroll.setFixedWidth(max(350, controls.minimumSizeHint().width() + 24))
         layout.addWidget(scroll)
         right = QtWidgets.QVBoxLayout()
         row = QtWidgets.QHBoxLayout()
@@ -208,7 +227,7 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         row.addWidget(self.view)
         row.addStretch()
         right.addLayout(row)
-        self.overview_panel = ImagePanel((600, 380))
+        self.overview_panel = ImagePanel((500, 380))
         self.overview_panel.moved.connect(self.orbit)
         self.overview_panel.zoomed.connect(self.zoom)
         right.addWidget(self.overview_panel, 1)
@@ -224,22 +243,23 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         self.detect_checkbox.toggled.connect(self.sensor_changed)
         bar.addWidget(self.camera_select)
         bar.addWidget(self.detect_checkbox)
-        bar.addWidget(QtWidgets.QLabel('1920×1080 原图识别'))
         bar.addStretch()
         sensor_layout.addLayout(bar)
-        sensor_row = QtWidgets.QHBoxLayout()
-        self.sensor_panel = ImagePanel((360, 203))
-        self.sensor_panel.setMaximumWidth(480)
-        sensor_row.addWidget(self.sensor_panel, 1)
+        self.sensor_info = QtWidgets.QLabel()
+        self.sensor_info.setWordWrap(True)
+        sensor_layout.addWidget(self.sensor_info)
+        self.sensor_panel = ImagePanel((350, 197))
+        self.sensor_panel.setMaximumHeight(290)
+        sensor_layout.addWidget(self.sensor_panel)
+        sensor_layout.addWidget(QtWidgets.QLabel('二维码识别结果'))
         self.results = QtWidgets.QPlainTextEdit()
         self.results.setReadOnly(True)
         self.results.setPlainText('未启用二维码识别')
         self.results.setMinimumWidth(220)
-        sensor_row.addWidget(self.results, 1)
-        sensor_layout.addLayout(sensor_row)
-        sensor_box.setMaximumHeight(310)
-        right.addWidget(sensor_box)
+        sensor_layout.addWidget(self.results, 1)
+        sensor_box.setFixedWidth(395)
         layout.addLayout(right, 1)
+        layout.addWidget(sensor_box)
         self.changed()
         self.worker = Worker()
         self.thread = QtCore.QThread(self)
@@ -266,10 +286,20 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         return spin
 
     def controls(self):
-        return {key: spin.value() for key, spin in self.inputs.items()}
+        controls = {key: spin.value() for key, spin in self.inputs.items()}
+        for name, combo in self.resolution_inputs.items():
+            width, height = combo.currentData()
+            controls[name + '_width'] = int(width)
+            controls[name + '_height'] = int(height)
+        return controls
 
     def changed(self, *unused):
         self.revision += 1
+        if hasattr(self, 'sensor_info'):
+            name = self.camera_select.currentData()
+            width, height = self.resolution_inputs[name].currentData()
+            hfov = self.inputs[name + '_hfov_deg'].value()
+            self.sensor_info.setText(f'{width}×{height} · 水平视场角 {hfov:g}°\n识别与保存均使用原始分辨率')
         if hasattr(self, 'top_height'):
             self.top_height.setText(f"顶部光心高度：{.725 + self.inputs['pole_length_m'].value():.3f} m")
 
@@ -296,8 +326,13 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
         spin.setValue((spin.value() + sign * self.turn_step.value() + 180) % 360 - 180)
 
     def reset_controls(self):
-        for key, value in default_controls().items():
-            self.inputs[key].setValue(value)
+        defaults = default_controls()
+        for key, spin in self.inputs.items():
+            spin.setValue(defaults[key])
+        for name, combo in self.resolution_inputs.items():
+            size = (defaults[name + '_width'], defaults[name + '_height'])
+            index = next(index for index in range(combo.count()) if tuple(combo.itemData(index)) == size)
+            combo.setCurrentIndex(index)
         self.changed()
 
     def orbit(self, dx, dy):
@@ -350,7 +385,9 @@ class RobotRoomWindow(QtWidgets.QMainWindow):
             self.results.setPlainText(text)
         a, b = payload['door_angles']
         self.door_state.setText(f'双扇门角度：{a:.1f}° / {b:.1f}°')
-        self.statusBar().showMessage(f"{LABELS[payload['camera']]} · 1920×1080 · 机器狗 X={payload['controls']['robot_x_m']:.2f} Y={payload['controls']['robot_y_m']:.2f}")
+        name = payload['camera']
+        controls = payload['controls']
+        self.statusBar().showMessage(f"{LABELS[name]} · {controls[name + '_width']}×{controls[name + '_height']} · 水平视场角 {controls[name + '_hfov_deg']:g}° · 机器狗 X={controls['robot_x_m']:.2f} Y={controls['robot_y_m']:.2f}")
 
     @QtCore.pyqtSlot(str)
     def failed(self, message):

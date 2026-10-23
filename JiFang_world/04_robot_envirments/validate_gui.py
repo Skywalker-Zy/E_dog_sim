@@ -30,7 +30,23 @@ def main():
         buttons[0].click()
 
     try:
-        wait_current()
+        initial = wait_current()
+        assert initial['sensor'].shape == (2160, 3840, 3)
+        assert window.findChild(QtWidgets.QScrollArea).horizontalScrollBar().maximum() == 0
+        assert window.inputs['top_hfov_deg'].value() == 115.
+        assert window.inputs['left_hfov_deg'].value() == window.inputs['right_hfov_deg'].value() == 60.
+        assert window.sensor_panel.mapTo(window.centralWidget(), window.sensor_panel.rect().topLeft()).x() > window.overview_panel.mapTo(window.centralWidget(), window.overview_panel.rect().topLeft()).x() + window.overview_panel.width()
+        for index, name in enumerate(CAMERAS):
+            window.inputs[name + '_hfov_deg'].setValue(80. + index * 5)
+            window.resolution_inputs[name].setCurrentIndex(index)
+            window.camera_select.setCurrentIndex(window.camera_select.findData(name))
+            payload = wait_current()
+            width, height = window.resolution_inputs[name].currentData()
+            assert payload['sensor'].shape == (height, width, 3)
+            assert payload['controls'][name + '_hfov_deg'] == 80. + index * 5
+            assert f'{width}×{height}' in window.sensor_info.text()
+        window.reset_controls()
+        assert wait_current()['controls'] == default_controls()
         window.inputs['robot_yaw_deg'].setValue(90)
         click('前进')
         assert abs(window.inputs['robot_y_m'].value() - .1) < 1e-12
@@ -81,7 +97,8 @@ def main():
                   'six camera angles and mast controls', 'three preview camera selections',
                   'rapid edits keep matching image revision', 'reset pose/camera controls',
                   'QR overlay/results enabled and cleared when disabled', 'saved images match capture settings',
-                  'background renderer shuts down cleanly']
+                  'background renderer shuts down cleanly', 'per-camera HFOV and resolution presets',
+                  '4K defaults and reset', 'sensor panel located right of scene view']
         (ROOT / 'verification/gui_validation.json').write_text(json.dumps({'checks': checks}, ensure_ascii=False, indent=2) + '\n')
         print(json.dumps(checks, ensure_ascii=False, indent=2))
     finally:

@@ -1,6 +1,6 @@
 """Pose control and full-resolution camera capture for the combined room."""
 from pathlib import Path
-from dataclasses import asdict
+from dataclasses import asdict, fields
 import math
 import sys
 import json
@@ -11,18 +11,22 @@ sys.path.insert(0, str(ROOT.parent / 'two_rows_20_racks'))
 sys.path.insert(0, str(ROOT.parent / 'shared' / 'camera_lab'))
 from runtime import RoomSimulation, mujoco
 from inspection_camera.robot_platform import RobotSettings, CAMERAS, HEIGHT, quaternion
+from camera_config import default_camera_controls, camera_projection
 
 
 def default_controls():
     settings = asdict(RobotSettings(robot_x_m=.9, robot_y_m=0.))
-    return {key: value for key, value in settings.items()
-            if key.startswith('robot_') or key.endswith(('_yaw_deg', '_pitch_deg')) or key == 'pole_length_m'}
+    controls = {key: value for key, value in settings.items()
+                if key.startswith('robot_') or key.endswith(('_yaw_deg', '_pitch_deg')) or key == 'pole_length_m'}
+    controls.update(default_camera_controls())
+    return controls
 
 
 class RobotRoomSimulation(RoomSimulation):
     def __init__(self, directory=ROOT):
         super().__init__(directory)
         self.sensor_renderer = None
+        self.sensor_renderer_size = None
         self.controls = default_controls()
         equipment = json.loads((ROOT.parent / 'two_rows_20_racks/equipment.json').read_text())
         self.qr_lookup = {item['payload']: dict(item, rack_id=row['rack_id'])
@@ -39,11 +43,17 @@ class RobotRoomSimulation(RoomSimulation):
         for name in CAMERAS:
             limits[name + '_yaw_deg'] = (-180., 180.)
             limits[name + '_pitch_deg'] = (-80., 80.)
+            limits[name + '_hfov_deg'] = (10., 150.)
+            for axis in ('width', 'height'):
+                key = name + '_' + axis
+                limits[key] = (240, 4096)
+                if type(values[key]) is not int:
+                    raise ValueError(f'{key} 必须为整数')
         for key, value in values.items():
             low, high = limits[key]
             if not math.isfinite(value) or not low <= value <= high:
                 raise ValueError(f'{key} 范围 [{low}, {high}]')
-        settings = RobotSettings(**values)
+        settings = RobotSettings(**{field.name: values[field.name] for field in fields(RobotSettings) if field.name in values})
         base = self.model.body('robot_base').mocapid[0]
         self.data.mocap_pos[base] = [settings.robot_x_m, settings.robot_y_m, 0.]
         self.data.mocap_quat[base] = quaternion(settings.base_rotation())
@@ -55,6 +65,13 @@ class RobotRoomSimulation(RoomSimulation):
             body = self.model.body(name + '_camera_mount').id
             self.model.body_pos[body] = settings.camera_local_position(name)
             self.model.body_quat[body] = quaternion(settings.camera_local_rotation(name))
+            width, height = values[name + '_width'], values[name + '_height']
+            sensor_width, sensor_height, vfov = camera_projection(width, height, values[name + '_hfov_deg'])
+            camera = self.model.camera(name + '_inspection_camera').id
+            self.model.cam_resolution[camera] = [width, height]
+            self.model.cam_sensorsize[camera] = [sensor_width, sensor_height]
+            self.model.cam_intrinsic[camera] = [1., 1., 0., 0.]
+            self.model.cam_fovy[camera] = vfov
         self.controls = values
         mujoco.mj_forward(self.model, self.data)
 
@@ -74,10 +91,14 @@ class RobotRoomSimulation(RoomSimulation):
     def capture(self, name, detect=False):
         if name not in CAMERAS:
             raise ValueError('未知相机')
-        if self.sensor_renderer is None:
-            self.model.vis.global_.offwidth = max(1920, self.model.vis.global_.offwidth)
-            self.model.vis.global_.offheight = max(1080, self.model.vis.global_.offheight)
-            self.sensor_renderer = mujoco.Renderer(self.model, width=1920, height=1080, max_geom=12000)
+        width, height = self.controls[name + '_width'], self.controls[name + '_height']
+        if self.sensor_renderer_size != (width, height):
+            if self.sensor_renderer is not None:
+                self.sensor_renderer.close()
+            self.model.vis.global_.offwidth = max(width, self.model.vis.global_.offwidth)
+            self.model.vis.global_.offheight = max(height, self.model.vis.global_.offheight)
+            self.sensor_renderer = mujoco.Renderer(self.model, width=width, height=height, max_geom=12000)
+            self.sensor_renderer_size = (width, height)
         option = mujoco.MjvOption()
         option.geomgroup[2] = option.geomgroup[3] = 0
         self.sensor_renderer.update_scene(self.data, camera=name + '_inspection_camera', scene_option=option)
@@ -103,4 +124,5 @@ class RobotRoomSimulation(RoomSimulation):
         if self.sensor_renderer is not None:
             self.sensor_renderer.close()
             self.sensor_renderer = None
+            self.sensor_renderer_size = None
         super().close()

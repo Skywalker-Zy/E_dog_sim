@@ -2,6 +2,7 @@
 from pathlib import Path
 import json
 import xml.etree.ElementTree as ET
+from camera_config import DEFAULT_HFOV, camera_projection
 
 ROOT = Path(__file__).resolve().parent
 ROOM = ROOT.parent / 'two_rows_20_racks'
@@ -11,6 +12,12 @@ ROBOT = ROOT.parent / '03_robot_cameras' / 'standalone_robot'
 def build():
     robot = ET.parse(ROBOT / 'robot.xml').getroot()
     robot.find('body').set('pos', '0.9 0 0')
+    for name, hfov in DEFAULT_HFOV.items():
+        camera = robot.find(f".//camera[@name='{name}_inspection_camera']")
+        sx, sy, _ = camera_projection(3840, 2160, hfov)
+        camera.set('resolution', '3840 2160')
+        camera.set('sensorsize', f'{sx} {sy}')
+        camera.set('focal', '1 1')
     ET.indent(robot, space='  ')
     ET.ElementTree(robot).write(ROOT / 'robot.xml', encoding='utf-8', xml_declaration=True)
     # MuJoCo merges the included room first, then applies the local compiler
@@ -19,7 +26,7 @@ def build():
     ET.SubElement(root, 'include', file='../two_rows_20_racks/scene.xml')
     ET.SubElement(root, 'compiler', texturedir='../two_rows_20_racks/assets')
     visual = ET.SubElement(root, 'visual')
-    ET.SubElement(visual, 'global', offwidth='1920', offheight='1080')
+    ET.SubElement(visual, 'global', offwidth='3840', offheight='2160')
     world = ET.SubElement(root, 'worldbody')
     ET.SubElement(world, 'include', file='robot.xml')
     ET.SubElement(world, 'camera', name='robot_overview', pos='-0.65 -0.42 1.25',

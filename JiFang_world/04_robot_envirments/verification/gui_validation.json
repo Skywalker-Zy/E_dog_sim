@@ -9,6 +9,9 @@
     "reset pose/camera controls",
     "QR overlay/results enabled and cleared when disabled",
     "saved images match capture settings",
-    "background renderer shuts down cleanly"
+    "background renderer shuts down cleanly",
+    "per-camera HFOV and resolution presets",
+    "4K defaults and reset",
+    "sensor panel located right of scene view"
   ]
 }

@@ -1,4 +1,13 @@
 {
+  "default_resolution": [
+    3840,
+    2160
+  ],
+  "default_hfov_deg": {
+    "top": 115,
+    "left": 60,
+    "right": 60
+  },
   "default_left_decoded": [
     "L02-10/39-0.52",
     "L02-9/39-0.48",
@@ -52,6 +61,10 @@
     "all camera yaw/pitch optical axes",
     "mast extension with fixed side camera height",
     "actual QR recognition and metadata",
-    "disabled recognition skips decoder"
+    "disabled recognition skips decoder",
+    "all three sensors render at 4K by default",
+    "independent HFOV and resolution controls",
+    "720p/1080p/1440p/4K renderer resizing",
+    "XML optics match console defaults"
   ]
 }

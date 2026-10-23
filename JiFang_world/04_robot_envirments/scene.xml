@@ -3,7 +3,7 @@
   <include file="../two_rows_20_racks/scene.xml" />
   <compiler texturedir="../two_rows_20_racks/assets" />
   <visual>
-    <global offwidth="1920" offheight="1080" />
+    <global offwidth="3840" offheight="2160" />
   </visual>
   <worldbody>
     <include file="robot.xml" />
